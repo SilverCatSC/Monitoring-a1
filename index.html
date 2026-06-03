@@ -6,119 +6,458 @@
     <title>Мониторинг А1: Дашборд</title>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
+        * { box-sizing: border-box; }
         body { 
             background-color: #0B0E14; 
             font-family: 'Manrope', sans-serif; 
             color: #E2E8F0; 
-            margin: 0; padding: 40px; 
+            margin: 0; 
+            padding: 20px;
         }
-        .header { display: flex; justify-content: space-between; border-bottom: 2px solid rgba(255,255,255,0.05); padding-bottom: 20px; margin-bottom: 30px; }
-        .header h1 { margin: 0; font-size: 32px; font-weight: 800; }
-        .date-badge { background: rgba(255,255,255,0.05); padding: 8px 16px; border-radius: 12px; font-size: 16px; color: #94A3B8; display: flex; align-items: center; }
         
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 25px; }
+        @media (min-width: 768px) {
+            body { padding: 40px; }
+        }
+        
+        .header { 
+            display: flex; 
+            flex-wrap: wrap;
+            justify-content: space-between; 
+            align-items: center;
+            border-bottom: 2px solid rgba(255,255,255,0.05); 
+            padding-bottom: 20px; 
+            margin-bottom: 30px; 
+            gap: 15px;
+        }
+        
+        .header h1 { 
+            margin: 0; 
+            font-size: clamp(24px, 5vw, 32px); 
+            font-weight: 800; 
+            background: linear-gradient(135deg, #fff 0%, #94A3B8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .date-badge { 
+            background: rgba(255,255,255,0.05); 
+            padding: 8px 16px; 
+            border-radius: 12px; 
+            font-size: 14px; 
+            color: #94A3B8; 
+            display: flex; 
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .refresh-btn {
+            background: #10B981;
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-family: 'Manrope', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .refresh-btn:hover {
+            background: #059669;
+            transform: translateY(-2px);
+        }
+        
+        .stats-bar {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-card {
+            background: rgba(30,41,59,0.4);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 15px 25px;
+            flex: 1;
+            min-width: 150px;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: #64748B;
+            margin-bottom: 8px;
+        }
+        
+        .stat-value {
+            font-size: 28px;
+            font-weight: 800;
+            color: #10B981;
+        }
+        
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); 
+            gap: 25px; 
+        }
         
         .card { 
             background: rgba(30,41,59,0.4); 
+            backdrop-filter: blur(10px);
             border: 1px solid rgba(255,255,255,0.05); 
-            border-radius: 16px; padding: 20px; 
+            border-radius: 20px; 
+            padding: 20px; 
+            transition: all 0.3s;
         }
-        .card-header { display: flex; justify-content: space-between; margin-bottom: 15px; }
-        .car-title { font-size: 18px; font-weight: 800; color: #fff; }
-        .car-vin { font-family: monospace; color: #94A3B8; font-size: 14px; background: rgba(0,0,0,0.3); padding: 4px 8px; border-radius: 6px; }
         
-        .platforms { display: flex; gap: 15px; margin-bottom: 20px; }
-        .platform { flex: 1; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 12px; }
-        .plat-name { font-size: 14px; color: #64748B; font-weight: 600; text-transform: uppercase; margin-bottom: 8px; }
-        .plat-price { font-size: 20px; font-weight: 800; color: #10B981; }
-        .plat-status { font-size: 14px; margin-top: 4px; color: #94A3B8; }
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(16, 185, 129, 0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
         
-        .history-title { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #64748B; margin-bottom: 10px; }
-        .history-row { display: flex; justify-content: space-between; font-size: 13px; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.02); }
-        .history-row:last-child { border: none; }
-        .h-date { color: #94A3B8; width: 80px; }
-        .h-val { color: #E2E8F0; }
+        .card-header { 
+            display: flex; 
+            justify-content: space-between; 
+            margin-bottom: 15px; 
+            flex-wrap: wrap;
+            gap: 10px;
+        }
         
-        .status-ok { color: #3B82F6; }
-        .status-bad { color: #F97316; }
+        .car-title { 
+            font-size: 18px; 
+            font-weight: 800; 
+            color: #fff; 
+        }
+        
+        .car-vin { 
+            font-family: monospace; 
+            color: #94A3B8; 
+            font-size: 12px; 
+            background: rgba(0,0,0,0.3); 
+            padding: 4px 8px; 
+            border-radius: 6px; 
+        }
+        
+        .platforms { 
+            display: flex; 
+            gap: 15px; 
+            margin-bottom: 20px; 
+            flex-wrap: wrap;
+        }
+        
+        .platform { 
+            flex: 1; 
+            background: rgba(0,0,0,0.3); 
+            padding: 15px; 
+            border-radius: 12px; 
+            transition: all 0.2s;
+        }
+        
+        .platform:hover {
+            background: rgba(0,0,0,0.5);
+        }
+        
+        .plat-name { 
+            font-size: 13px; 
+            color: #64748B; 
+            font-weight: 600; 
+            text-transform: uppercase; 
+            margin-bottom: 8px; 
+            letter-spacing: 1px;
+        }
+        
+        .plat-price { 
+            font-size: 22px; 
+            font-weight: 800; 
+            color: #10B981; 
+        }
+        
+        .plat-status { 
+            font-size: 13px; 
+            margin-top: 6px; 
+            color: #94A3B8; 
+            font-weight: 600;
+        }
+        
+        .history-title { 
+            font-size: 11px; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            color: #64748B; 
+            margin-bottom: 12px; 
+            font-weight: 600;
+        }
+        
+        .history-row { 
+            display: flex; 
+            justify-content: space-between; 
+            font-size: 12px; 
+            padding: 8px 0; 
+            border-bottom: 1px solid rgba(255,255,255,0.05); 
+        }
+        
+        .history-row:last-child { 
+            border: none; 
+        }
+        
+        .h-date { 
+            color: #94A3B8; 
+            width: 85px; 
+            font-weight: 500;
+        }
+        
+        .h-val { 
+            color: #E2E8F0; 
+            flex: 1;
+        }
+        
+        .h-val span {
+            display: inline-block;
+            margin-right: 12px;
+        }
+        
+        .status-ok { 
+            color: #3B82F6; 
+        }
+        
+        .status-bad { 
+            color: #F97316; 
+        }
+        
+        .status-warning {
+            color: #F59E0B;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #64748B;
+        }
+        
+        .error-box {
+            background: rgba(249, 115, 22, 0.1);
+            border: 1px solid #F97316;
+            border-radius: 16px;
+            padding: 20px;
+            margin: 20px;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .platforms {
+                flex-direction: column;
+            }
+        }
+        
+        .priority-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 800;
+            margin-left: 8px;
+        }
+        
+        .priority-high {
+            background: #F97316;
+            color: white;
+        }
+        
+        .priority-medium {
+            background: #F59E0B;
+            color: white;
+        }
+        
+        .priority-low {
+            background: #64748B;
+            color: white;
+        }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <h1>Аналитика Размещения Автомобилей</h1>
-        <div class="date-badge" id="last-update">Обновление: ...</div>
+        <h1>📊 Аналитика Размещения Автомобилей</h1>
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <div class="date-badge" id="last-update">
+                📅 Обновление: <span id="update-time">...</span>
+            </div>
+            <button class="refresh-btn" onclick="location.reload()">
+                🔄 Обновить
+            </button>
+        </div>
+    </div>
+
+    <div class="stats-bar" id="stats-bar" style="display: none;">
+        <div class="stat-card">
+            <div class="stat-label">Всего автомобилей</div>
+            <div class="stat-value" id="total-cars">0</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Найдено на Auto.ru</div>
+            <div class="stat-value" id="found-auto">0</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Найдено на Avito</div>
+            <div class="stat-value" id="found-avito">0</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Проблемные</div>
+            <div class="stat-value" id="problem-cars">0</div>
+        </div>
     </div>
 
     <div class="grid" id="cars-container">
-        </div>
+        <div class="loading">⏳ Загрузка данных...</div>
+    </div>
 
     <script>
         // Функция для определения цвета статуса
         function getStatusClass(status) {
-            if (status.includes("Стр. 3+") || status.includes("Архив") || status.includes("Нет")) return "status-bad";
-            return "status-ok";
+            if (!status || status === "Нет") return "status-bad";
+            if (status.includes("Стр. 3+") || status.includes("Архив")) return "status-bad";
+            if (status.includes("Стр. 1") || status.includes("Стр. 2")) return "status-ok";
+            return "status-warning";
         }
-
-        // Загрузка JSON файла (он должен лежать в той же папке, что и index.html)
-        fetch('data.json')
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('last-update').innerText = 'Обновлено: ' + data.last_updated;
-                
-                const container = document.getElementById('cars-container');
-                
-                for (const [vin, carInfo] of Object.entries(data.cars)) {
-                    // Берем последнюю запись из истории как текущие данные
-                    const history = carInfo.history;
-                    const current = history[history.length - 1] || {};
+        
+        // Функция для форматирования приоритета
+        function getPriorityClass(priority) {
+            if (priority === "Высокий") return "priority-high";
+            if (priority === "Средний") return "priority-medium";
+            return "priority-low";
+        }
+        
+        // Загрузка JSON файла
+        function loadData() {
+            fetch('data.json?_=' + Date.now()) // Добавляем timestamp для избежания кэша
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    document.getElementById('update-time').innerText = data.last_updated;
                     
-                    // Формируем блок истории
-                    let historyHtml = '';
-                    // Показываем последние 4 недели
-                    const recentHistory = history.slice(-4).reverse(); 
-                    recentHistory.forEach(h => {
-                        historyHtml += `
-                            <div class="history-row">
-                                <span class="h-date">${h.date}</span>
-                                <span class="h-val">Auto: <span class="${getStatusClass(h.auto_status)}">${h.auto_status}</span></span>
-                                <span class="h-val">Avito: <span class="${getStatusClass(h.avito_status)}">${h.avito_status}</span></span>
+                    const container = document.getElementById('cars-container');
+                    container.innerHTML = '';
+                    
+                    let totalCars = 0;
+                    let foundAuto = 0;
+                    let foundAvito = 0;
+                    let problemCars = 0;
+                    
+                    for (const [vin, carInfo] of Object.entries(data.cars)) {
+                        totalCars++;
+                        
+                        // Берем последнюю запись из истории как текущие данные
+                        const history = carInfo.history;
+                        const current = history[history.length - 1] || {};
+                        
+                        // Подсчет статистики
+                        if (current.auto_status && current.auto_status !== "Нет" && !current.auto_status.includes("Архив")) {
+                            foundAuto++;
+                        }
+                        if (current.avito_status && current.avito_status !== "Нет" && !current.avito_status.includes("Архив")) {
+                            foundAvito++;
+                        }
+                        if ((!current.auto_status || current.auto_status === "Нет") && 
+                            (!current.avito_status || current.avito_status === "Нет")) {
+                            problemCars++;
+                        }
+                        
+                        // Формируем блок истории (последние 6 записей)
+                        let historyHtml = '';
+                        const recentHistory = history.slice(-6).reverse();
+                        recentHistory.forEach(h => {
+                            historyHtml += `
+                                <div class="history-row">
+                                    <span class="h-date">${h.date}</span>
+                                    <span class="h-val">
+                                        <span>🚗 Auto: <span class="${getStatusClass(h.auto_status)}">${h.auto_status || 'Нет'}</span></span>
+                                        <span>📱 Avito: <span class="${getStatusClass(h.avito_status)}">${h.avito_status || 'Нет'}</span></span>
+                                    </span>
+                                </div>
+                            `;
+                        });
+                        
+                        // Определяем приоритет
+                        const priorityClass = getPriorityClass(carInfo.priority);
+                        const priorityText = carInfo.priority || 'Стандартный';
+                        
+                        // Создаем карточку
+                        const card = document.createElement('div');
+                        card.className = 'card';
+                        card.innerHTML = `
+                            <div class="card-header">
+                                <div>
+                                    <div class="car-title">
+                                        ${carInfo.title}
+                                        <span class="priority-badge ${priorityClass}">${priorityText}</span>
+                                    </div>
+                                </div>
+                                <div class="car-vin">🔢 ${vin}</div>
+                            </div>
+                            <div class="platforms">
+                                <div class="platform">
+                                    <div class="plat-name">🚗 Auto.ru</div>
+                                    <div class="plat-price">${current.auto_price || '—'}</div>
+                                    <div class="plat-status ${getStatusClass(current.auto_status || '')}">
+                                        ${current.auto_status || 'Нет данных'}
+                                        ${current.auto_ai_warn ? `<span style="color:#F59E0B; margin-left:8px;">⚠️ ${current.auto_ai_warn}</span>` : ''}
+                                    </div>
+                                </div>
+                                <div class="platform">
+                                    <div class="plat-name">📱 Avito</div>
+                                    <div class="plat-price">${current.avito_price || '—'}</div>
+                                    <div class="plat-status ${getStatusClass(current.avito_status || '')}">
+                                        ${current.avito_status || 'Нет данных'}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="history">
+                                <div class="history-title">📈 Динамика позиций (6 последних проверок)</div>
+                                ${historyHtml || '<div class="history-row">Нет истории</div>'}
                             </div>
                         `;
-                    });
-
-                    // Создаем карточку
-                    const card = document.createElement('div');
-                    card.className = 'card';
-                    card.innerHTML = `
-                        <div class="card-header">
-                            <div class="car-title">${carInfo.title}</div>
-                            <div class="car-vin">${vin}</div>
-                        </div>
-                        <div class="platforms">
-                            <div class="platform">
-                                <div class="plat-name">Auto.ru</div>
-                                <div class="plat-price">${current.auto_price || '-'}</div>
-                                <div class="plat-status ${getStatusClass(current.auto_status || '')}">${current.auto_status || 'Нет данных'}</div>
-                            </div>
-                            <div class="platform">
-                                <div class="plat-name">Avito</div>
-                                <div class="plat-price">${current.avito_price || '-'}</div>
-                                <div class="plat-status ${getStatusClass(current.avito_status || '')}">${current.avito_status || 'Нет данных'}</div>
-                            </div>
-                        </div>
-                        <div class="history">
-                            <div class="history-title">Динамика позиций (4 недели)</div>
-                            ${historyHtml}
+                        container.appendChild(card);
+                    }
+                    
+                    // Обновляем статистику
+                    document.getElementById('total-cars').innerText = totalCars;
+                    document.getElementById('found-auto').innerText = foundAuto;
+                    document.getElementById('found-avito').innerText = foundAvito;
+                    document.getElementById('problem-cars').innerText = problemCars;
+                    document.getElementById('stats-bar').style.display = 'flex';
+                    
+                })
+                .catch(error => {
+                    console.error('Ошибка загрузки данных:', error);
+                    document.getElementById('cars-container').innerHTML = `
+                        <div class="error-box">
+                            <h3>❌ Ошибка загрузки данных</h3>
+                            <p>Не удалось загрузить data.json. Убедитесь, что файл существует в репозитории.</p>
+                            <p style="font-size:12px; color:#64748B;">Подробности: ${error.message}</p>
+                            <button onclick="location.reload()" style="background:#10B981; border:none; color:white; padding:10px 20px; border-radius:8px; cursor:pointer; margin-top:10px;">
+                                Повторить попытку
+                            </button>
                         </div>
                     `;
-                    container.appendChild(card);
-                }
-            })
-            .catch(error => {
-                console.error('Ошибка загрузки данных:', error);
-                document.getElementById('cars-container').innerHTML = '<p style="color:#F97316;">Не удалось загрузить data.json. Убедитесь, что файл отправлен в репозиторий.</p>';
-            });
+                    document.getElementById('stats-bar').style.display = 'none';
+                });
+        }
+        
+        // Загружаем данные при старте
+        loadData();
+        
+        // Автообновление каждые 5 минут (опционально)
+        setInterval(loadData, 5 * 60 * 1000);
     </script>
 </body>
 </html>
