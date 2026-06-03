@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мониторинг А1: Дашборд</title>
+    <title>Мониторинг А1: Детальная аналитика</title>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         * { box-sizing: border-box; }
         body { 
@@ -102,15 +103,13 @@
             font-weight: 800;
         }
         
-        .stat-card:nth-child(1) .stat-value { color: #3B82F6; }
-        .stat-card:nth-child(2) .stat-value { color: #10B981; }
-        .stat-card:nth-child(3) .stat-value { color: #F59E0B; }
-        .stat-card:nth-child(4) .stat-value { color: #EF4444; }
-        .stat-card:nth-child(5) .stat-value { color: #8B5CF6; }
+        .trend-up { color: #10B981; }
+        .trend-down { color: #EF4444; }
+        .trend-stable { color: #F59E0B; }
         
         .grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(450px, 1fr)); 
+            grid-template-columns: repeat(auto-fill, minmax(500px, 1fr)); 
             gap: 25px; 
         }
         
@@ -129,11 +128,8 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
         
-        .card-content {
-            padding: 20px;
-        }
-        
-        .card-header { 
+        .card-header {
+            padding: 20px 20px 0 20px;
             display: flex; 
             justify-content: space-between; 
             margin-bottom: 15px; 
@@ -142,7 +138,7 @@
         }
         
         .car-title { 
-            font-size: 18px; 
+            font-size: 20px; 
             font-weight: 800; 
             color: #fff; 
         }
@@ -161,6 +157,7 @@
             gap: 15px; 
             margin-bottom: 20px; 
             flex-wrap: wrap;
+            padding: 0 20px;
         }
         
         .platform { 
@@ -168,16 +165,11 @@
             background: rgba(0,0,0,0.3); 
             border-radius: 12px; 
             overflow: hidden;
-            transition: all 0.2s;
-        }
-        
-        .platform:hover {
-            background: rgba(0,0,0,0.5);
         }
         
         .platform-image {
             width: 100%;
-            height: 180px;
+            height: 160px;
             overflow: hidden;
             background: #0B0E14;
         }
@@ -186,11 +178,6 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.3s;
-        }
-        
-        .platform:hover .platform-image img {
-            transform: scale(1.05);
         }
         
         .platform-info {
@@ -203,22 +190,43 @@
             font-weight: 600; 
             text-transform: uppercase; 
             margin-bottom: 8px; 
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
         }
         
         .plat-price { 
             font-size: 20px; 
             font-weight: 800; 
             color: #10B981; 
-            margin-bottom: 4px;
         }
         
         .plat-status { 
             font-size: 12px; 
             font-weight: 600;
+            margin-top: 4px;
+        }
+        
+        .chart-container {
+            padding: 0 20px 20px 20px;
+            margin-top: 10px;
+        }
+        
+        .chart-title {
+            font-size: 12px;
+            color: #64748B;
+            margin-bottom: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        canvas {
+            max-height: 200px;
+            width: 100%;
+        }
+        
+        .history-section {
+            padding: 20px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            background: rgba(0,0,0,0.2);
         }
         
         .history-title { 
@@ -228,45 +236,38 @@
             color: #64748B; 
             margin-bottom: 12px; 
             font-weight: 600;
-            margin-top: 15px;
         }
         
-        .history-row { 
-            display: flex; 
-            justify-content: space-between; 
-            font-size: 11px; 
-            padding: 8px 0; 
-            border-bottom: 1px solid rgba(255,255,255,0.05); 
+        .history-table {
+            width: 100%;
+            font-size: 11px;
+            border-collapse: collapse;
         }
         
-        .history-row:last-child { 
-            border: none; 
+        .history-table th {
+            text-align: left;
+            padding: 8px 4px;
+            color: #64748B;
+            font-weight: 600;
         }
         
-        .h-date { 
-            color: #94A3B8; 
-            width: 80px; 
-            font-weight: 500;
+        .history-table td {
+            padding: 6px 4px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
         
-        .h-val { 
-            color: #E2E8F0; 
-            flex: 1;
-            display: flex;
-            gap: 12px;
+        .status-badge {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 600;
         }
         
-        .h-val span {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-        }
-        
-        /* Статусы */
-        .status-found { color: #10B981; }
-        .status-far { color: #F59E0B; }
-        .status-archive { color: #EF4444; }
-        .status-not-found { color: #64748B; }
+        .status-found { background: rgba(16,185,129,0.2); color: #10B981; }
+        .status-far { background: rgba(245,158,11,0.2); color: #F59E0B; }
+        .status-archive { background: rgba(239,68,68,0.2); color: #EF4444; }
+        .status-not-found { background: rgba(100,116,139,0.2); color: #94A3B8; }
         
         .badge {
             display: inline-block;
@@ -281,37 +282,30 @@
         .priority-medium { background: #F59E0B; color: white; }
         .priority-low { background: #64748B; color: white; }
         
-        .loading {
-            text-align: center;
-            padding: 50px;
-            color: #64748B;
+        .insight {
+            padding: 12px 20px;
+            background: rgba(16,185,129,0.1);
+            border-left: 3px solid #10B981;
+            margin: 0 20px 20px 20px;
+            border-radius: 8px;
+            font-size: 12px;
+        }
+        
+        .insight.warning {
+            background: rgba(239,68,68,0.1);
+            border-left-color: #EF4444;
         }
         
         @media (max-width: 768px) {
             .grid { grid-template-columns: 1fr; }
             .platforms { flex-direction: column; }
-            .platform-image { height: 150px; }
-        }
-        
-        .no-image {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            color: #64748B;
-            font-size: 12px;
-        }
-        
-        .image-error {
-            display: none;
         }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <h1>📸 Мониторинг Размещения Автомобилей</h1>
+        <h1>📈 Мониторинг А1: Детальная аналитика</h1>
         <div style="display: flex; gap: 10px; align-items: center;">
             <div class="date-badge">
                 📅 <span id="update-time">...</span>
@@ -323,25 +317,25 @@
     </div>
 
     <div class="stats-bar" id="stats-bar" style="display: none;">
-        <div class="stat-card" title="Всего автомобилей в мониторинге">
-            <div class="stat-label">🚗 Всего авто</div>
+        <div class="stat-card" title="Всего автомобилей">
+            <div class="stat-label">🚗 Всего</div>
             <div class="stat-value" id="total-cars">0</div>
         </div>
-        <div class="stat-card" title="Найдены на 1-2 страницах выдачи">
-            <div class="stat-label">✅ В топе выдачи</div>
-            <div class="stat-value" id="top-found">0</div>
+        <div class="stat-card" title="Средняя позиция на Auto.ru">
+            <div class="stat-label">📊 Средняя позиция Auto</div>
+            <div class="stat-value" id="avg-auto-pos">-</div>
         </div>
-        <div class="stat-card" title="Найдены дальше 2 страницы">
-            <div class="stat-label">📄 Далеко в выдаче</div>
-            <div class="stat-value" id="far-found">0</div>
+        <div class="stat-card" title="Средняя позиция на Avito">
+            <div class="stat-label">📊 Средняя позиция Avito</div>
+            <div class="stat-value" id="avg-avito-pos">-</div>
         </div>
-        <div class="stat-card" title="Объявление в архиве или продано">
-            <div class="stat-label">📦 В архиве</div>
-            <div class="stat-value" id="archived">0</div>
+        <div class="stat-card" title="Улучшили позиции за неделю">
+            <div class="stat-label">📈 Улучшили позиции</div>
+            <div class="stat-value trend-up" id="improved">0</div>
         </div>
-        <div class="stat-card" title="Не найдены ни на одной площадке">
-            <div class="stat-label">⚠️ Не найдены</div>
-            <div class="stat-value" id="not-found">0</div>
+        <div class="stat-card" title="Ухудшили позиции за неделю">
+            <div class="stat-label">📉 Ухудшили позиции</div>
+            <div class="stat-value trend-down" id="declined">0</div>
         </div>
     </div>
 
@@ -350,6 +344,16 @@
     </div>
 
     <script>
+        // Конвертация статуса в числовую позицию
+        function statusToPosition(status) {
+            if (!status || status === "Нет") return 100;
+            if (status.includes("Стр. 1")) return 1;
+            if (status.includes("Стр. 2")) return 2;
+            if (status.includes("Стр. 3+")) return 4;
+            if (status.includes("Архив")) return 99;
+            return 50;
+        }
+        
         function getStatusInfo(status) {
             if (!status || status === "Нет") {
                 return { text: "❌ Не найден", class: "status-not-found" };
@@ -357,7 +361,10 @@
             if (status.includes("Архив")) {
                 return { text: "📦 В архиве", class: "status-archive" };
             }
-            if (status.includes("Стр. 1") || status.includes("Стр. 2")) {
+            if (status.includes("Стр. 1")) {
+                return { text: status, class: "status-found" };
+            }
+            if (status.includes("Стр. 2")) {
                 return { text: status, class: "status-found" };
             }
             if (status.includes("Стр. 3+")) {
@@ -372,9 +379,20 @@
             return "priority-low";
         }
         
-        function handleImageError(img, platform) {
-            img.onerror = null;
-            img.src = `https://via.placeholder.com/400x300?text=No+Image+${platform}`;
+        // Анализ динамики за последние 7 дней
+        function analyzeTrend(history, platform) {
+            if (!history || history.length < 2) return { trend: "stable", change: 0, message: "Недостаточно данных" };
+            
+            const recent = history.slice(-7);
+            if (recent.length < 2) return { trend: "stable", change: 0, message: "Недостаточно данных" };
+            
+            const first = statusToPosition(recent[0][`${platform}_status`]);
+            const last = statusToPosition(recent[recent.length - 1][`${platform}_status`]);
+            const change = first - last; // Положительное = улучшение
+            
+            if (change > 0) return { trend: "up", change: change, message: `Улучшилась на ${change} позицию` };
+            if (change < 0) return { trend: "down", change: Math.abs(change), message: `Ухудшилась на ${Math.abs(change)} позицию` };
+            return { trend: "stable", change: 0, message: "Без изменений" };
         }
         
         function loadData() {
@@ -390,136 +408,206 @@
                     container.innerHTML = '';
                     
                     let totalCars = 0;
-                    let topFound = 0;
-                    let farFound = 0;
-                    let archived = 0;
-                    let notFound = 0;
+                    let totalAutoPos = 0;
+                    let totalAvitoPos = 0;
+                    let autoCount = 0;
+                    let avitoCount = 0;
+                    let improved = 0;
+                    let declined = 0;
                     
-                    // Сортируем автомобили: сначала не найденные, потом по приоритету
                     const sortedCars = Object.entries(data.cars).sort((a, b) => {
-                        const aHistory = a[1].history;
-                        const bHistory = b[1].history;
-                        const aCurrent = aHistory[aHistory.length - 1] || {};
-                        const bCurrent = bHistory[bHistory.length - 1] || {};
-                        
-                        const aNotFound = (aCurrent.auto_status === "Нет" && aCurrent.avito_status === "Нет");
-                        const bNotFound = (bCurrent.auto_status === "Нет" && bCurrent.avito_status === "Нет");
-                        
-                        if (aNotFound && !bNotFound) return -1;
-                        if (!aNotFound && bNotFound) return 1;
-                        
-                        // По приоритету
-                        const priorityOrder = { "Высокий": 0, "Средний": 1, "Стандартный": 2 };
-                        const aPriority = priorityOrder[a[1].priority] || 2;
-                        const bPriority = priorityOrder[b[1].priority] || 2;
+                        const aPriority = { "Высокий": 0, "Средний": 1, "Стандартный": 2 }[a[1].priority] || 2;
+                        const bPriority = { "Высокий": 0, "Средний": 1, "Стандартный": 2 }[b[1].priority] || 2;
                         return aPriority - bPriority;
                     });
                     
                     for (const [vin, carInfo] of sortedCars) {
                         totalCars++;
-                        
                         const history = carInfo.history;
                         const current = history[history.length - 1] || {};
                         
-                        const autoStatus = current.auto_status || "Нет";
-                        const avitoStatus = current.avito_status || "Нет";
+                        // Подсчет средних позиций
+                        const autoPos = statusToPosition(current.auto_status);
+                        const avitoPos = statusToPosition(current.avito_status);
+                        if (autoPos < 50) { totalAutoPos += autoPos; autoCount++; }
+                        if (avitoPos < 50) { totalAvitoPos += avitoPos; avitoCount++; }
                         
-                        // Подсчет статистики
-                        const bestStatus = (autoStatus !== "Нет" ? autoStatus : avitoStatus);
-                        if (bestStatus === "Нет") {
-                            notFound++;
-                        } else if (bestStatus.includes("Архив")) {
-                            archived++;
-                        } else if (bestStatus.includes("Стр. 1") || bestStatus.includes("Стр. 2")) {
-                            topFound++;
-                        } else {
-                            farFound++;
+                        // Анализ трендов
+                        const autoTrend = analyzeTrend(history, 'auto');
+                        const avitoTrend = analyzeTrend(history, 'avito');
+                        
+                        if (autoTrend.trend === 'up' || avitoTrend.trend === 'up') improved++;
+                        if (autoTrend.trend === 'down' || avitoTrend.trend === 'down') declined++;
+                        
+                        // Формирование инсайтов
+                        let insightHtml = '';
+                        if (autoPos >= 99 || avitoPos >= 99) {
+                            insightHtml = `<div class="insight warning">
+                                ⚠️ <strong>Требует внимания!</strong> Объявление не найдено или в архиве. Рекомендуется проверить и обновить.
+                            </div>`;
+                        } else if (autoTrend.trend === 'down' || avitoTrend.trend === 'down') {
+                            insightHtml = `<div class="insight warning">
+                                📉 <strong>Падение позиций!</strong> ${autoTrend.message} на Auto.ru, ${avitoTrend.message} на Avito.
+                            </div>`;
+                        } else if (autoTrend.trend === 'up' || avitoTrend.trend === 'up') {
+                            insightHtml = `<div class="insight">
+                                📈 <strong>Положительная динамика!</strong> ${autoTrend.message} на Auto.ru, ${avitoTrend.message} на Avito.
+                            </div>`;
                         }
                         
-                        // Формируем историю
-                        let historyHtml = '';
-                        const recentHistory = history.slice(-6).reverse();
-                        recentHistory.forEach(h => {
-                            const autoInfo = getStatusInfo(h.auto_status);
-                            const avitoInfo = getStatusInfo(h.avito_status);
-                            historyHtml += `
-                                <div class="history-row">
-                                    <span class="h-date">${h.date}</span>
-                                    <div class="h-val">
-                                        <span>🚗 <span class="${autoInfo.class}">${autoInfo.text}</span></span>
-                                        <span>📱 <span class="${avitoInfo.class}">${avitoInfo.text}</span></span>
-                                    </div>
-                                </div>
+                        // Подготовка данных для графика
+                        const last7Days = history.slice(-7);
+                        const dates = last7Days.map(h => h.date.split(' ')[0].slice(5));
+                        const autoPositions = last7Days.map(h => statusToPosition(h.auto_status));
+                        const avitoPositions = last7Days.map(h => statusToPosition(h.avito_status));
+                        
+                        const chartId = `chart-${vin.replace(/[^a-zA-Z0-9]/g, '')}`;
+                        
+                        const autoInfo = getStatusInfo(current.auto_status);
+                        const avitoInfo = getStatusInfo(current.avito_status);
+                        const priorityClass = getPriorityClass(carInfo.priority);
+                        
+                        const autoImg = current.auto_img || 'https://via.placeholder.com/400x200?text=No+Image';
+                        const avitoImg = current.avito_img || 'https://via.placeholder.com/400x200?text=No+Image';
+                        
+                        // Таблица истории
+                        let historyTableHtml = `
+                            <table class="history-table">
+                                <thead>
+                                    <tr>
+                                        <th>Дата</th>
+                                        <th>Auto.ru статус</th>
+                                        <th>Auto.ru цена</th>
+                                        <th>Avito статус</th>
+                                        <th>Avito цена</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                        `;
+                        
+                        history.slice(-10).reverse().forEach(h => {
+                            const hAutoInfo = getStatusInfo(h.auto_status);
+                            const hAvitoInfo = getStatusInfo(h.avito_status);
+                            historyTableHtml += `
+                                <tr>
+                                    <td>${h.date}</td>
+                                    <td><span class="status-badge ${hAutoInfo.class}">${hAutoInfo.text}</span></td>
+                                    <td>${h.auto_price || '-'}</td>
+                                    <td><span class="status-badge ${hAvitoInfo.class}">${hAvitoInfo.text}</span></td>
+                                    <td>${h.avito_price || '-'}</td>
+                                </tr>
                             `;
                         });
                         
-                        const priorityClass = getPriorityClass(carInfo.priority);
-                        const priorityText = carInfo.priority || 'Стандартный';
-                        const autoInfo = getStatusInfo(autoStatus);
-                        const avitoInfo = getStatusInfo(avitoStatus);
-                        
-                        // Получаем URL картинок
-                        const autoImg = current.auto_img || 'https://via.placeholder.com/400x300?text=No+Image+Auto.ru';
-                        const avitoImg = current.avito_img || 'https://via.placeholder.com/400x300?text=No+Image+Avito';
+                        historyTableHtml += `</tbody></table>`;
                         
                         const card = document.createElement('div');
                         card.className = 'card';
                         card.innerHTML = `
-                            <div class="card-content">
-                                <div class="card-header">
-                                    <div>
-                                        <div class="car-title">
-                                            ${carInfo.title}
-                                            <span class="badge ${priorityClass}">${priorityText}</span>
-                                        </div>
-                                    </div>
-                                    <div class="car-vin">🔢 ${vin}</div>
-                                </div>
-                                <div class="platforms">
-                                    <div class="platform">
-                                        <div class="platform-image">
-                                            <img src="${autoImg}" 
-                                                 alt="Auto.ru" 
-                                                 onerror="handleImageError(this, 'Auto.ru')"
-                                                 loading="lazy">
-                                        </div>
-                                        <div class="platform-info">
-                                            <div class="plat-name">
-                                                🚗 Auto.ru
-                                                ${current.auto_ai_warn ? `<span style="color:#F59E0B;" title="${current.auto_ai_warn}">⚠️</span>` : ''}
-                                            </div>
-                                            <div class="plat-price">${current.auto_price || '—'}</div>
-                                            <div class="plat-status ${autoInfo.class}">${autoInfo.text}</div>
-                                        </div>
-                                    </div>
-                                    <div class="platform">
-                                        <div class="platform-image">
-                                            <img src="${avitoImg}" 
-                                                 alt="Avito" 
-                                                 onerror="handleImageError(this, 'Avito')"
-                                                 loading="lazy">
-                                        </div>
-                                        <div class="platform-info">
-                                            <div class="plat-name">📱 Avito</div>
-                                            <div class="plat-price">${current.avito_price || '—'}</div>
-                                            <div class="plat-status ${avitoInfo.class}">${avitoInfo.text}</div>
-                                        </div>
+                            <div class="card-header">
+                                <div>
+                                    <div class="car-title">
+                                        ${carInfo.title}
+                                        <span class="badge ${priorityClass}">${carInfo.priority || 'Стандартный'}</span>
                                     </div>
                                 </div>
-                                <div class="history">
-                                    <div class="history-title">📈 Динамика (6 последних проверок)</div>
-                                    ${historyHtml || '<div class="history-row">Нет истории</div>'}
+                                <div class="car-vin">🔢 ${vin}</div>
+                            </div>
+                            <div class="platforms">
+                                <div class="platform">
+                                    <div class="platform-image">
+                                        <img src="${autoImg}" alt="Auto.ru" loading="lazy" onerror="this.src='https://via.placeholder.com/400x200?text=No+Image'">
+                                    </div>
+                                    <div class="platform-info">
+                                        <div class="plat-name">🚗 Auto.ru</div>
+                                        <div class="plat-price">${current.auto_price || '—'}</div>
+                                        <div class="plat-status ${autoInfo.class}">${autoInfo.text}</div>
+                                        ${current.auto_ai_warn ? `<div style="font-size:10px; color:#F59E0B; margin-top:4px;">⚠️ ${current.auto_ai_warn}</div>` : ''}
+                                    </div>
                                 </div>
+                                <div class="platform">
+                                    <div class="platform-image">
+                                        <img src="${avitoImg}" alt="Avito" loading="lazy" onerror="this.src='https://via.placeholder.com/400x200?text=No+Image'">
+                                    </div>
+                                    <div class="platform-info">
+                                        <div class="plat-name">📱 Avito</div>
+                                        <div class="plat-price">${current.avito_price || '—'}</div>
+                                        <div class="plat-status ${avitoInfo.class}">${avitoInfo.text}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            ${insightHtml}
+                            <div class="chart-container">
+                                <div class="chart-title">📊 Динамика позиций (последние 7 дней)</div>
+                                <canvas id="${chartId}" style="max-height: 200px;"></canvas>
+                            </div>
+                            <div class="history-section">
+                                <div class="history-title">📋 История изменений (последние 10 записей)</div>
+                                ${historyTableHtml}
                             </div>
                         `;
                         container.appendChild(card);
+                        
+                        // Создаем график после добавления в DOM
+                        setTimeout(() => {
+                            const ctx = document.getElementById(chartId)?.getContext('2d');
+                            if (ctx && dates.length > 0) {
+                                new Chart(ctx, {
+                                    type: 'line',
+                                    data: {
+                                        labels: dates,
+                                        datasets: [
+                                            {
+                                                label: 'Auto.ru позиция',
+                                                data: autoPositions,
+                                                borderColor: '#3B82F6',
+                                                backgroundColor: 'rgba(59,130,246,0.1)',
+                                                tension: 0.3,
+                                                fill: true
+                                            },
+                                            {
+                                                label: 'Avito позиция',
+                                                data: avitoPositions,
+                                                borderColor: '#8B5CF6',
+                                                backgroundColor: 'rgba(139,92,246,0.1)',
+                                                tension: 0.3,
+                                                fill: true
+                                            }
+                                        ]
+                                    },
+                                    options: {
+                                        responsive: true,
+                                        maintainAspectRatio: true,
+                                        plugins: {
+                                            legend: { position: 'top', labels: { color: '#94A3B8', font: { size: 10 } } },
+                                            tooltip: { callbacks: { label: (ctx) => `${ctx.dataset.label}: ${ctx.raw === 100 ? 'Не найден' : ctx.raw === 99 ? 'Архив' : ctx.raw + ' страница'}` } }
+                                        },
+                                        scales: {
+                                            y: { 
+                                                reverse: true,
+                                                min: 0.5,
+                                                max: 5.5,
+                                                ticks: { 
+                                                    stepSize: 1,
+                                                    callback: (val) => val === 1 ? '1 стр' : val === 2 ? '2 стр' : val === 4 ? '3+ стр' : val === 99 ? 'Архив' : val === 100 ? 'Нет' : '',
+                                                    color: '#64748B'
+                                                },
+                                                grid: { color: 'rgba(255,255,255,0.05)' }
+                                            },
+                                            x: { ticks: { color: '#64748B', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.05)' } }
+                                        }
+                                    }
+                                });
+                            }
+                        }, 100);
                     }
                     
+                    // Обновляем статистику
                     document.getElementById('total-cars').innerText = totalCars;
-                    document.getElementById('top-found').innerText = topFound;
-                    document.getElementById('far-found').innerText = farFound;
-                    document.getElementById('archived').innerText = archived;
-                    document.getElementById('not-found').innerText = notFound;
+                    document.getElementById('avg-auto-pos').innerText = autoCount > 0 ? (totalAutoPos / autoCount).toFixed(1) : '-';
+                    document.getElementById('avg-avito-pos').innerText = avitoCount > 0 ? (totalAvitoPos / avitoCount).toFixed(1) : '-';
+                    document.getElementById('improved').innerText = improved;
+                    document.getElementById('declined').innerText = declined;
                     document.getElementById('stats-bar').style.display = 'flex';
                 })
                 .catch(error => {
@@ -528,7 +616,6 @@
                         <div style="background: rgba(239,68,68,0.1); border: 1px solid #EF4444; border-radius: 16px; padding: 30px; text-align: center;">
                             <h3>❌ Ошибка загрузки данных</h3>
                             <p>Не удалось загрузить data.json</p>
-                            <p style="font-size:12px;">${error.message}</p>
                             <button onclick="location.reload()" style="background:#10B981; border:none; color:white; padding:10px 20px; border-radius:8px; cursor:pointer; margin-top:10px;">
                                 Повторить
                             </button>
@@ -536,8 +623,6 @@
                     `;
                 });
         }
-        
-        window.handleImageError = handleImageError;
         
         loadData();
         setInterval(loadData, 5 * 60 * 1000);
