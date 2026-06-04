@@ -25,7 +25,6 @@
     body{font-family:'Geologica',sans-serif;background:var(--bg-pearl);color:var(--text-primary);min-height:100vh;line-height:1.5}
     body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:9999}
 
-    /* HEADER */
     .header{position:sticky;top:0;z-index:100;background:var(--surface);border-bottom:1px solid var(--border);box-shadow:var(--shadow-sm)}
     .header-inner{max-width:1440px;margin:0 auto;padding:0 32px;height:68px;display:flex;align-items:center;justify-content:space-between}
     .logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--text-primary)}
@@ -33,7 +32,7 @@
     .logo-text{font-size:18px;font-weight:600;letter-spacing:-.3px}
     .logo-text span{color:var(--text-muted);font-weight:300;margin-left:2px}
     .header-nav{display:flex;align-items:center;gap:6px}
-    .header-nav a{text-decoration:none;color:var(--text-secondary);font-size:14px;padding:8px 16px;border-radius:var(--radius-sm);transition:.2s}
+    .header-nav a{text-decoration:none;color:var(--text-secondary);font-size:14px;padding:8px 16px;border-radius:var(--radius-sm);transition:.2s;cursor:pointer}
     .header-nav a:hover{color:var(--text-primary);background:var(--bg-warm)}
     .header-nav a.active{color:var(--accent);background:var(--accent-pale);font-weight:500}
     .header-right{display:flex;align-items:center;gap:14px}
@@ -42,10 +41,8 @@
     .avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-soft));color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;cursor:pointer;transition:transform .2s}
     .avatar:hover{transform:scale(1.08)}
 
-    /* LAYOUT */
     .layout{max-width:1440px;margin:0 auto;padding:24px 32px 48px;display:grid;grid-template-columns:260px 1fr;gap:24px;min-height:calc(100vh - 68px)}
 
-    /* SIDEBAR */
     .sidebar{position:sticky;top:92px;height:fit-content;max-height:calc(100vh - 116px);overflow-y:auto;display:flex;flex-direction:column;gap:4px}
     .sidebar::-webkit-scrollbar{width:4px}
     .sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
@@ -73,13 +70,11 @@
     .sidebar-stat{display:flex;justify-content:space-between;font-size:12px;color:var(--text-muted);padding:2px 0}
     .sidebar-stat .val{font-weight:600;color:var(--text-primary)}
 
-    /* MAIN */
     .main{display:flex;flex-direction:column;gap:24px}
     .page-title{opacity:0;animation:fadeUp .5s ease forwards}
     .page-title h1{font-size:28px;font-weight:600;letter-spacing:-.5px}
     .page-title p{font-size:15px;color:var(--text-muted);font-weight:300;margin-top:4px}
 
-    /* STAT CARDS */
     .stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
     .stat-card{background:var(--surface);border:1px solid var(--border-light);border-radius:var(--radius);padding:22px;position:relative;overflow:hidden;transition:.25s;opacity:0;animation:fadeUp .5s ease forwards}
     .stat-card:nth-child(1){animation-delay:.1s}.stat-card:nth-child(2){animation-delay:.15s}
@@ -91,7 +86,6 @@
     .stat-label{font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.6px;color:var(--text-muted);margin-bottom:10px}
     .stat-value{font-size:30px;font-weight:700;letter-spacing:-1px;line-height:1.1}
 
-    /* TABLE */
     .table-card{background:var(--surface);border:1px solid var(--border-light);border-radius:var(--radius);overflow:hidden;opacity:0;animation:fadeUp .5s ease forwards;animation-delay:.3s}
     .table-header{padding:20px 24px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border-light)}
     .table-header h2{font-size:16px;font-weight:600;letter-spacing:-.2px}
@@ -102,6 +96,7 @@
     tbody td{padding:10px 16px;font-size:13px;color:var(--text-secondary);border-bottom:1px solid var(--border-light);transition:background .1s;vertical-align:middle}
     tbody tr:last-child td{border-bottom:none}
     tbody tr:hover td{background:var(--surface-hover)}
+    tbody tr.hidden-row{display:none}
 
     .car-cell{display:flex;align-items:center;gap:12px}
     .car-thumb{width:64px;height:44px;border-radius:6px;object-fit:cover;background:var(--bg-warm);flex-shrink:0;border:1px solid var(--border-light)}
@@ -124,14 +119,13 @@
     .status-badge.none{color:#bbb5aa;background:var(--bg-warm)}.status-badge.none::before{background:#ccc}
     .platform-price{font-weight:500;color:var(--text-primary);font-size:12px;white-space:nowrap}
 
-    a.status-link{text-decoration:none;display:inline-flex;align-items:center;gap:6px;border-radius:20px;transition:transform .15s,box-shadow .15s}
-    a.status-link:hover{transform:translateY(-1px);box-shadow:0 2px 8px rgba(0,0,0,.08)}
-    .link-arrow{font-size:11px;color:var(--text-muted);opacity:.5;transition:opacity .15s}
-    a.status-link:hover .link-arrow{opacity:1;color:var(--accent)}
-    .no-link .status-badge{cursor:default}
+    a.plat-link{text-decoration:none;display:inline-flex;align-items:center;gap:6px;border-radius:20px;padding:2px;transition:transform .15s,box-shadow .15s}
+    a.plat-link:hover{transform:translateY(-1px);box-shadow:0 2px 8px rgba(0,0,0,.08)}
+    .link-icon{width:14px;height:14px;opacity:0;transition:opacity .15s;color:var(--accent);flex-shrink:0}
+    a.plat-link:hover .link-icon{opacity:1}
+    .no-link{cursor:default}
     .price-na{color:var(--text-muted);font-style:italic;font-size:12px}
 
-    /* COMPETITORS */
     .comp-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
     .comp-card{background:var(--surface);border:1px solid var(--border-light);border-radius:var(--radius);overflow:hidden;opacity:0;animation:fadeUp .5s ease forwards}
     .comp-card:nth-child(1){animation-delay:.32s}.comp-card:nth-child(2){animation-delay:.36s}
@@ -154,7 +148,6 @@
     .comp-info .seller{font-size:11px;color:var(--text-muted);margin-top:2px}
     .comp-price{font-weight:600;font-size:13px;color:var(--text-primary);white-space:nowrap}
 
-    /* CHARTS */
     .charts-section{padding-top:8px}
     .charts-title-row{display:flex;align-items:baseline;gap:12px;margin-bottom:20px;opacity:0;animation:fadeUp .5s ease forwards;animation-delay:.38s}
     .charts-title-row h2{font-size:22px;font-weight:600;letter-spacing:-.4px}
@@ -165,6 +158,8 @@
     .chart-card h3{font-size:14px;font-weight:600;margin-bottom:4px}
     .chart-card .chart-sub{font-size:12px;color:var(--text-muted);font-weight:300;margin-bottom:20px}
     .chart-box{position:relative;height:280px}
+
+    .section-hidden{display:none !important}
 
     @media(max-width:1200px){.charts-grid{grid-template-columns:1fr 1fr}}
     @media(max-width:1100px){.stat-grid{grid-template-columns:repeat(2,1fr)}.charts-grid,.comp-grid{grid-template-columns:1fr}}
@@ -177,15 +172,15 @@
 <!-- HEADER -->
 <header class="header">
   <div class="header-inner">
-    <a href="#" class="logo">
+    <a href="#" class="logo" onclick="return false">
       <div class="logo-icon">Mo</div>
       <div class="logo-text">Monitor<span>Hub</span></div>
     </a>
-    <nav class="header-nav">
-      <a href="#" class="active">Обзор</a>
-      <a href="#">Мои авто</a>
-      <a href="#">Конкуренты</a>
-      <a href="#">История</a>
+    <nav class="header-nav" id="mainNav">
+      <a href="#overview" class="active" data-section="overview">Обзор</a>
+      <a href="#cars" data-section="cars">Мои авто</a>
+      <a href="#competitors" data-section="competitors">Конкуренты</a>
+      <a href="#charts" data-section="charts">Статистика</a>
     </nav>
     <div class="header-right">
       <span class="github-badge">GitHub синхронизация</span>
@@ -195,103 +190,88 @@
   </div>
 </header>
 
-<!-- LAYOUT -->
 <div class="layout">
-
-  <!-- SIDEBAR -->
   <aside class="sidebar">
     <div class="filter-section">
       <div class="filter-title">Поиск</div>
-      <input class="filter-input" type="text" placeholder="VIN, марка, модель...">
+      <input class="filter-input" type="text" id="searchInput" placeholder="VIN, марка, модель...">
     </div>
     <div class="filter-section">
       <div class="filter-title">Марка</div>
-      <div class="filter-group">
-        <label class="filter-label"><input type="checkbox" checked> Mercedes-Benz</label>
-        <label class="filter-label"><input type="checkbox" checked> Mercedes-Benz Sprinter</label>
-        <label class="filter-label"><input type="checkbox" checked> Zeekr 009</label>
-        <label class="filter-label"><input type="checkbox" checked> Maextro S800</label>
-        <label class="filter-label"><input type="checkbox" checked> Land Rover</label>
+      <div class="filter-group" id="filterBrand">
+        <label class="filter-label"><input type="checkbox" value="Mercedes-Benz" checked> Mercedes-Benz</label>
+        <label class="filter-label"><input type="checkbox" value="Sprinter" checked> Mercedes-Benz Sprinter</label>
+        <label class="filter-label"><input type="checkbox" value="Zeekr" checked> Zeekr 009</label>
+        <label class="filter-label"><input type="checkbox" value="Maextro" checked> Maextro S800</label>
+        <label class="filter-label"><input type="checkbox" value="Land Rover" checked> Land Rover</label>
       </div>
     </div>
     <div class="filter-section">
       <div class="filter-title">Статус</div>
-      <div class="filter-group">
-        <label class="filter-label"><input type="checkbox" checked> Архив</label>
-        <label class="filter-label"><input type="checkbox" checked> Стр. 1</label>
-        <label class="filter-label"><input type="checkbox" checked> Стр. 2</label>
-        <label class="filter-label"><input type="checkbox" checked> Стр. 3 / 3+</label>
-        <label class="filter-label"><input type="checkbox" checked> Нет</label>
+      <div class="filter-group" id="filterStatus">
+        <label class="filter-label"><input type="checkbox" value="archive" checked> Архив</label>
+        <label class="filter-label"><input type="checkbox" value="page1" checked> Стр. 1</label>
+        <label class="filter-label"><input type="checkbox" value="page2" checked> Стр. 2</label>
+        <label class="filter-label"><input type="checkbox" value="page3" checked> Стр. 3 / 3+</label>
+        <label class="filter-label"><input type="checkbox" value="none" checked> Нет</label>
       </div>
     </div>
     <div class="filter-section">
       <div class="filter-title">Приоритет</div>
-      <select class="filter-select">
-        <option selected>Все приоритеты</option>
-        <option>Высокий</option>
-        <option>Стандартный</option>
+      <select class="filter-select" id="filterPriority">
+        <option value="all">Все приоритеты</option>
+        <option value="high">Высокий</option>
+        <option value="std">Стандартный</option>
       </select>
     </div>
     <div class="filter-section">
       <div class="filter-title">Платформа</div>
-      <div class="filter-group">
-        <label class="filter-label"><input type="checkbox" checked> Auto.ru</label>
-        <label class="filter-label"><input type="checkbox" checked> Avito</label>
+      <div class="filter-group" id="filterPlatform">
+        <label class="filter-label"><input type="checkbox" value="auto" checked> Auto.ru</label>
+        <label class="filter-label"><input type="checkbox" value="avito" checked> Avito</label>
       </div>
     </div>
     <div class="filter-section">
-      <button class="btn-apply">Применить фильтры</button>
-      <button class="btn-reset">Сбросить</button>
+      <button class="btn-apply" id="btnApply">Применить фильтры</button>
+      <button class="btn-reset" id="btnReset">Сбросить</button>
     </div>
     <div class="filter-section">
       <div class="filter-title">Сводка</div>
-      <div class="sidebar-stats">
-        <div class="sidebar-stat"><span>Всего авто</span><span class="val">26</span></div>
-        <div class="sidebar-stat"><span>Высокий приоритет</span><span class="val">2</span></div>
-        <div class="sidebar-stat"><span>Архив (Auto.ru)</span><span class="val">4</span></div>
-        <div class="sidebar-stat"><span>Стр. 1 (Auto.ru)</span><span class="val">2</span></div>
-        <div class="sidebar-stat"><span>Стр. 1 (Avito)</span><span class="val">4</span></div>
-        <div class="sidebar-stat"><span>Не найдено нигде</span><span class="val">2</span></div>
+      <div class="sidebar-stats" id="sidebarStats">
+        <div class="sidebar-stat"><span>Всего авто</span><span class="val" id="statTotal">26</span></div>
+        <div class="sidebar-stat"><span>Высокий приоритет</span><span class="val" id="statHigh">2</span></div>
+        <div class="sidebar-stat"><span>Архив (Auto.ru)</span><span class="val" id="statArchive">4</span></div>
+        <div class="sidebar-stat"><span>Стр. 1 (Auto.ru)</span><span class="val" id="statP1Auto">2</span></div>
+        <div class="sidebar-stat"><span>Стр. 1 (Avito)</span><span class="val" id="statP1Avito">4</span></div>
+        <div class="sidebar-stat"><span>Видимых</span><span class="val" id="statVisible">26</span></div>
       </div>
     </div>
   </aside>
 
-  <!-- MAIN -->
   <main class="main">
 
-    <div class="page-title">
-      <h1>Мониторинг объявлений</h1>
-      <p>Данные на 04.06.2026 10:03 · Синхронизировано с GitHub · Последнее сканирование 26 автомобилей</p>
-    </div>
-
-    <!-- STAT CARDS -->
-    <div class="stat-grid">
-      <div class="stat-card">
-        <div class="stat-label">На мониторинге</div>
-        <div class="stat-value">26</div>
+    <!-- OVERVIEW section -->
+    <div id="sec-overview">
+      <div class="page-title">
+        <h1>Мониторинг объявлений</h1>
+        <p>Данные на 04.06.2026 10:03 · Последнее сканирование 26 автомобилей</p>
       </div>
-      <div class="stat-card">
-        <div class="stat-label">В архиве</div>
-        <div class="stat-value">4</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">На 1-й стр.</div>
-        <div class="stat-value">2 / 4</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Конкурентов</div>
-        <div class="stat-value">16</div>
+      <div class="stat-grid">
+        <div class="stat-card"><div class="stat-label">На мониторинге</div><div class="stat-value">26</div></div>
+        <div class="stat-card"><div class="stat-label">В архиве</div><div class="stat-value">4</div></div>
+        <div class="stat-card"><div class="stat-label">На 1-й стр.</div><div class="stat-value">2 / 4</div></div>
+        <div class="stat-card"><div class="stat-label">Конкурентов</div><div class="stat-value">16</div></div>
       </div>
     </div>
 
     <!-- CARS TABLE -->
-    <div class="table-card">
+    <div id="sec-cars" class="table-card">
       <div class="table-header">
         <h2>Мои автомобили</h2>
-        <span class="table-count">26 записей</span>
+        <span class="table-count" id="tableCount">26 записей</span>
       </div>
       <div class="table-scroll">
-      <table>
+      <table id="carsTable">
         <thead>
           <tr>
             <th>Автомобиль</th>
@@ -300,214 +280,188 @@
             <th>Avito</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id="carsBody">
 
-          <!-- 1 -->
-          <tr>
+          <tr data-brand="Mercedes-Benz" data-priority="high" data-auto-status="archive" data-avito-status="none">
             <td><div class="car-cell"><img src="https://avatars.mds.yandex.net/get-autoru-vos/5207325/3b3bfd40d6dfaa3776dba23b25aa9b74/584x438" class="car-thumb" loading="lazy"><div><div class="car-title">Mercedes-Benz</div><div class="car-vin">W1VVNLSZXS4493307</div></div></div></td>
             <td><span class="priority-high">Высокий</span></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/?vin=W1VVNLSZXS4493307" target="_blank" class="status-link"><span class="status-badge archive">Архив</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">46 990 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/mercedes-benz/?vin=W1VVNLSZXS4493307&geo_radius=0&rid=213" target="_blank" rel="noopener" class="plat-link"><span class="status-badge archive">Архив</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">46 990 000 &#8381;</div></div></td>
             <td><div class="platform-cell"><div class="platform-top no-link"><span class="status-badge none">Нет</span></div><div class="platform-price">46 990 000 &#8381;</div></div></td>
           </tr>
 
-          <!-- 2 -->
-          <tr>
+          <tr data-brand="Mercedes-Benz" data-priority="high" data-auto-status="page3" data-avito-status="page3">
             <td><div class="car-cell"><img src="https://photo.auto.ru/photo/get-autoru-vos/17915300/omdsDY4Lt4JLqOB9IJkHIDCWbflW5udLmMkzs6-rzTg0dMg9ElpMqRe_De-P-6L_40PvtwJa4Fn5QuC3PWwQBFRixynnR4HbLJOaERs0g8h5lgJeX3_OFsQH5oqrg7_TOoZmETrA13U88Dq82-Bsu5UgEBFWMy1zoSxcGPBknbn3Bik/584x438" class="car-thumb" loading="lazy"><div><div class="car-title">Mercedes-Benz</div><div class="car-vin">W1VVNLTZ0T4566300</div></div></div></td>
             <td><span class="priority-high">Высокий</span></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/?vin=W1VVNLTZ0T4566300" target="_blank" class="status-link"><span class="status-badge page3">Стр. 3+</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">45 550 000 &#8381;</div></div></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=W1VVNLTZ0T4566300" target="_blank" class="status-link"><span class="status-badge page3">Стр. 3+</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">45 550 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/mercedes-benz/?vin=W1VVNLTZ0T4566300&geo_radius=0&rid=213" target="_blank" rel="noopener" class="plat-link"><span class="status-badge page3">Стр. 3+</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">45 550 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=W1VVNLTZ0T4566300" target="_blank" rel="noopener" class="plat-link"><span class="status-badge page3">Стр. 3+</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">45 550 000 &#8381;</div></div></td>
           </tr>
 
-          <!-- 3 -->
-          <tr>
+          <tr data-brand="Mercedes-Benz" data-priority="std" data-auto-status="page3" data-avito-status="page3">
             <td><div class="car-cell"><img src="https://avatars.mds.yandex.net/get-autoru-vos/19793268/183f2c043113dfb978f0b2b5a00d99fe/584x438" class="car-thumb" loading="lazy"><div><div class="car-title">Mercedes-Benz</div><div class="car-vin">W1VVNLTZ5S4556796</div></div></div></td>
             <td><span class="priority-std">Стандартный</span></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/?vin=W1VVNLTZ5S4556796" target="_blank" class="status-link"><span class="status-badge page3">Стр. 3+</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">44 990 000 &#8381;</div></div></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=W1VVNLTZ5S4556796" target="_blank" class="status-link"><span class="status-badge page3">Стр. 3+</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">44 990 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/mercedes-benz/?vin=W1VVNLTZ5S4556796&geo_radius=0&rid=213" target="_blank" rel="noopener" class="plat-link"><span class="status-badge page3">Стр. 3+</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">44 990 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=W1VVNLTZ5S4556796" target="_blank" rel="noopener" class="plat-link"><span class="status-badge page3">Стр. 3+</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">44 990 000 &#8381;</div></div></td>
           </tr>
 
-          <!-- 4 -->
-          <tr>
+          <tr data-brand="Mercedes-Benz" data-priority="std" data-auto-status="archive" data-avito-status="page3">
             <td><div class="car-cell"><img src="https://photo.auto.ru/photo/get-autoru-vos/4886517/cFKwC8dPrF0V7Z84r4nnkeRND3H3ZQJFB0UfTp59toi5LdSclJF41KtoGG8pytvqL-DS03D1RYgQkZMxpyhR_F4k2R_D0WAdlCLyBp1t1LQEGgUfMSyWuJSNdmRkIzi-VwkAJw7IpiWxsFGoBfBiLeFq97QfmSVKzu_KOcov0jMf8w/584x438" class="car-thumb" loading="lazy"><div><div class="car-title">Mercedes-Benz</div><div class="car-vin">W1VVNLSZ9P4271674</div></div></div></td>
             <td><span class="priority-std">Стандартный</span></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/?vin=W1VVNLSZ9P4271674" target="_blank" class="status-link"><span class="status-badge archive">Архив</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">43 980 000 &#8381;</div></div></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=W1VVNLSZ9P4271674" target="_blank" class="status-link"><span class="status-badge page3">Стр. 3+</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">43 980 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/mercedes-benz/?vin=W1VVNLSZ9P4271674&geo_radius=0&rid=213" target="_blank" rel="noopener" class="plat-link"><span class="status-badge archive">Архив</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">43 980 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=W1VVNLSZ9P4271674" target="_blank" rel="noopener" class="plat-link"><span class="status-badge page3">Стр. 3+</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">43 980 000 &#8381;</div></div></td>
           </tr>
 
-          <!-- 5 -->
-          <tr>
+          <tr data-brand="Mercedes-Benz" data-priority="std" data-auto-status="page3" data-avito-status="page3">
             <td><div class="car-cell"><img src="https://avatars.mds.yandex.net/get-autoru-vos/16273341/f1d24620339430a8dfd594eaa01fd1ec/584x438" class="car-thumb" loading="lazy"><div><div class="car-title">Mercedes-Benz</div><div class="car-vin">W1VVNLSZ2S4495364</div></div></div></td>
             <td><span class="priority-std">Стандартный</span></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/?vin=W1VVNLSZ2S4495364" target="_blank" class="status-link"><span class="status-badge page3">Стр. 3+</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">41 500 000 &#8381;</div></div></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=W1VVNLSZ2S4495364" target="_blank" class="status-link"><span class="status-badge page3">Стр. 3+</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">41 500 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/mercedes-benz/?vin=W1VVNLSZ2S4495364&geo_radius=0&rid=213" target="_blank" rel="noopener" class="plat-link"><span class="status-badge page3">Стр. 3+</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">41 500 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=W1VVNLSZ2S4495364" target="_blank" rel="noopener" class="plat-link"><span class="status-badge page3">Стр. 3+</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">41 500 000 &#8381;</div></div></td>
           </tr>
 
-          <!-- 6 -->
-          <tr>
+          <tr data-brand="Mercedes-Benz" data-priority="std" data-auto-status="page3" data-avito-status="page3">
             <td><div class="car-cell"><img src="https://avatars.mds.yandex.net/get-autoru-vos/17915300/c0cd52862a51faa215822f2ce485aaee/584x438" class="car-thumb" loading="lazy"><div><div class="car-title">Mercedes-Benz</div><div class="car-vin">W1VVNLTZXS4485803</div></div></div></td>
             <td><span class="priority-std">Стандартный</span></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/?vin=W1VVNLTZXS4485803" target="_blank" class="status-link"><span class="status-badge page3">Стр. 3+</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">39 990 000 &#8381;</div></div></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=W1VVNLTZXS4485803" target="_blank" class="status-link"><span class="status-badge page3">Стр. 3+</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">39 990 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/mercedes-benz/?vin=W1VVNLTZXS4485803&geo_radius=0&rid=213" target="_blank" rel="noopener" class="plat-link"><span class="status-badge page3">Стр. 3+</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">39 990 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=W1VVNLTZXS4485803" target="_blank" rel="noopener" class="plat-link"><span class="status-badge page3">Стр. 3+</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">39 990 000 &#8381;</div></div></td>
           </tr>
 
-          <!-- 7 — VIN не указан -->
-          <tr>
+          <tr data-brand="Mercedes-Benz" data-priority="std" data-auto-status="none" data-avito-status="page2">
             <td><div class="car-cell"><img src="https://80.img.avito.st/image/1/1.SYn48LaA5WDuUEdh5rUY56FR52RKR-FgSiCEZErz5MJNU-F67lBHYU4.8jKTg5heMv93-uZmiNCMf2Kfaf0NYpFhXNuUvnsLf0Q" class="car-thumb" loading="lazy"><div><div class="car-title">Mercedes-Benz</div><div class="car-vin">VIN не указан</div></div></div></td>
             <td><span class="priority-std">Стандартный</span></td>
             <td><div class="platform-cell"><div class="platform-top no-link"><span class="status-badge none">Нет</span></div><div class="price-na">нет данных</div></div></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=Mercedes-Benz" target="_blank" class="status-link"><span class="status-badge page2">Стр. 2</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">39 990 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=Mercedes-Benz" target="_blank" rel="noopener" class="plat-link"><span class="status-badge page2">Стр. 2</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">39 990 000 &#8381;</div></div></td>
           </tr>
 
-          <!-- 8 -->
-          <tr>
+          <tr data-brand="Mercedes-Benz" data-priority="std" data-auto-status="page3" data-avito-status="page3">
             <td><div class="car-cell"><img src="https://avatars.mds.yandex.net/get-autoru-vos/20033387/ce72ab6aaeccb86e7420bcf4fef2b853/584x438" class="car-thumb" loading="lazy"><div><div class="car-title">Mercedes-Benz</div><div class="car-vin">X89183511G1GB1002</div></div></div></td>
             <td><span class="priority-std">Стандартный</span></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/?vin=X89183511G1GB1002" target="_blank" class="status-link"><span class="status-badge page3">Стр. 3+</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">6 490 000 &#8381;</div></div></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=X89183511G1GB1002" target="_blank" class="status-link"><span class="status-badge page3">Стр. 3+</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">6 490 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/mercedes-benz/?vin=X89183511G1GB1002&geo_radius=0&rid=213" target="_blank" rel="noopener" class="plat-link"><span class="status-badge page3">Стр. 3+</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">6 490 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=X89183511G1GB1002" target="_blank" rel="noopener" class="plat-link"><span class="status-badge page3">Стр. 3+</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">6 490 000 &#8381;</div></div></td>
           </tr>
 
-          <!-- 9 — оба Нет -->
-          <tr>
+          <tr data-brand="Mercedes-Benz" data-priority="std" data-auto-status="none" data-avito-status="none">
             <td><div class="car-cell"><div class="car-thumb-placeholder">&#128663;</div><div><div class="car-title">Mercedes-Benz</div><div class="car-vin">W1VVNLTZXT4617043</div></div></div></td>
             <td><span class="priority-std">Стандартный</span></td>
             <td><div class="platform-cell"><div class="platform-top no-link"><span class="status-badge none">Нет</span></div><div class="platform-price">44 990 000 &#8381;</div></div></td>
             <td><div class="platform-cell"><div class="platform-top no-link"><span class="status-badge none">Нет</span></div><div class="platform-price">44 990 000 &#8381;</div></div></td>
           </tr>
 
-          <!-- 10 -->
-          <tr>
+          <tr data-brand="Mercedes-Benz" data-priority="std" data-auto-status="page3" data-avito-status="page3">
             <td><div class="car-cell"><img src="https://photo.auto.ru/photo/get-autoru-vos/5485882/-1eVGGBODxZW2Bm4YJ0V6QkSBhscchiW1Wh0zGZSkGQ9sNfRtX3XrvX3J7jZIAmTQIdDqf0pXPAiVEbTYfZI5zZegMPigL28o_fBrTfM6AqyE3fPJScIdQ1Vdt42TwZBfFbXgNnqldm3DJusKOBWWA2ypmkMjsnklkkVOuXV3sifW2c/584x438" class="car-thumb" loading="lazy"><div><div class="car-title">Mercedes-Benz</div><div class="car-vin">WDF44781313650523</div></div></div></td>
             <td><span class="priority-std">Стандартный</span></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/?vin=WDF44781313650523" target="_blank" class="status-link"><span class="status-badge page3">Стр. 3+</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">10 990 000 &#8381;</div></div></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=WDF44781313650523" target="_blank" class="status-link"><span class="status-badge page3">Стр. 3+</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">10 990 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/mercedes-benz/?vin=WDF44781313650523&geo_radius=0&rid=213" target="_blank" rel="noopener" class="plat-link"><span class="status-badge page3">Стр. 3+</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">10 990 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=WDF44781313650523" target="_blank" rel="noopener" class="plat-link"><span class="status-badge page3">Стр. 3+</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">10 990 000 &#8381;</div></div></td>
           </tr>
 
-          <!-- 11 -->
-          <tr>
+          <tr data-brand="Mercedes-Benz" data-priority="std" data-auto-status="page3" data-avito-status="page3">
             <td><div class="car-cell"><img src="https://photo.auto.ru/photo/get-autoru-vos/17707957/_tzYfeAqTrw4ptfjK_R6EYP_IcuGdElkRvqTsE_Pd02m7XguT40SD6FPzmHedPELIiQ-wgOIJ-MA-fKDukP7JtXqSG4N_8RcuL1_vMHRbJzsMCBiEWljToPWIwad_Py6HRWUt5eu9srJMahGKNQXq5I7a4-RpoDNks5fUpLJtX7uAg/584x438" class="car-thumb" loading="lazy"><div><div class="car-title">Mercedes-Benz</div><div class="car-vin">WDF44781513582315</div></div></div></td>
             <td><span class="priority-std">Стандартный</span></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/?vin=WDF44781513582315" target="_blank" class="status-link"><span class="status-badge page3">Стр. 3+</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">9 000 000 &#8381;</div></div></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=WDF44781513582315" target="_blank" class="status-link"><span class="status-badge page3">Стр. 3+</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">9 000 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/mercedes-benz/?vin=WDF44781513582315&geo_radius=0&rid=213" target="_blank" rel="noopener" class="plat-link"><span class="status-badge page3">Стр. 3+</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">9 000 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=WDF44781513582315" target="_blank" rel="noopener" class="plat-link"><span class="status-badge page3">Стр. 3+</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">9 000 000 &#8381;</div></div></td>
           </tr>
 
-          <!-- 12 -->
-          <tr>
+          <tr data-brand="Mercedes-Benz" data-priority="std" data-auto-status="archive" data-avito-status="page2">
             <td><div class="car-cell"><img src="https://avatars.mds.yandex.net/get-autoru-vos/2170895/7d637b9cbdd5d311535d17ed27618188/584x438" class="car-thumb" loading="lazy"><div><div class="car-title">Mercedes-Benz</div><div class="car-vin">W1VVNKTZ3S4415320</div></div></div></td>
             <td><span class="priority-std">Стандартный</span></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/?vin=W1VVNKTZ3S4415320" target="_blank" class="status-link"><span class="status-badge archive">Архив</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">24 250 000 &#8381;</div></div></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=W1VVNKTZ3S4415320" target="_blank" class="status-link"><span class="status-badge page2">Стр. 2</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">24 250 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/mercedes-benz/?vin=W1VVNKTZ3S4415320&geo_radius=0&rid=213" target="_blank" rel="noopener" class="plat-link"><span class="status-badge archive">Архив</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">24 250 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=W1VVNKTZ3S4415320" target="_blank" rel="noopener" class="plat-link"><span class="status-badge page2">Стр. 2</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">24 250 000 &#8381;</div></div></td>
           </tr>
 
-          <!-- 13 -->
-          <tr>
+          <tr data-brand="Mercedes-Benz" data-priority="std" data-auto-status="page3" data-avito-status="page3">
             <td><div class="car-cell"><img src="https://avatars.mds.yandex.net/get-autoru-vos/18621059/928d59ca946e2889d997afb454b41e6b/584x438" class="car-thumb" loading="lazy"><div><div class="car-title">Mercedes-Benz</div><div class="car-vin">W1VVNLTZ6P4264984</div></div></div></td>
             <td><span class="priority-std">Стандартный</span></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/?vin=W1VVNLTZ6P4264984" target="_blank" class="status-link"><span class="status-badge page3">Стр. 3+</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">13 390 000 &#8381;</div></div></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=W1VVNLTZ6P4264984" target="_blank" class="status-link"><span class="status-badge page3">Стр. 3+</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">13 390 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/mercedes-benz/?vin=W1VVNLTZ6P4264984&geo_radius=0&rid=213" target="_blank" rel="noopener" class="plat-link"><span class="status-badge page3">Стр. 3+</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">13 390 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=W1VVNLTZ6P4264984" target="_blank" rel="noopener" class="plat-link"><span class="status-badge page3">Стр. 3+</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">13 390 000 &#8381;</div></div></td>
           </tr>
 
-          <!-- 14 -->
-          <tr>
+          <tr data-brand="Mercedes-Benz" data-priority="std" data-auto-status="page3" data-avito-status="page3">
             <td><div class="car-cell"><img src="https://photo.auto.ru/photo/get-autoru-vos/18143138/I672_Bzslp14OE1OcuMJLDjfObmqvsiw6pDnxkVuLRGM62Wtwipzsn-BSwfyVSIdZ2rbZ3x2pP_HAS0T-QGs4FY_WUOoAfCzYYbwQJUljbx7QRTBMZQxCe-r2FVmxxn6wSTF5iA0WRRkdQ3UtK1bqQLafncf8S1oiXTpfyLo0znuNw/584x438" class="car-thumb" loading="lazy"><div><div class="car-title">Mercedes-Benz</div><div class="car-vin">X89183511L1GB1066</div></div></div></td>
             <td><span class="priority-std">Стандартный</span></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/?vin=X89183511L1GB1066" target="_blank" class="status-link"><span class="status-badge page3">Стр. 3+</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">7 500 000 &#8381;</div></div></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=X89183511L1GB1066" target="_blank" class="status-link"><span class="status-badge page3">Стр. 3+</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">7 500 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/mercedes-benz/?vin=X89183511L1GB1066&geo_radius=0&rid=213" target="_blank" rel="noopener" class="plat-link"><span class="status-badge page3">Стр. 3+</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">7 500 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=X89183511L1GB1066" target="_blank" rel="noopener" class="plat-link"><span class="status-badge page3">Стр. 3+</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">7 500 000 &#8381;</div></div></td>
           </tr>
 
-          <!-- 15 -->
-          <tr>
+          <tr data-brand="Mercedes-Benz" data-priority="std" data-auto-status="page2" data-avito-status="page3">
             <td><div class="car-cell"><img src="https://avatars.mds.yandex.net/get-autoru-vos/20390804/6fd1bb3e60ed35778c7a05c2bd26cdd2/584x438" class="car-thumb" loading="lazy"><div><div class="car-title">Mercedes-Benz</div><div class="car-vin">W1VVNLTZ6T4568116</div></div></div></td>
             <td><span class="priority-std">Стандартный</span></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/?vin=W1VVNLTZ6T4568116" target="_blank" class="status-link"><span class="status-badge page2">Стр. 2</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">14 590 000 &#8381;</div></div></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=W1VVNLTZ6T4568116" target="_blank" class="status-link"><span class="status-badge page3">Стр. 3</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">14 590 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/mercedes-benz/?vin=W1VVNLTZ6T4568116&geo_radius=0&rid=213" target="_blank" rel="noopener" class="plat-link"><span class="status-badge page2">Стр. 2</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">14 590 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=W1VVNLTZ6T4568116" target="_blank" rel="noopener" class="plat-link"><span class="status-badge page3">Стр. 3</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">14 590 000 &#8381;</div></div></td>
           </tr>
 
-          <!-- 16 -->
-          <tr>
+          <tr data-brand="Mercedes-Benz" data-priority="std" data-auto-status="page2" data-avito-status="page3">
             <td><div class="car-cell"><img src="https://avatars.mds.yandex.net/get-autoru-vos/14916128/4665e80875a76f151997a6e03c536bf9/584x438" class="car-thumb" loading="lazy"><div><div class="car-title">Mercedes-Benz</div><div class="car-vin">W1VVNLTZ4T4637708</div></div></div></td>
             <td><span class="priority-std">Стандартный</span></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/?vin=W1VVNLTZ4T4637708" target="_blank" class="status-link"><span class="status-badge page2">Стр. 2</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">14 250 000 &#8381;</div></div></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=W1VVNLTZ4T4637708" target="_blank" class="status-link"><span class="status-badge page3">Стр. 3</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">14 250 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/mercedes-benz/?vin=W1VVNLTZ4T4637708&geo_radius=0&rid=213" target="_blank" rel="noopener" class="plat-link"><span class="status-badge page2">Стр. 2</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">14 250 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=W1VVNLTZ4T4637708" target="_blank" rel="noopener" class="plat-link"><span class="status-badge page3">Стр. 3</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">14 250 000 &#8381;</div></div></td>
           </tr>
 
-          <!-- 17 -->
-          <tr>
+          <tr data-brand="Mercedes-Benz" data-priority="std" data-auto-status="page3" data-avito-status="page3">
             <td><div class="car-cell"><img src="https://avatars.mds.yandex.net/get-autoru-vos/17712067/e3f2f3ff93af2cab724f2ab2a331bc0e/584x438" class="car-thumb" loading="lazy"><div><div class="car-title">Mercedes-Benz</div><div class="car-vin">W1VVNLTZ6T4614981</div></div></div></td>
             <td><span class="priority-std">Стандартный</span></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/?vin=W1VVNLTZ6T4614981" target="_blank" class="status-link"><span class="status-badge page3">Стр. 3+</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">14 250 000 &#8381;</div></div></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=W1VVNLTZ6T4614981" target="_blank" class="status-link"><span class="status-badge page3">Стр. 3</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">14 250 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/mercedes-benz/?vin=W1VVNLTZ6T4614981&geo_radius=0&rid=213" target="_blank" rel="noopener" class="plat-link"><span class="status-badge page3">Стр. 3+</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">14 250 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=W1VVNLTZ6T4614981" target="_blank" rel="noopener" class="plat-link"><span class="status-badge page3">Стр. 3</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">14 250 000 &#8381;</div></div></td>
           </tr>
 
-          <!-- 18 Sprinter -->
-          <tr>
+          <tr data-brand="Sprinter" data-priority="std" data-auto-status="page2" data-avito-status="page1">
             <td><div class="car-cell"><img src="https://photo.auto.ru/photo/get-autoru-vos/18139133/Jj8kQySSHFurfpdlLo-TFJm_TICtyMOGJbRqDhjSIkS3KlHVdjH4dgHZD7MQwEJ94EiHfOOL0SMTAqPBT9c9plzgOidyUGhZWcTjTY46jbg7sUyOiYnWC1j7SLhrwnJNr0U3R3jmcXzGTGWei6PiTJXEE_ubIuBjxD56e50rdkKs2bY/584x438" class="car-thumb" loading="lazy"><div><div class="car-title">Mercedes-Benz Sprinter</div><div class="car-vin">W1V3MCFZ0SP708664</div></div></div></td>
             <td><span class="priority-std">Стандартный</span></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/?vin=W1V3MCFZ0SP708664" target="_blank" class="status-link"><span class="status-badge page2">Стр. 2</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">47 500 000 &#8381;</div></div></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=W1V3MCFZ0SP708664" target="_blank" class="status-link"><span class="status-badge page1">Стр. 1</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">47 500 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/mercedes-benz/?vin=W1V3MCFZ0SP708664&geo_radius=0&rid=213" target="_blank" rel="noopener" class="plat-link"><span class="status-badge page2">Стр. 2</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">47 500 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=W1V3MCFZ0SP708664" target="_blank" rel="noopener" class="plat-link"><span class="status-badge page1">Стр. 1</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">47 500 000 &#8381;</div></div></td>
           </tr>
 
-          <!-- 19 Sprinter -->
-          <tr>
+          <tr data-brand="Sprinter" data-priority="std" data-auto-status="page3" data-avito-status="page3">
             <td><div class="car-cell"><img src="https://photo.auto.ru/photo/get-autoru-vos/2170182/JQZRPt5dH3JI1HI7mi_gdpJ8RkJo8Sa6vtHIdk5b3MUfiSLU6OAb6HdGePyhWjweABMknKmh0SiH4ePq8TQYwAa665rTimzEj5b41AKgeJCYZbaMrg4lv0Spipa7My_6_NgUHuAriYMx2CRuHHJezfSXtFZR1M7KJNEurWtfZ5CawHw/584x438" class="car-thumb" loading="lazy"><div><div class="car-title">Mercedes-Benz Sprinter</div><div class="car-vin">WDB9077351P162375</div></div></div></td>
             <td><span class="priority-std">Стандартный</span></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/?vin=WDB9077351P162375" target="_blank" class="status-link"><span class="status-badge page3">Стр. 3+</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">43 750 000 &#8381;</div></div></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=WDB9077351P162375" target="_blank" class="status-link"><span class="status-badge page3">Стр. 3+</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">43 750 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/mercedes-benz/?vin=WDB9077351P162375&geo_radius=0&rid=213" target="_blank" rel="noopener" class="plat-link"><span class="status-badge page3">Стр. 3+</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">43 750 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=WDB9077351P162375" target="_blank" rel="noopener" class="plat-link"><span class="status-badge page3">Стр. 3+</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">43 750 000 &#8381;</div></div></td>
           </tr>
 
-          <!-- 20 Sprinter -->
-          <tr>
+          <tr data-brand="Sprinter" data-priority="std" data-auto-status="page3" data-avito-status="page1">
             <td><div class="car-cell"><img src="https://avatars.mds.yandex.net/get-autoru-vos/5335648/578873a0e9065ae4202e5a37cf94ad0b/584x438" class="car-thumb" loading="lazy"><div><div class="car-title">Mercedes-Benz Sprinter</div><div class="car-vin">WDB9077351P161073</div></div></div></td>
             <td><span class="priority-std">Стандартный</span></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/?vin=WDB9077351P161073" target="_blank" class="status-link"><span class="status-badge page3">Стр. 3+</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">41 500 000 &#8381;</div></div></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=WDB9077351P161073" target="_blank" class="status-link"><span class="status-badge page1">Стр. 1</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">41 500 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/mercedes-benz/?vin=WDB9077351P161073&geo_radius=0&rid=213" target="_blank" rel="noopener" class="plat-link"><span class="status-badge page3">Стр. 3+</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">41 500 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=WDB9077351P161073" target="_blank" rel="noopener" class="plat-link"><span class="status-badge page1">Стр. 1</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">41 500 000 &#8381;</div></div></td>
           </tr>
 
-          <!-- 21 Sprinter -->
-          <tr>
+          <tr data-brand="Sprinter" data-priority="std" data-auto-status="page3" data-avito-status="page3">
             <td><div class="car-cell"><img src="https://avatars.mds.yandex.net/get-autoru-vos/2157011/87d2effc666d93ff34e847eb03fe3e60/584x438" class="car-thumb" loading="lazy"><div><div class="car-title">Mercedes-Benz Sprinter</div><div class="car-vin">W1V3MCTZ7SP716183</div></div></div></td>
             <td><span class="priority-std">Стандартный</span></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/?vin=W1V3MCTZ7SP716183" target="_blank" class="status-link"><span class="status-badge page3">Стр. 3</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">25 900 000 &#8381;</div></div></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=W1V3MCTZ7SP716183" target="_blank" class="status-link"><span class="status-badge page3">Стр. 3+</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">25 900 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/mercedes-benz/?vin=W1V3MCTZ7SP716183&geo_radius=0&rid=213" target="_blank" rel="noopener" class="plat-link"><span class="status-badge page3">Стр. 3</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">25 900 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=W1V3MCTZ7SP716183" target="_blank" rel="noopener" class="plat-link"><span class="status-badge page3">Стр. 3+</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">25 900 000 &#8381;</div></div></td>
           </tr>
 
-          <!-- 22 Zeekr -->
-          <tr>
+          <tr data-brand="Zeekr" data-priority="std" data-auto-status="page1" data-avito-status="page3">
             <td><div class="car-cell"><img src="https://photo.auto.ru/photo/get-autoru-vos/16409627/eAuIoygiZSphJRDRJ5z4bH63njWp9GhB-veBfEBUyLk7OO4W_40sBDqPvumSC4nnFbYytP7oUIXlEZNfM40ykAT5GebsgCDhGQDG1ak3_wpW8KsWfk7jJsaAMGTD63aupRKt5f86psui3Vta7s3ts-TcKSVE8Ys9N4bZMApAeH2qGg/584x438" class="car-thumb" loading="lazy"><div><div class="car-title">Zeekr 009</div><div class="car-vin">L6T79T2E4PP039633</div></div></div></td>
             <td><span class="priority-std">Стандартный</span></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/?vin=L6T79T2E4PP039633" target="_blank" class="status-link"><span class="status-badge page1">Стр. 1</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">17 100 000 &#8381;</div></div></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=L6T79T2E4PP039633" target="_blank" class="status-link"><span class="status-badge page3">Стр. 3+</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">17 100 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/zeekr/?vin=L6T79T2E4PP039633&geo_radius=0&rid=213" target="_blank" rel="noopener" class="plat-link"><span class="status-badge page1">Стр. 1</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">17 100 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=L6T79T2E4PP039633" target="_blank" rel="noopener" class="plat-link"><span class="status-badge page3">Стр. 3+</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">17 100 000 &#8381;</div></div></td>
           </tr>
 
-          <!-- 23 Zeekr -->
-          <tr>
+          <tr data-brand="Zeekr" data-priority="std" data-auto-status="page1" data-avito-status="page1">
             <td><div class="car-cell"><img src="https://avatars.mds.yandex.net/get-autoru-vos/20116688/946aac881509550314287e0a8aa9ccb0/584x438" class="car-thumb" loading="lazy"><div><div class="car-title">Zeekr 009</div><div class="car-vin">L6T79T2E2PP081956</div></div></div></td>
             <td><span class="priority-std">Стандартный</span></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/?vin=L6T79T2E2PP081956" target="_blank" class="status-link"><span class="status-badge page1">Стр. 1</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">13 000 000 &#8381;</div></div></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=L6T79T2E2PP081956" target="_blank" class="status-link"><span class="status-badge page1">Стр. 1</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">13 000 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/zeekr/?vin=L6T79T2E2PP081956&geo_radius=0&rid=213" target="_blank" rel="noopener" class="plat-link"><span class="status-badge page1">Стр. 1</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">13 000 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=L6T79T2E2PP081956" target="_blank" rel="noopener" class="plat-link"><span class="status-badge page1">Стр. 1</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">13 000 000 &#8381;</div></div></td>
           </tr>
 
-          <!-- 24 Maextro -->
-          <tr>
+          <tr data-brand="Maextro" data-priority="std" data-auto-status="archive" data-avito-status="page1">
             <td><div class="car-cell"><img src="https://avatars.mds.yandex.net/get-autoru-vos/16135405/e4b6d5236e4390eab1a4484121907d51/584x438" class="car-thumb" loading="lazy"><div><div class="car-title">Maextro S800</div><div class="car-vin">LJ1HFAUU4SH000003</div></div></div></td>
             <td><span class="priority-std">Стандартный</span></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/?vin=LJ1HFAUU4SH000003" target="_blank" class="status-link"><span class="status-badge archive">Архив</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">27 550 000 &#8381;</div></div></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=LJ1HFAUU4SH000003" target="_blank" class="status-link"><span class="status-badge page1">Стр. 1</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">27 550 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/maextro/?vin=LJ1HFAUU4SH000003&geo_radius=0&rid=213" target="_blank" rel="noopener" class="plat-link"><span class="status-badge archive">Архив</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">27 550 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=LJ1HFAUU4SH000003" target="_blank" rel="noopener" class="plat-link"><span class="status-badge page1">Стр. 1</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">27 550 000 &#8381;</div></div></td>
           </tr>
 
-          <!-- 25 Land Rover -->
-          <tr>
-            <td><div class="car-cell"><img src="https://20.img.avito.st/image/1/1.mrEXyraANlgBapRZL8Stzy9qNFylfTJYpRpXXKXJN_qiaTJCAWqUWaE.j0e_9RHqze8a5OuSQLeuy15yrUNBLDhOQANZsVgYXQw?cqp=2.31EmCLg6ik3oatt1ttbFq_ajuGsz9wCshVqsaNgtLVVqtiwIcdxsWidTBGP4W2gjZpwuVqcdzwQCR5DnUbaoBbU1" class="car-thumb" loading="lazy"><div><div class="car-title">Land Rover</div><div class="car-vin">SALKABB93RA233353</div></div></div></td>
+          <tr data-brand="Land Rover" data-priority="std" data-auto-status="none" data-avito-status="page2">
+            <td><div class="car-cell"><img src="https://20.img.avito.st/image/1/1.mrEXyraANlgBapRZL8Stzy9qNFylfTJYpRpXXKXJN_qiaTJCAWqUWaE.j0e_9RHqze8a5OuSQLeuy15yrUNBLDhOQANZsVgYXQw" class="car-thumb" loading="lazy"><div><div class="car-title">Land Rover</div><div class="car-vin">SALKABB93RA233353</div></div></div></td>
             <td><span class="priority-std">Стандартный</span></td>
             <td><div class="platform-cell"><div class="platform-top no-link"><span class="status-badge none">Нет</span></div><div class="platform-price">46 665 000 &#8381;</div></div></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=SALKABB93RA233353" target="_blank" class="status-link"><span class="status-badge page2">Стр. 2</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">46 665 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=SALKABB93RA233353" target="_blank" rel="noopener" class="plat-link"><span class="status-badge page2">Стр. 2</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">46 665 000 &#8381;</div></div></td>
           </tr>
 
-          <!-- 26 Land Rover -->
-          <tr>
+          <tr data-brand="Land Rover" data-priority="std" data-auto-status="page3" data-avito-status="page3">
             <td><div class="car-cell"><img src="https://avatars.mds.yandex.net/get-autoru-vos/17665660/ef753079be0875ec3699cdbf3c8f0abc/584x438" class="car-thumb" loading="lazy"><div><div class="car-title">Land Rover</div><div class="car-vin">SALKABB93RA237563</div></div></div></td>
             <td><span class="priority-std">Стандартный</span></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/?vin=SALKABB93RA237563" target="_blank" class="status-link"><span class="status-badge page3">Стр. 3+</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">38 250 000 &#8381;</div></div></td>
-            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=SALKABB93RA237563" target="_blank" class="status-link"><span class="status-badge page3">Стр. 3+</span><span class="link-arrow">&#8599;</span></a></div><div class="platform-price">38 250 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://auto.ru/cars/used/sale/land_rover/?vin=SALKABB93RA237563&geo_radius=0&rid=213" target="_blank" rel="noopener" class="plat-link"><span class="status-badge page3">Стр. 3+</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">38 250 000 &#8381;</div></div></td>
+            <td><div class="platform-cell"><div class="platform-top"><a href="https://www.avito.ru/moskva/avtomobili?q=SALKABB93RA237563" target="_blank" rel="noopener" class="plat-link"><span class="status-badge page3">Стр. 3+</span><svg class="link-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a></div><div class="platform-price">38 250 000 &#8381;</div></div></td>
           </tr>
 
         </tbody>
@@ -516,44 +470,34 @@
     </div>
 
     <!-- COMPETITORS -->
-    <div class="comp-grid">
+    <div id="sec-competitors" class="comp-grid">
       <div class="comp-card">
-        <div class="comp-header">
-          <h3>Конкуренты &mdash; Auto.ru</h3>
-          <span class="comp-badge auto">Auto.ru</span>
-        </div>
-        <div class="comp-empty">Данные конкурентов по Auto.ru отсутствуют в последнем сканировании</div>
+        <div class="comp-header"><h3>Конкуренты &mdash; Auto.ru</h3><span class="comp-badge auto">Auto.ru</span></div>
+        <div class="comp-empty">Данные конкурентов по Auto.ru отсутствуют</div>
       </div>
       <div class="comp-card">
-        <div class="comp-header">
-          <h3>Конкуренты &mdash; Avito</h3>
-          <span class="comp-badge avito">Avito &middot; 16 объявлений</span>
-        </div>
+        <div class="comp-header"><h3>Конкуренты &mdash; Avito</h3><span class="comp-badge avito">Avito &middot; 16 объявлений</span></div>
         <div class="comp-list">
           <div class="comp-cat">Mercedes-Benz</div>
-          <div class="comp-item"><div class="comp-info"><div class="name">Mercedes-Benz V-класс 2.0 AT, 2025</div><div class="seller">МБ РУС Ленинградский</div></div><div class="comp-price">11 501 000 &#8381;</div></div>
-          <div class="comp-item"><div class="comp-info"><div class="name">Mercedes-Benz V-класс 2.0 AT, 2025</div><div class="seller">Панавто Mercedes-Benz</div></div><div class="comp-price">11 100 000 &#8381;</div></div>
-          <div class="comp-item"><div class="comp-info"><div class="name">Mercedes-Benz V-класс 2.0 AT, 2025</div><div class="seller">МБ РУС Ленинградский</div></div><div class="comp-price">11 340 000 &#8381;</div></div>
-          <div class="comp-item"><div class="comp-info"><div class="name">Mercedes-Benz V-класс 2.0 AT, 2025</div><div class="seller">GREATS | Deluxe Auto Gallery</div></div><div class="comp-price">49 840 000 &#8381;</div></div>
-          <div class="comp-item"><div class="comp-info"><div class="name">Mercedes-Benz V-класс 2.0 AT, 2025, 100 км</div><div class="seller">GAZTORMOZ</div></div><div class="comp-price">9 999 000 &#8381;</div></div>
-
+          <div class="comp-item"><div class="comp-info"><div class="name">V-класс 2.0 AT, 2025</div><div class="seller">МБ РУС Ленинградский</div></div><div class="comp-price">11 501 000 &#8381;</div></div>
+          <div class="comp-item"><div class="comp-info"><div class="name">V-класс 2.0 AT, 2025</div><div class="seller">Панавто Mercedes-Benz</div></div><div class="comp-price">11 100 000 &#8381;</div></div>
+          <div class="comp-item"><div class="comp-info"><div class="name">V-класс 2.0 AT, 2025</div><div class="seller">МБ РУС Ленинградский</div></div><div class="comp-price">11 340 000 &#8381;</div></div>
+          <div class="comp-item"><div class="comp-info"><div class="name">V-класс 2.0 AT, 2025</div><div class="seller">GREATS | Deluxe Auto Gallery</div></div><div class="comp-price">49 840 000 &#8381;</div></div>
+          <div class="comp-item"><div class="comp-info"><div class="name">V-класс 2.0 AT, 2025, 100 км</div><div class="seller">GAZTORMOZ</div></div><div class="comp-price">9 999 000 &#8381;</div></div>
           <div class="comp-cat">Mercedes-Benz Sprinter</div>
           <div class="comp-item"><div class="comp-info"><div class="name">Sprinter 3.0 AT, 2024</div><div class="seller">А1 АВТО</div></div><div class="comp-price">44 600 000 &#8381;</div></div>
           <div class="comp-item"><div class="comp-info"><div class="name">Sprinter 2.0 AT, 2022, 56 341 км</div><div class="seller">PELETON</div></div><div class="comp-price">4 680 000 &#8381;</div></div>
           <div class="comp-item"><div class="comp-info"><div class="name">Sprinter 3.0 AT, 2024</div><div class="seller">МБ РУС Вешки</div></div><div class="comp-price">44 600 000 &#8381;</div></div>
           <div class="comp-item"><div class="comp-info"><div class="name">Sprinter 3.0 AT, 2024</div><div class="seller">МБ РУС Ленинградский</div></div><div class="comp-price">44 600 000 &#8381;</div></div>
           <div class="comp-item"><div class="comp-info"><div class="name">Sprinter 2.0 AT, 2023, 81 707 км</div><div class="seller">PELETON</div></div><div class="comp-price">6 800 000 &#8381;</div></div>
-
           <div class="comp-cat">Zeekr 009</div>
           <div class="comp-item"><div class="comp-info"><div class="name">Zeekr 009 AT, 2026</div><div class="seller">ZEEKR Авилон Легенда</div></div><div class="comp-price">13 900 000 &#8381;</div></div>
           <div class="comp-item"><div class="comp-info"><div class="name">Zeekr 009 AT, 2026</div><div class="seller">ФРАНК АВТО Вешки</div></div><div class="comp-price">19 500 000 &#8381;</div></div>
           <div class="comp-item"><div class="comp-info"><div class="name">Zeekr 009 AT, 2025</div><div class="seller">ZEEKR Авилон Легенда</div></div><div class="comp-price">17 020 000 &#8381;</div></div>
           <div class="comp-item"><div class="comp-info"><div class="name">Zeekr 009 AT, 2025</div><div class="seller">ZEEKR Авилон Легенда</div></div><div class="comp-price">16 990 000 &#8381;</div></div>
           <div class="comp-item"><div class="comp-info"><div class="name">Zeekr 009 AT, 2026</div><div class="seller">ФРАНК АВТО Вешки</div></div><div class="comp-price">19 500 000 &#8381;</div></div>
-
           <div class="comp-cat">Maextro S800</div>
           <div class="comp-item"><div class="comp-info"><div class="name">Maextro S800 1.5 AT, 2026</div><div class="seller">А1 АВТО</div></div><div class="comp-price">27 550 000 &#8381;</div></div>
-
           <div class="comp-cat">Land Rover</div>
           <div class="comp-item"><div class="comp-info"><div class="name">Range Rover 4.4 AT, 2025, 1 км</div><div class="seller">КРИСТАЛ КАР</div></div><div class="comp-price">25 450 000 &#8381;</div></div>
           <div class="comp-item"><div class="comp-info"><div class="name">Range Rover 3.0 AT, 2026, 11 км</div><div class="seller">DA.MOTORS</div></div><div class="comp-price">22 500 000 &#8381;</div></div>
@@ -565,27 +509,12 @@
     </div>
 
     <!-- CHARTS -->
-    <section class="charts-section">
-      <div class="charts-title-row">
-        <h2>Статистика мониторинга</h2>
-        <span>Распределение статусов и динамика за период</span>
-      </div>
+    <section id="sec-charts" class="charts-section">
+      <div class="charts-title-row"><h2>Статистика мониторинга</h2><span>Распределение статусов и динамика</span></div>
       <div class="charts-grid">
-        <div class="chart-card">
-          <h3>Статусы на Auto.ru</h3>
-          <p class="chart-sub">Распределение по состоянию на 04.06.2026</p>
-          <div class="chart-box"><canvas id="statusAutoChart"></canvas></div>
-        </div>
-        <div class="chart-card">
-          <h3>Статусы на Avito</h3>
-          <p class="chart-sub">Распределение по состоянию на 04.06.2026</p>
-          <div class="chart-box"><canvas id="statusAvitoChart"></canvas></div>
-        </div>
-        <div class="chart-card">
-          <h3>Avito: динамика 03.06 &rarr; 04.06</h3>
-          <p class="chart-sub">Изменение позиций за сутки</p>
-          <div class="chart-box"><canvas id="trendChart"></canvas></div>
-        </div>
+        <div class="chart-card"><h3>Статусы на Auto.ru</h3><p class="chart-sub">04.06.2026</p><div class="chart-box"><canvas id="chAuto"></canvas></div></div>
+        <div class="chart-card"><h3>Статусы на Avito</h3><p class="chart-sub">04.06.2026</p><div class="chart-box"><canvas id="chAvito"></canvas></div></div>
+        <div class="chart-card"><h3>Динамика Avito 03&rarr;04.06</h3><p class="chart-sub">Изменение позиций</p><div class="chart-box"><canvas id="chTrend"></canvas></div></div>
       </div>
     </section>
 
@@ -593,55 +522,83 @@
 </div>
 
 <script>
+/* ── NAV ── */
+document.getElementById('mainNav').addEventListener('click',function(e){
+  const a=e.target.closest('a[data-section]');
+  if(!a)return;
+  e.preventDefault();
+  this.querySelectorAll('a').forEach(x=>x.classList.remove('active'));
+  a.classList.add('active');
+  const sec=a.dataset.section;
+  ['overview','cars','competitors','charts'].forEach(s=>{
+    const el=document.getElementById('sec-'+s);
+    if(el)el.classList.toggle('section-hidden',s!==sec);
+  });
+});
+
+/* ── FILTERS ── */
+function applyFilters(){
+  const q=document.getElementById('searchInput').value.toLowerCase().trim();
+  const pri=document.getElementById('filterPriority').value;
+  const brands=[...document.querySelectorAll('#filterBrand input:checked')].map(c=>c.value.toLowerCase());
+  const statuses=[...document.querySelectorAll('#filterStatus input:checked')].map(c=>c.value);
+  const plats=[...document.querySelectorAll('#filterPlatform input:checked')].map(c=>c.value);
+  const rows=document.querySelectorAll('#carsBody tr');
+  let vis=0;
+  rows.forEach(row=>{
+    const t=row.querySelector('.car-title')?.textContent?.toLowerCase()||'';
+    const v=row.querySelector('.car-vin')?.textContent?.toLowerCase()||'';
+    const rb=(row.dataset.brand||'').toLowerCase();
+    const rp=row.dataset.priority||'';
+    const as=row.dataset.autoStatus||'';
+    const avs=row.dataset.avitoStatus||'';
+
+    let show=true;
+    if(q&&!t.includes(q)&&!v.includes(q))show=false;
+    if(!brands.some(b=>rb.includes(b)||b.includes(rb)))show=false;
+    if(pri!=='all'&&rp!==pri)show=false;
+
+    const matchStatus=statuses.length===0||statuses.some(s=>as===s||avs===s);
+    if(!matchStatus)show=false;
+
+    const hasAuto=as!=='none';
+    const hasAvit=avs!=='none';
+    if(plats.length===1){
+      if(plats[0]==='auto'&&!hasAuto)show=false;
+      if(plats[0]==='avito'&&!hasAvit)show=false;
+    }
+    if(plats.length===0)show=false;
+
+    row.classList.toggle('hidden-row',!show);
+    if(show)vis++;
+  });
+  document.getElementById('tableCount').textContent=vis+' запис'+(vis===1?'ь':vis>=2&&vis<=4?'и':'ей');
+  document.getElementById('statVisible').textContent=vis;
+}
+
+document.getElementById('btnApply').addEventListener('click',applyFilters);
+document.getElementById('searchInput').addEventListener('input',applyFilters);
+document.querySelectorAll('#filterBrand input,#filterStatus input,#filterPlatform input').forEach(cb=>cb.addEventListener('change',applyFilters));
+document.getElementById('filterPriority').addEventListener('change',applyFilters);
+
+document.getElementById('btnReset').addEventListener('click',function(){
+  document.getElementById('searchInput').value='';
+  document.getElementById('filterPriority').value='all';
+  document.querySelectorAll('#filterBrand input,#filterStatus input,#filterPlatform input').forEach(cb=>cb.checked=true);
+  applyFilters();
+});
+
+/* ── CHARTS ── */
 Chart.defaults.font.family="'Geologica',sans-serif";
 Chart.defaults.font.size=12;
 Chart.defaults.color='#9a9286';
-Chart.defaults.plugins.legend.labels.usePointStyle=true;
-Chart.defaults.plugins.legend.labels.padding=14;
+const accent='#2a6f5a',coral='#c45d4a',amber='#b8860b',accentSoft='#3a8f74',gridC='rgba(224,216,200,0.5)';
 
-const accent='#2a6f5a',coral='#c45d4a',amber='#b8860b',purple='#6b5ce7',accentSoft='#3a8f74',muted='#9a9286';
-const gridC='rgba(224,216,200,0.5)';
+new Chart(document.getElementById('chAuto'),{type:'doughnut',data:{labels:['Архив (4)','Стр. 1 (2)','Стр. 2 (3)','Стр. 3 (1)','Стр. 3+ (13)','Нет (3)'],datasets:[{data:[4,2,3,1,13,3],backgroundColor:[coral,accent,'#c9a227','#a89070',accentSoft,'#ccc'],borderWidth:0,hoverOffset:8}]},options:{responsive:true,maintainAspectRatio:false,cutout:'58%',plugins:{legend:{position:'bottom',labels:{padding:12,font:{size:11}}}}}});
 
-// Auto.ru doughnut: Архив=4, Стр.1=2, Стр.2=3, Стр.3=1, Стр.3+=13, Нет=3
-new Chart(document.getElementById('statusAutoChart'),{
-  type:'doughnut',
-  data:{
-    labels:['Архив (4)','Стр. 1 (2)','Стр. 2 (3)','Стр. 3 (1)','Стр. 3+ (13)','Нет (3)'],
-    datasets:[{data:[4,2,3,1,13,3],backgroundColor:[coral,accent,'#c9a227','#a89070',accentSoft,'#ccc'],borderWidth:0,hoverOffset:8}]
-  },
-  options:{responsive:true,maintainAspectRatio:false,cutout:'58%',plugins:{legend:{position:'bottom',labels:{padding:12,font:{size:11}}}}}
-});
+new Chart(document.getElementById('chAvito'),{type:'doughnut',data:{labels:['Стр. 1 (4)','Стр. 2 (3)','Стр. 3 (3)','Стр. 3+ (14)','Нет (2)'],datasets:[{data:[4,3,3,14,2],backgroundColor:[accent,amber,'#a89070',accentSoft,'#ccc'],borderWidth:0,hoverOffset:8}]},options:{responsive:true,maintainAspectRatio:false,cutout:'58%',plugins:{legend:{position:'bottom',labels:{padding:12,font:{size:11}}}}}});
 
-// Avito doughnut: Стр.1=4, Стр.2=3, Стр.3=3, Стр.3+=14, Нет=2
-new Chart(document.getElementById('statusAvitoChart'),{
-  type:'doughnut',
-  data:{
-    labels:['Стр. 1 (4)','Стр. 2 (3)','Стр. 3 (3)','Стр. 3+ (14)','Нет (2)'],
-    datasets:[{data:[4,3,3,14,2],backgroundColor:[accent,amber,'#a89070',accentSoft,'#ccc'],borderWidth:0,hoverOffset:8}]
-  },
-  options:{responsive:true,maintainAspectRatio:false,cutout:'58%',plugins:{legend:{position:'bottom',labels:{padding:12,font:{size:11}}}}}
-});
-
-// Avito trend: 03.06 vs 04.06
-new Chart(document.getElementById('trendChart'),{
-  type:'bar',
-  data:{
-    labels:['Стр. 1','Стр. 2','Стр. 3','Стр. 3+','Нет'],
-    datasets:[
-      {label:'03.06',data:[4,2,1,17,2],backgroundColor:'rgba(42,111,90,.2)',borderRadius:5,borderSkipped:false,barPercentage:.45,categoryPercentage:.7},
-      {label:'04.06',data:[4,3,3,14,2],backgroundColor:accent,borderRadius:5,borderSkipped:false,barPercentage:.45,categoryPercentage:.7}
-    ]
-  },
-  options:{
-    responsive:true,maintainAspectRatio:false,
-    plugins:{legend:{position:'top',align:'end',labels:{font:{size:10}}}},
-    scales:{
-      y:{beginAtZero:true,grid:{color:gridC,drawBorder:false},ticks:{padding:6,stepSize:2}},
-      x:{grid:{display:false},ticks:{padding:6,font:{size:11}}}
-    }
-  }
-});
+new Chart(document.getElementById('chTrend'),{type:'bar',data:{labels:['Стр. 1','Стр. 2','Стр. 3','Стр. 3+','Нет'],datasets:[{label:'03.06',data:[4,2,1,17,2],backgroundColor:'rgba(42,111,90,.2)',borderRadius:5,borderSkipped:false,barPercentage:.45,categoryPercentage:.7},{label:'04.06',data:[4,3,3,14,2],backgroundColor:accent,borderRadius:5,borderSkipped:false,barPercentage:.45,categoryPercentage:.7}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',align:'end'}},scales:{y:{beginAtZero:true,grid:{color:gridC,drawBorder:false}},x:{grid:{display:false}}}}});
 </script>
-
 </body>
 </html>
