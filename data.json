@@ -1,5 +1,5 @@
 {
-  "last_updated": "15.06.2026 10:01",
+  "last_updated": "16.06.2026 10:23",
   "cars": {
     "W1VVNLSZXS4493307": {
       "title": "Mercedes-Benz",
@@ -17,6 +17,16 @@
         },
         {
           "date": "15.06.2026",
+          "auto_status": "Архив",
+          "auto_price": "46 990 000 ₽",
+          "auto_img": "https://avatars.mds.yandex.net/get-autoru-vos/5207325/3b3bfd40d6dfaa3776dba23b25aa9b74/584x438",
+          "auto_ai_warn": "",
+          "avito_status": "Нет",
+          "avito_price": "46 990 000 ₽",
+          "avito_img": "https://via.placeholder.com/400x300?text=No+Image+Avito"
+        },
+        {
+          "date": "16.06.2026",
           "auto_status": "Архив",
           "auto_price": "46 990 000 ₽",
           "auto_img": "https://avatars.mds.yandex.net/get-autoru-vos/5207325/3b3bfd40d6dfaa3776dba23b25aa9b74/584x438",
@@ -50,6 +60,16 @@
           "avito_status": "Стр. 3+",
           "avito_price": "45 550 000 ₽",
           "avito_img": "https://30.img.avito.st/image/1/1.ePeQ0La41B6meRYb7LVR2rRw1hgucVYW5nTWHCB53BQm.CBXjeSzYweTrfUQ7hG5phpP8IFKwb4EV0ICs5I0O9-I?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ"
+        },
+        {
+          "date": "16.06.2026",
+          "auto_status": "Стр. 3+",
+          "auto_price": "45 550 000 ₽",
+          "auto_img": "https://photo.auto.ru/photo/get-autoru-vos/17915300/hNynRvp27t7AXHsqY19QIy6_en12ErJMBSEfRc1WdEEyboBw_xlFhDEVHL9qkrW1FkJrpAeaHE3yucBneT15Vy5LVbOO3NWbm2NNW5aD9S0KXXFwufYHYhV1U5KTzZlBkYQiIllAPDdNes1g_EEtUpQIlXQcRSlwPCfTq4h9wSC5Dw/584x438",
+          "auto_ai_warn": "",
+          "avito_status": "Стр. 3+",
+          "avito_price": "45 550 000 ₽",
+          "avito_img": "https://30.img.avito.st/image/1/1.ePeQ0La41B6meRYb7LVR2rRw1hgucVYW5nTWHCB53BQm.CBXjeSzYweTrfUQ7hG5phpP8IFKwb4EV0ICs5I0O9-I?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ"
         }
       ]
     },
@@ -69,6 +89,16 @@
         },
         {
           "date": "15.06.2026",
+          "auto_status": "Стр. 3+",
+          "auto_price": "44 990 000 ₽",
+          "auto_img": "https://avatars.mds.yandex.net/get-autoru-vos/19793268/183f2c043113dfb978f0b2b5a00d99fe/584x438",
+          "auto_ai_warn": "",
+          "avito_status": "Стр. 3+",
+          "avito_price": "44 990 000 ₽",
+          "avito_img": "https://70.img.avito.st/image/1/1.v8lXpba4EyBhDNElJbfA5XMFESbpBJEoIQERIucMGyrh.UurLG1GApVmfHGAO80Eg5tn78xn6O91idgwsqLQPL_s"
+        },
+        {
+          "date": "16.06.2026",
           "auto_status": "Стр. 3+",
           "auto_price": "44 990 000 ₽",
           "auto_img": "https://avatars.mds.yandex.net/get-autoru-vos/19793268/183f2c043113dfb978f0b2b5a00d99fe/584x438",
@@ -102,6 +132,16 @@
           "avito_status": "Стр. 3+",
           "avito_price": "43 980 000 ₽",
           "avito_img": "https://via.placeholder.com/400x300?text=No+Image+Avito"
+        },
+        {
+          "date": "16.06.2026",
+          "auto_status": "Архив",
+          "auto_price": "43 980 000 ₽",
+          "auto_img": "https://photo.auto.ru/photo/get-autoru-vos/4886517/PayTHL1-79iZRt4hrP36gPD1I3xv0RRbqz2DrAEgeKystpPD3EKV4dq79p_vs_Ivj6L7vF3B1tRw9FqZi2YMk-lCwlApK1sy_RNl3PTRN3UajhvDPY8Kao9JC7IV_VxjJ2H7BuwjfhqA0AZakiYSzuiIqPRYYuD49IX_e5v13M-5S8w/584x438",
+          "auto_ai_warn": "",
+          "avito_status": "Стр. 3+",
+          "avito_price": "43 980 000 ₽",
+          "avito_img": "https://via.placeholder.com/400x300?text=No+Image+Avito"
         }
       ]
     },
@@ -121,6 +161,16 @@
         },
         {
           "date": "15.06.2026",
+          "auto_status": "Стр. 3+",
+          "auto_price": "41 500 000 ₽",
+          "auto_img": "https://avatars.mds.yandex.net/get-autoru-vos/16273341/f1d24620339430a8dfd594eaa01fd1ec/584x438",
+          "auto_ai_warn": "",
+          "avito_status": "Стр. 3+",
+          "avito_price": "41 500 000 ₽",
+          "avito_img": "https://60.img.avito.st/image/1/1._VhtJ7a4UbFbjpO0GxypdUmHU7fThtO5G4NTs92OWbvb.JXxxtA2TO7tbBbc7sWFwjmAoUBwV6MvGNZ3ahsOaEts"
+        },
+        {
+          "date": "16.06.2026",
           "auto_status": "Стр. 3+",
           "auto_price": "41 500 000 ₽",
           "auto_img": "https://avatars.mds.yandex.net/get-autoru-vos/16273341/f1d24620339430a8dfd594eaa01fd1ec/584x438",
@@ -154,6 +204,16 @@
           "avito_status": "Стр. 3+",
           "avito_price": "39 990 000 ₽",
           "avito_img": "https://00.img.avito.st/image/1/1.xB0_Yra4aPQJy6rxOz3OPhvCavKBw-r8ScZq9o_LYP6J.8hBRxibt8SwDIFjg-dwZmWlibfXlmyNYaJOTn2BIX6I?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ"
+        },
+        {
+          "date": "16.06.2026",
+          "auto_status": "Стр. 3+",
+          "auto_price": "39 990 000 ₽",
+          "auto_img": "https://avatars.mds.yandex.net/get-autoru-vos/17915300/c0cd52862a51faa215822f2ce485aaee/584x438",
+          "auto_ai_warn": "",
+          "avito_status": "Стр. 3+",
+          "avito_price": "39 990 000 ₽",
+          "avito_img": "https://00.img.avito.st/image/1/1.xB0_Yra4aPQJy6rxOz3OPhvCavKBw-r8ScZq9o_LYP6J.8hBRxibt8SwDIFjg-dwZmWlibfXlmyNYaJOTn2BIX6I?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ"
         }
       ]
     },
@@ -173,6 +233,16 @@
         },
         {
           "date": "15.06.2026",
+          "auto_status": "Нет",
+          "auto_price": "39 990 000 ₽",
+          "auto_img": "https://via.placeholder.com/400x300?text=No+Image+Auto.ru",
+          "auto_ai_warn": "",
+          "avito_status": "Стр. 1",
+          "avito_price": "39 990 000 ₽",
+          "avito_img": "https://80.img.avito.st/image/1/1.SYn48LaA5WDuUEdh5rUY56FR52RKR-FgSiCEZErz5MJNU-F67lBHYU4.8jKTg5heMv93-uZmiNCMf2Kfaf0NYpFhXNuUvnsLf0Q"
+        },
+        {
+          "date": "16.06.2026",
           "auto_status": "Нет",
           "auto_price": "39 990 000 ₽",
           "auto_img": "https://via.placeholder.com/400x300?text=No+Image+Auto.ru",
@@ -206,6 +276,16 @@
           "avito_status": "Стр. 3+",
           "avito_price": "6 490 000 ₽",
           "avito_img": "https://via.placeholder.com/400x300?text=No+Image+Avito"
+        },
+        {
+          "date": "16.06.2026",
+          "auto_status": "Стр. 3+",
+          "auto_price": "6 490 000 ₽",
+          "auto_img": "https://avatars.mds.yandex.net/get-autoru-vos/20033387/ce72ab6aaeccb86e7420bcf4fef2b853/584x438",
+          "auto_ai_warn": "",
+          "avito_status": "Стр. 3+",
+          "avito_price": "6 490 000 ₽",
+          "avito_img": "https://via.placeholder.com/400x300?text=No+Image+Avito"
         }
       ]
     },
@@ -225,6 +305,16 @@
         },
         {
           "date": "15.06.2026",
+          "auto_status": "Нет",
+          "auto_price": "44 990 000 ₽",
+          "auto_img": "https://via.placeholder.com/400x300?text=No+Image+Auto.ru",
+          "auto_ai_warn": "",
+          "avito_status": "Нет",
+          "avito_price": "44 990 000 ₽",
+          "avito_img": "https://via.placeholder.com/400x300?text=No+Image+Avito"
+        },
+        {
+          "date": "16.06.2026",
           "auto_status": "Нет",
           "auto_price": "44 990 000 ₽",
           "auto_img": "https://via.placeholder.com/400x300?text=No+Image+Auto.ru",
@@ -258,6 +348,16 @@
           "avito_status": "Стр. 3+",
           "avito_price": "10 990 000 ₽",
           "avito_img": "https://70.img.avito.st/image/1/1.eiyw37a41sWGdhTAyLojDpR_1MMOflTNxnvUxwB23s8G.K3uugxroVcyF_CTYW6M-yOnqJ0V_WaqrJ_09Zd_D5_w"
+        },
+        {
+          "date": "16.06.2026",
+          "auto_status": "Стр. 3+",
+          "auto_price": "10 990 000 ₽",
+          "auto_img": "https://photo.auto.ru/photo/get-autoru-vos/5485882/gNTq-X0Bv9WBtw_F0apNPGy9Jl3bV9Nsnj0icW0_zHTjwV7OPwXByiHKe60Phlwyi7Zjm-Y9am8A99OuQNuslnJ8QRvWH6c_sXQOoZ3bJTZlqy43csP1uNKXl82TLt90XzREG9S1h2VrVc1jqZsv67wjd8d6_VTcnAUsMEadEpG_fSU/584x438",
+          "auto_ai_warn": "",
+          "avito_status": "Стр. 3+",
+          "avito_price": "10 990 000 ₽",
+          "avito_img": "https://70.img.avito.st/image/1/1.eiyw37a41sWGdhTAyLojDpR_1MMOflTNxnvUxwB23s8G.K3uugxroVcyF_CTYW6M-yOnqJ0V_WaqrJ_09Zd_D5_w"
         }
       ]
     },
@@ -284,6 +384,16 @@
           "avito_status": "Стр. 3+",
           "avito_price": "9 000 000 ₽",
           "avito_img": "https://30.img.avito.st/image/1/1.E0QJaLa4v60_wX2oI0gGPyzIvau3yT2lf8y9r7nBt6e_.a2Xr2vh-V4KLEo1wjcRRw8OD8FFQgxBRqEt6qImxayY?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ"
+        },
+        {
+          "date": "16.06.2026",
+          "auto_status": "Стр. 3+",
+          "auto_price": "9 000 000 ₽",
+          "auto_img": "https://photo.auto.ru/photo/get-autoru-vos/17707957/0OPK_J3ff4PtI8KF4usSKJPooFm5-az5DUeLan9ELIOwFR0P0lFFi9JfnvV0U7hK1E5gigTM0PNuicY12WfXF1prslZEEbzcBNJEQJKOazYUDwLarvn6Cj0OQmQT6vWTelncYfKIb8Pty2Fh-YjtATJSlEe-en4NnznqC72QCVbfHw/584x438",
+          "auto_ai_warn": "",
+          "avito_status": "Стр. 3+",
+          "avito_price": "9 000 000 ₽",
+          "avito_img": "https://30.img.avito.st/image/1/1.E0QJaLa4v60_wX2oI0gGPyzIvau3yT2lf8y9r7nBt6e_.a2Xr2vh-V4KLEo1wjcRRw8OD8FFQgxBRqEt6qImxayY?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ"
         }
       ]
     },
@@ -303,6 +413,16 @@
         },
         {
           "date": "15.06.2026",
+          "auto_status": "Архив",
+          "auto_price": "24 250 000 ₽",
+          "auto_img": "https://avatars.mds.yandex.net/get-autoru-vos/2170895/7d637b9cbdd5d311535d17ed27618188/584x438",
+          "auto_ai_warn": "",
+          "avito_status": "Стр. 1",
+          "avito_price": "24 250 000 ₽",
+          "avito_img": "https://30.img.avito.st/image/1/1.H0-p4La6paafQTGmm4hodndDtaA5w7OkFWGxpB9XsQ.VRJuAzN2aEP_kmKh9-YzzBovozLI08it0ct2oD-MbsY?cqp=2.pGdjs5fBvl5-fB-fm84xxYDAkt8GM2Wgr1fOyxua9Q=="
+        },
+        {
+          "date": "16.06.2026",
           "auto_status": "Архив",
           "auto_price": "24 250 000 ₽",
           "auto_img": "https://avatars.mds.yandex.net/get-autoru-vos/2170895/7d637b9cbdd5d311535d17ed27618188/584x438",
@@ -336,6 +456,16 @@
           "avito_status": "Стр. 3+",
           "avito_price": "13 390 000 ₽",
           "avito_img": "https://80.img.avito.st/image/1/1.onxRpba4DpVnDMyQGYuOXnUFDJPvBIydJwEMl-EMBp_n.1YAfwxCZRDTI2h4A8mihtu_u0tdE1I8Ur5Njm8RcZYA"
+        },
+        {
+          "date": "16.06.2026",
+          "auto_status": "Стр. 3+",
+          "auto_price": "13 390 000 ₽",
+          "auto_img": "https://avatars.mds.yandex.net/get-autoru-vos/18621059/928d59ca946e2889d997afb454b41e6b/584x438",
+          "auto_ai_warn": "",
+          "avito_status": "Стр. 3+",
+          "avito_price": "13 390 000 ₽",
+          "avito_img": "https://80.img.avito.st/image/1/1.onxRpba4DpVnDMyQGYuOXnUFDJPvBIydJwEMl-EMBp_n.1YAfwxCZRDTI2h4A8mihtu_u0tdE1I8Ur5Njm8RcZYA"
         }
       ]
     },
@@ -362,6 +492,16 @@
           "avito_status": "Стр. 3+",
           "avito_price": "7 500 000 ₽",
           "avito_img": "https://70.img.avito.st/image/1/1.fTA1nra40dkDNxPcQ6cnEhE-09-LP1PRQzrT24U32dOD.ET_W321tJ8EjmsE3bbj7SjYaJ5nvDvVyOYSrqpK1i90"
+        },
+        {
+          "date": "16.06.2026",
+          "auto_status": "Стр. 3+",
+          "auto_price": "7 500 000 ₽",
+          "auto_img": "https://photo.auto.ru/photo/get-autoru-vos/18143138/t-ZwwDtmTj3EjUprSdctvhiE7W9w7GJWZRr6dUyCPGnM5Y3jvceKidvCoWUd56jU0t2ldtGH9Q9UT784g3hsxk7CG9pZZgncP9D6pJa8nJKmEGmSzAesHe7DFRZKkVlYbqLGBW24UYqIQtYdFlxt9380QEGKVuc_CnzVT_mr8DI-MS4/584x438",
+          "auto_ai_warn": "",
+          "avito_status": "Архив",
+          "avito_price": "7 500 000 ₽",
+          "avito_img": "https://70.img.avito.st/image/1/1.fTA1nra40dkDNxPcQ6cnEhE-09-LP1PRQzrT24U32dOD.ET_W321tJ8EjmsE3bbj7SjYaJ5nvDvVyOYSrqpK1i90"
         }
       ]
     },
@@ -381,6 +521,16 @@
         },
         {
           "date": "15.06.2026",
+          "auto_status": "Стр. 2",
+          "auto_price": "14 590 000 ₽",
+          "auto_img": "https://avatars.mds.yandex.net/get-autoru-vos/20390804/6fd1bb3e60ed35778c7a05c2bd26cdd2/584x438",
+          "auto_ai_warn": "",
+          "avito_status": "Стр. 3",
+          "avito_price": "14 590 000 ₽",
+          "avito_img": "https://30.img.avito.st/image/1/1.H0-p4La6paafQTGmm4hodndDtaA5w7OkFWGxpB9XsQ.VRJuAzN2aEP_kmKh9-YzzBovozLI08it0ct2oD-MbsY?cqp=2.pGdjs5fBvl5-fB-fm84xxYDAkt8GM2Wgr1fOyxua9Q=="
+        },
+        {
+          "date": "16.06.2026",
           "auto_status": "Стр. 2",
           "auto_price": "14 590 000 ₽",
           "auto_img": "https://avatars.mds.yandex.net/get-autoru-vos/20390804/6fd1bb3e60ed35778c7a05c2bd26cdd2/584x438",
@@ -414,6 +564,16 @@
           "avito_status": "Архив",
           "avito_price": "14 250 000 ₽",
           "avito_img": "https://via.placeholder.com/400x300?text=No+Image+Avito"
+        },
+        {
+          "date": "16.06.2026",
+          "auto_status": "Архив",
+          "auto_price": "14 250 000 ₽",
+          "auto_img": "https://avatars.mds.yandex.net/get-autoru-vos/14916128/4665e80875a76f151997a6e03c536bf9/584x438",
+          "auto_ai_warn": "",
+          "avito_status": "Архив",
+          "avito_price": "14 250 000 ₽",
+          "avito_img": "https://via.placeholder.com/400x300?text=No+Image+Avito"
         }
       ]
     },
@@ -433,6 +593,16 @@
         },
         {
           "date": "15.06.2026",
+          "auto_status": "Архив",
+          "auto_price": "14 250 000 ₽",
+          "auto_img": "https://avatars.mds.yandex.net/get-autoru-vos/17712067/e3f2f3ff93af2cab724f2ab2a331bc0e/584x438",
+          "auto_ai_warn": "",
+          "avito_status": "Архив",
+          "avito_price": "14 250 000 ₽",
+          "avito_img": "https://via.placeholder.com/400x300?text=No+Image+Avito"
+        },
+        {
+          "date": "16.06.2026",
           "auto_status": "Архив",
           "auto_price": "14 250 000 ₽",
           "auto_img": "https://avatars.mds.yandex.net/get-autoru-vos/17712067/e3f2f3ff93af2cab724f2ab2a331bc0e/584x438",
@@ -466,6 +636,16 @@
           "avito_status": "Стр. 1",
           "avito_price": "47 500 000 ₽",
           "avito_img": "https://20.img.avito.st/image/1/1.RyIrYbaA68s9wUnKKSQraBjB6c-Z1u_LmbGKz5li6mmewu_RPcFJyp0.pIPFanXEYVaxjMJ3u0FRUw1BLWCB9Sxf_XKpCbf5Sa8?cqp=2.31EmCLg6ik3oatt1ttbFq_ajuGsz9wCshVqsaNgtLVVqtiwIcdxsWidTBGP4W2gjZpwuVqcdzwQCR5DnUbaoBbU1"
+        },
+        {
+          "date": "16.06.2026",
+          "auto_status": "Стр. 2",
+          "auto_price": "47 500 000 ₽",
+          "auto_img": "https://photo.auto.ru/photo/get-autoru-vos/18139133/Rp3I5zht_qz1mG2yLtsLEOf7ekdShbYRv2wFJRa41AuPW9SUZzeo_pFdjclY-6ugOIbR5INtG9-NCwqO3cIA8LuVy9JRCJ8fpyGnSMKstWwmPGuxyAzuF2CBWdEHGV0EP0bz-9uMtso9dE_KtOKsYSKXYxi3ho0x1cn9wDTfEHF1x68/584x438",
+          "auto_ai_warn": "",
+          "avito_status": "Стр. 1",
+          "avito_price": "47 500 000 ₽",
+          "avito_img": "https://20.img.avito.st/image/1/1.RyIrYbaA68s9wUnKKSQraBjB6c-Z1u_LmbGKz5li6mmewu_RPcFJyp0.pIPFanXEYVaxjMJ3u0FRUw1BLWCB9Sxf_XKpCbf5Sa8?cqp=2.31EmCLg6ik3oatt1ttbFq_ajuGsz9wCshVqsaNgtLVVqtiwIcdxsWidTBGP4W2gjZpwuVqcdzwQCR5DnUbaoBbU1"
         }
       ]
     },
@@ -492,6 +672,16 @@
           "avito_status": "Стр. 3+",
           "avito_price": "43 750 000 ₽",
           "avito_img": "https://via.placeholder.com/400x300?text=No+Image+Avito"
+        },
+        {
+          "date": "16.06.2026",
+          "auto_status": "Стр. 3+",
+          "auto_price": "43 750 000 ₽",
+          "auto_img": "https://photo.auto.ru/photo/get-autoru-vos/2170182/iDhLuKltnAWEBYJxNhZaXlNPIn5o7RRBL1xML1BdeDMEfHcAMQhCboeyp5fGABZvWmQPUmlGHV78-BhX78Vc_OFtDZJ35DUu9CdZReHQr533lrct2ErtIGXXxVdy1OoJZF_mf1taqdJgWcfneQnt-3FIjwd2Jt-VFNrgEHf-NWSE4A/584x438",
+          "auto_ai_warn": "",
+          "avito_status": "Стр. 3+",
+          "avito_price": "43 750 000 ₽",
+          "avito_img": "https://via.placeholder.com/400x300?text=No+Image+Avito"
         }
       ]
     },
@@ -511,6 +701,16 @@
         },
         {
           "date": "15.06.2026",
+          "auto_status": "Стр. 3+",
+          "auto_price": "41 500 000 ₽",
+          "auto_img": "https://avatars.mds.yandex.net/get-autoru-vos/5335648/578873a0e9065ae4202e5a37cf94ad0b/584x438",
+          "auto_ai_warn": "",
+          "avito_status": "Стр. 1",
+          "avito_price": "41 500 000 ₽",
+          "avito_img": "https://30.img.avito.st/image/1/1.H0-p4La6paafQTGmm4hodndDtaA5w7OkFWGxpB9XsQ.VRJuAzN2aEP_kmKh9-YzzBovozLI08it0ct2oD-MbsY?cqp=2.pGdjs5fBvl5-fB-fm84xxYDAkt8GM2Wgr1fOyxua9Q=="
+        },
+        {
+          "date": "16.06.2026",
           "auto_status": "Стр. 3+",
           "auto_price": "41 500 000 ₽",
           "auto_img": "https://avatars.mds.yandex.net/get-autoru-vos/5335648/578873a0e9065ae4202e5a37cf94ad0b/584x438",
@@ -544,6 +744,16 @@
           "avito_status": "Стр. 3+",
           "avito_price": "25 900 000 ₽",
           "avito_img": "https://20.img.avito.st/image/1/1.7AuOQLa4QOK46YLn2nfMTMXhQuQw4cLq-ORC4D7pSOg4.eG0ywDnTmDp4fx4f7US9-KKyTNCgFHddMG8xvkzcg6M?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ"
+        },
+        {
+          "date": "16.06.2026",
+          "auto_status": "Стр. 3",
+          "auto_price": "25 900 000 ₽",
+          "auto_img": "https://avatars.mds.yandex.net/get-autoru-vos/2157011/87d2effc666d93ff34e847eb03fe3e60/584x438",
+          "auto_ai_warn": "",
+          "avito_status": "Стр. 3+",
+          "avito_price": "25 900 000 ₽",
+          "avito_img": "https://20.img.avito.st/image/1/1.7AuOQLa4QOK46YLn2nfMTMXhQuQw4cLq-ORC4D7pSOg4.eG0ywDnTmDp4fx4f7US9-KKyTNCgFHddMG8xvkzcg6M?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ"
         }
       ]
     },
@@ -570,6 +780,16 @@
           "avito_status": "Стр. 3+",
           "avito_price": "17 100 000 ₽",
           "avito_img": "https://via.placeholder.com/400x300?text=No+Image+Avito"
+        },
+        {
+          "date": "16.06.2026",
+          "auto_status": "Стр. 1",
+          "auto_price": "17 100 000 ₽",
+          "auto_img": "https://photo.auto.ru/photo/get-autoru-vos/16409627/58rY74HDx2b8njtwszMUkvVpBVZB4svWYXV0N9hqp1ok8BkFCplVHd0Fa2dBf9PiPvGL9trVfPTfi0TAT8hqEMmcfDlx0gGkd0r2nThYmZYTs5YOk80H55_ap0z-CtjlwN2hjS-Oyva3AMftT7q4IUuX9IBzAVvo6z6byMQE8pN6dVE/584x438",
+          "auto_ai_warn": "",
+          "avito_status": "Стр. 3+",
+          "avito_price": "17 100 000 ₽",
+          "avito_img": "https://via.placeholder.com/400x300?text=No+Image+Avito"
         }
       ]
     },
@@ -589,6 +809,16 @@
         },
         {
           "date": "15.06.2026",
+          "auto_status": "Стр. 1",
+          "auto_price": "13 000 000 ₽",
+          "auto_img": "https://avatars.mds.yandex.net/get-autoru-vos/20116688/946aac881509550314287e0a8aa9ccb0/584x438",
+          "auto_ai_warn": "",
+          "avito_status": "Стр. 1",
+          "avito_price": "13 000 000 ₽",
+          "avito_img": "https://30.img.avito.st/image/1/1.H0-p4La6paafQTGmm4hodndDtaA5w7OkFWGxpB9XsQ.VRJuAzN2aEP_kmKh9-YzzBovozLI08it0ct2oD-MbsY?cqp=2.pGdjs5fBvl5-fB-fm84xxYDAkt8GM2Wgr1fOyxua9Q=="
+        },
+        {
+          "date": "16.06.2026",
           "auto_status": "Стр. 1",
           "auto_price": "13 000 000 ₽",
           "auto_img": "https://avatars.mds.yandex.net/get-autoru-vos/20116688/946aac881509550314287e0a8aa9ccb0/584x438",
@@ -622,6 +852,16 @@
           "avito_status": "Стр. 1",
           "avito_price": "27 550 000 ₽",
           "avito_img": "https://80.img.avito.st/image/1/1.A_l-jbaArxBoLQ0RdN1W1FotrRTMOqsQzF3OFMyOrrLLLqsKaC0NEcg.3-D2a4WIkpgVelnKbnZkhaURAxljlsNi0fBoNdEts28"
+        },
+        {
+          "date": "16.06.2026",
+          "auto_status": "Архив",
+          "auto_price": "27 550 000 ₽",
+          "auto_img": "https://avatars.mds.yandex.net/get-autoru-vos/16135405/e4b6d5236e4390eab1a4484121907d51/584x438",
+          "auto_ai_warn": "",
+          "avito_status": "Стр. 1",
+          "avito_price": "27 550 000 ₽",
+          "avito_img": "https://80.img.avito.st/image/1/1.A_l-jbaArxBoLQ0RdN1W1FotrRTMOqsQzF3OFMyOrrLLLqsKaC0NEcg.3-D2a4WIkpgVelnKbnZkhaURAxljlsNi0fBoNdEts28"
         }
       ]
     },
@@ -648,6 +888,16 @@
           "avito_status": "Стр. 3+",
           "avito_price": "46 665 000 ₽",
           "avito_img": "https://00.img.avito.st/image/1/1.LaVNILa4gUx7iUNJGwgEh2mAg0rzgQNEO4SDTv2JiUb7.R-kcmNk0qUuqTg0I-QMRj9QulgyyyzEomck_aCwxBT8?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ"
+        },
+        {
+          "date": "16.06.2026",
+          "auto_status": "Нет",
+          "auto_price": "46 665 000 ₽",
+          "auto_img": "https://via.placeholder.com/400x300?text=No+Image+Auto.ru",
+          "auto_ai_warn": "",
+          "avito_status": "Стр. 3+",
+          "avito_price": "46 665 000 ₽",
+          "avito_img": "https://00.img.avito.st/image/1/1.LaVNILa4gUx7iUNJGwgEh2mAg0rzgQNEO4SDTv2JiUb7.R-kcmNk0qUuqTg0I-QMRj9QulgyyyzEomck_aCwxBT8?cqp=2.TSzMy-m0u9ojo94xoNTr4TIkcUBjMu1L_y5Z6Lr-VHA-3xfoRpsvf1jN4IBF36LEO13sxOCjYv9KRoXzpmAFvKTQ"
         }
       ]
     },
@@ -667,6 +917,16 @@
         },
         {
           "date": "15.06.2026",
+          "auto_status": "Стр. 3+",
+          "auto_price": "38 250 000 ₽",
+          "auto_img": "https://avatars.mds.yandex.net/get-autoru-vos/17665660/ef753079be0875ec3699cdbf3c8f0abc/584x438",
+          "auto_ai_warn": "",
+          "avito_status": "Стр. 3+",
+          "avito_price": "38 250 000 ₽",
+          "avito_img": "https://50.img.avito.st/image/1/1.dwsfF7a42-IpvhnnfSo2Kju32eShtlnqabPZ4K--0-ip.jT0vRmQWXR_e80U5y2KBMKafRZK1PvYZeWfunL-MY7A"
+        },
+        {
+          "date": "16.06.2026",
           "auto_status": "Стр. 3+",
           "auto_price": "38 250 000 ₽",
           "auto_img": "https://avatars.mds.yandex.net/get-autoru-vos/17665660/ef753079be0875ec3699cdbf3c8f0abc/584x438",
