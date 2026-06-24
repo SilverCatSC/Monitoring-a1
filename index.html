@@ -3,202 +3,250 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Мониторинг авто</title>
+<title>Auto Monitor — Кабинет дилера</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <style>
-:root{--bg:#f4f0e8;--bg2:#efe9dd;--sf:#fffdf8;--sfh:#faf6ee;--bd:#e0d8c8;--bdl:#ece6d8;--ac:#2a6f5a;--acs:#3a8f74;--acp:#e4f0ec;--cr:#c45d4a;--crp:#fbeae6;--am:#b8860b;--amp:#fdf3dc;--pr:#6b5ce7;--prp:#ede9fd;--t1:#2c2820;--t2:#6b6358;--t3:#9a9286;--r:12px;--rs:8px;--sh1:0 1px 3px rgba(44,40,32,.06);--sh2:0 4px 16px rgba(44,40,32,.08)}
+:root{
+  --bg:#f0ece3;--bg2:#e8e3d8;--sf:#ffffff;--sfh:#faf8f4;--bd:#ddd6c8;--bdl:#ece7db;
+  --ac:#1a5632;--acs:#2d7a48;--acp:#e6f0eb;
+  --gd:#c49a3c;--gdp:#fdf5e6;
+  --gn:#22804a;--gnp:#e6f4ec;
+  --am:#b8860b;--amp:#fdf3dc;
+  --rd:#c44b3f;--rdp:#fce8e6;
+  --gy:#8a7e6e;--gyp:#f0ece3;
+  --t1:#1a1a1a;--t2:#5a5040;--t3:#8a7e6e;
+  --r:12px;--rs:8px;
+  --sh1:0 1px 3px rgba(26,26,26,.05);
+  --sh2:0 4px 20px rgba(26,26,26,.08);
+  --sh3:0 8px 32px rgba(26,26,26,.12);
+}
 *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
-body{font-family:'Geologica',sans-serif;background:var(--bg);color:var(--t1);min-height:100vh;line-height:1.5}
-body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:9999}
+body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--t1);min-height:100vh;line-height:1.5}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");pointer-events:none;z-index:9999}
+.mono{font-family:'DM Mono',monospace}
 
 .hd{position:sticky;top:0;z-index:100;background:var(--sf);border-bottom:1px solid var(--bd);box-shadow:var(--sh1)}
-.hd-in{max-width:1440px;margin:0 auto;padding:0 32px;height:68px;display:flex;align-items:center;justify-content:space-between}
-.logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--t1)}
-.logo-i{width:36px;height:36px;background:var(--ac);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:14px}
-.logo-t{font-size:18px;font-weight:600}.logo-t span{color:var(--t3);font-weight:300;margin-left:2px}
-.nav{display:flex;gap:6px}.nav a{text-decoration:none;color:var(--t2);font-size:14px;padding:8px 16px;border-radius:var(--rs);transition:.2s;cursor:pointer}
-.nav a:hover{color:var(--t1);background:var(--bg2)}.nav a.on{color:var(--ac);background:var(--acp);font-weight:500}
-.hdr{display:flex;align-items:center;gap:14px}.hdr-date{font-size:13px;color:var(--t3);font-weight:300}
-.av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--ac),var(--acs));color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600}
+.hd-in{max-width:1480px;margin:0 auto;padding:0 28px;height:64px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--t1)}
+.logo-i{width:34px;height:34px;background:var(--ac);border-radius:9px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:13px}
+.logo-t{font-size:17px;font-weight:700;letter-spacing:-.3px}.logo-t span{color:var(--t3);font-weight:400}
+.nav{display:flex;gap:4px}.nav a{text-decoration:none;color:var(--t3);font-size:13px;font-weight:500;padding:7px 14px;border-radius:var(--rs);transition:.2s;cursor:pointer}
+.nav a:hover{color:var(--t1);background:var(--bg)}.nav a.on{color:var(--ac);background:var(--acp);font-weight:600}
+.hdr{display:flex;align-items:center;gap:12px}
+.hdr-date{font-size:12px;color:var(--t3);font-weight:400}
+.av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--ac),var(--acs));color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600}
 
-/* GitHub dropdown */
 .gw{position:relative}
-.gb{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;padding:5px 14px;border-radius:20px;background:var(--acp);color:var(--ac);cursor:pointer;transition:.2s;user-select:none}
+.gb{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:5px 12px;border-radius:16px;background:var(--acp);color:var(--ac);cursor:pointer;transition:.2s;user-select:none;letter-spacing:.3px}
 .gb:hover{background:var(--ac);color:#fff}
-.gd{display:none;position:absolute;top:calc(100% + 8px);right:0;width:370px;background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);box-shadow:var(--sh2);z-index:200;overflow:hidden}
+.gd{display:none;position:absolute;top:calc(100% + 8px);right:0;width:350px;background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);box-shadow:var(--sh3);z-index:200;overflow:hidden}
 .gd.open{display:block;animation:ddI .2s ease}
-@keyframes ddI{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
-.gd-h{padding:16px 20px;border-bottom:1px solid var(--bdl);display:flex;align-items:center;gap:10px}
-.gdot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
-.gdot.ok{background:var(--ac);box-shadow:0 0 6px rgba(42,111,90,.4)}.gdot.err{background:var(--cr)}.gdot.ld{background:var(--am);animation:pls 1s infinite}
+@keyframes ddI{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+.gd-h{padding:14px 18px;border-bottom:1px solid var(--bdl);display:flex;align-items:center;gap:10px}
+.gdot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.gdot.ok{background:var(--gn);box-shadow:0 0 6px rgba(34,128,74,.4)}.gdot.err{background:var(--rd)}.gdot.ld{background:var(--gd);animation:pls 1s infinite}
 @keyframes pls{0%,100%{opacity:1}50%{opacity:.4}}
-.gd-h b{font-size:14px;font-weight:600}
-.gr{padding:8px 20px;font-size:12px;color:var(--t3);display:flex;justify-content:space-between;gap:12px}
+.gd-h b{font-size:13px;font-weight:600}
+.gr{padding:6px 18px;font-size:11px;color:var(--t3);display:flex;justify-content:space-between;gap:10px}
 .gr b{color:var(--t2);font-weight:500;word-break:break-all;text-align:right}
-.gl{display:block;margin:10px 20px 0;padding:8px 14px;text-align:center;font-size:12px;font-weight:500;color:var(--ac);background:var(--acp);border-radius:var(--rs);text-decoration:none;transition:.2s}
+.gl{display:block;margin:8px 18px 0;padding:7px 12px;text-align:center;font-size:11px;font-weight:600;color:var(--ac);background:var(--acp);border-radius:var(--rs);text-decoration:none;transition:.2s;letter-spacing:.3px}
 .gl:hover{background:var(--ac);color:#fff}
-.gs{display:block;width:calc(100% - 40px);margin:12px 20px 16px;padding:10px;font-family:'Geologica',sans-serif;font-size:13px;font-weight:500;background:var(--ac);color:#fff;border:none;border-radius:var(--rs);cursor:pointer;transition:.2s}
+.gs{display:block;width:calc(100% - 36px);margin:10px 18px 14px;padding:9px;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:600;background:var(--ac);color:#fff;border:none;border-radius:var(--rs);cursor:pointer;transition:.2s;letter-spacing:.3px}
 .gs:hover{background:var(--acs)}.gs:disabled{opacity:.6;cursor:wait}
-.gs.sp{position:relative;color:transparent}.gs.sp::after{content:'';position:absolute;inset:0;margin:auto;width:16px;height:16px;border:2px solid #fff;border-top-color:transparent;border-radius:50%;animation:sp .6s linear infinite}
+.gs.sp{position:relative;color:transparent}.gs.sp::after{content:'';position:absolute;inset:0;margin:auto;width:14px;height:14px;border:2px solid #fff;border-top-color:transparent;border-radius:50%;animation:sp .6s linear infinite}
 @keyframes sp{to{transform:rotate(360deg)}}
-.ge{padding:8px 20px;font-size:11px;color:var(--cr);display:none}.ge.show{display:block}
-.go{padding:8px 20px;font-size:11px;color:var(--ac);display:none}.go.show{display:block}
+.ge{padding:6px 18px;font-size:11px;color:var(--rd);display:none}.ge.show{display:block}
+.go{padding:6px 18px;font-size:11px;color:var(--gn);display:none}.go.show{display:block}
 
-/* Layout */
-.ly{max-width:1440px;margin:0 auto;padding:24px 32px 48px;display:grid;grid-template-columns:260px 1fr;gap:24px}
-.sb{position:sticky;top:92px;height:fit-content;max-height:calc(100vh - 116px);overflow-y:auto;display:flex;flex-direction:column;gap:4px}
-.sb::-webkit-scrollbar{width:4px}.sb::-webkit-scrollbar-thumb{background:var(--bd);border-radius:4px}
-.fs{background:var(--sf);border:1px solid var(--bdl);border-radius:var(--r);padding:20px;margin-bottom:12px;opacity:0;animation:fu .5s ease forwards}
-.fs:nth-child(1){animation-delay:.05s}.fs:nth-child(2){animation-delay:.1s}.fs:nth-child(3){animation-delay:.15s}.fs:nth-child(4){animation-delay:.2s}.fs:nth-child(5){animation-delay:.25s}
-@keyframes fu{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-.ft{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--t3);margin-bottom:14px}
-.fg{display:flex;flex-direction:column;gap:8px}
-.fl{display:flex;align-items:center;gap:10px;cursor:pointer;font-size:13px;color:var(--t2);transition:.15s;padding:3px 0}
+.ly{max-width:1480px;margin:0 auto;padding:20px 28px 48px;display:grid;grid-template-columns:240px 1fr;gap:20px}
+.sb{position:sticky;top:84px;height:fit-content;max-height:calc(100vh - 104px);overflow-y:auto;display:flex;flex-direction:column;gap:6px}
+.sb::-webkit-scrollbar{width:3px}.sb::-webkit-scrollbar-thumb{background:var(--bd);border-radius:4px}
+
+.fs{background:var(--sf);border:1px solid var(--bdl);border-radius:var(--r);padding:16px;opacity:0;animation:fu .5s ease forwards}
+.fs:nth-child(1){animation-delay:.05s}.fs:nth-child(2){animation-delay:.1s}.fs:nth-child(3){animation-delay:.15s}.fs:nth-child(4){animation-delay:.2s}
+@keyframes fu{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.ft{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--t3);margin-bottom:10px}
+.fg{display:flex;flex-direction:column;gap:6px}
+.fl{display:flex;align-items:center;gap:8px;cursor:pointer;font-size:12px;color:var(--t2);transition:.15s;padding:2px 0}
 .fl:hover{color:var(--t1)}
-.fl input[type="checkbox"]{appearance:none;width:18px;height:18px;border:1.5px solid var(--bd);border-radius:5px;background:var(--sf);cursor:pointer;position:relative;transition:.15s;flex-shrink:0}
+.fl input[type="checkbox"]{appearance:none;width:16px;height:16px;border:1.5px solid var(--bd);border-radius:4px;background:var(--sf);cursor:pointer;position:relative;transition:.15s;flex-shrink:0}
 .fl input:checked{background:var(--ac);border-color:var(--ac)}
-.fl input:checked::after{content:'';position:absolute;left:5px;top:2px;width:5px;height:9px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
-.sel,.inp{width:100%;padding:10px 12px;font-family:'Geologica',sans-serif;font-size:13px;border:1.5px solid var(--bd);border-radius:var(--rs);background:var(--sf);color:var(--t1);outline:none;transition:.15s}
+.fl input:checked::after{content:'';position:absolute;left:4px;top:1px;width:5px;height:8px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.sel,.inp{width:100%;padding:9px 10px;font-family:'Montserrat',sans-serif;font-size:12px;border:1.5px solid var(--bd);border-radius:var(--rs);background:var(--sf);color:var(--t1);outline:none;transition:.15s}
 .sel:focus,.inp:focus{border-color:var(--ac)}
-.ba{width:100%;padding:11px;font-family:'Geologica',sans-serif;font-size:13px;font-weight:500;background:var(--ac);color:#fff;border:none;border-radius:var(--rs);cursor:pointer;transition:.2s;margin-top:8px}
+.ba{width:100%;padding:10px;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:600;background:var(--ac);color:#fff;border:none;border-radius:var(--rs);cursor:pointer;transition:.2s;margin-top:8px;letter-spacing:.3px}
 .ba:hover{background:var(--acs)}
-.br{width:100%;padding:10px;font-family:'Geologica',sans-serif;font-size:12px;background:transparent;color:var(--t3);border:1.5px solid var(--bdl);border-radius:var(--rs);cursor:pointer;transition:.15s;margin-top:6px}
-.br:hover{color:var(--cr);border-color:var(--cr)}
-.ss{display:flex;flex-direction:column;gap:6px;margin-top:4px}
-.sr{display:flex;justify-content:space-between;font-size:12px;color:var(--t3);padding:2px 0}
+.br{width:100%;padding:8px;font-family:'Montserrat',sans-serif;font-size:11px;background:transparent;color:var(--t3);border:1.5px solid var(--bdl);border-radius:var(--rs);cursor:pointer;transition:.15s;margin-top:4px}
+.br:hover{color:var(--rd);border-color:var(--rd)}
+.ss{display:flex;flex-direction:column;gap:4px;margin-top:4px}
+.sr{display:flex;justify-content:space-between;font-size:11px;color:var(--t3);padding:2px 0}
 .sr b{font-weight:600;color:var(--t1)}
-.mn{display:flex;flex-direction:column;gap:24px}
-.pt{opacity:0;animation:fu .5s ease forwards}
-.pt h1{font-size:28px;font-weight:600;letter-spacing:-.5px}.pt p{font-size:15px;color:var(--t3);font-weight:300;margin-top:4px}
 
-/* Stat cards */
-.sg{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.sc{background:var(--sf);border:1px solid var(--bdl);border-radius:var(--r);padding:22px;position:relative;overflow:hidden;transition:.25s;opacity:0;animation:fu .5s ease forwards}
-.sc:nth-child(1){animation-delay:.1s}.sc:nth-child(2){animation-delay:.15s}.sc:nth-child(3){animation-delay:.2s}.sc:nth-child(4){animation-delay:.25s}
-.sc:hover{box-shadow:var(--sh2);transform:translateY(-2px)}
-.sc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
-.sc:nth-child(1)::before{background:var(--ac)}.sc:nth-child(2)::before{background:var(--cr)}.sc:nth-child(3)::before{background:var(--am)}.sc:nth-child(4)::before{background:var(--pr)}
-.sl{font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.6px;color:var(--t3);margin-bottom:10px}
-.sv{font-size:30px;font-weight:700;letter-spacing:-1px;line-height:1.1}
+.mn{display:flex;flex-direction:column;gap:20px;min-width:0}
+.pt{opacity:0;animation:fu .5s ease forwards}.pt h1{font-size:24px;font-weight:700;letter-spacing:-.5px}.pt p{font-size:13px;color:var(--t3);font-weight:400;margin-top:2px}
 
-/* Table */
+.kg{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.kc{background:var(--sf);border:1px solid var(--bdl);border-radius:var(--r);padding:18px;position:relative;overflow:hidden;transition:.25s;opacity:0;animation:fu .5s ease forwards}
+.kc:nth-child(1){animation-delay:.1s}.kc:nth-child(2){animation-delay:.15s}.kc:nth-child(3){animation-delay:.2s}.kc:nth-child(4){animation-delay:.25s}
+.kc:hover{box-shadow:var(--sh2);transform:translateY(-2px)}
+.kc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.kc:nth-child(1)::before{background:var(--ac)}.kc:nth-child(2)::before{background:var(--gn)}
+.kc:nth-child(3)::before{background:var(--rd)}.kc:nth-child(4)::before{background:var(--gd)}
+.kl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--t3);margin-bottom:8px}
+.kv{font-family:'DM Mono',monospace;font-size:26px;font-weight:500;line-height:1.1}
+.ks{font-size:11px;color:var(--t3);margin-top:4px;font-weight:400}
+
 .tc{background:var(--sf);border:1px solid var(--bdl);border-radius:var(--r);overflow:hidden;opacity:0;animation:fu .5s ease forwards;animation-delay:.3s}
-.tch{padding:20px 24px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--bdl)}
-.tch h2{font-size:16px;font-weight:600}
-.tcc{font-size:12px;color:var(--t3);background:var(--bg2);padding:4px 12px;border-radius:20px}
+.tch{padding:16px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--bdl)}
+.tch h2{font-size:15px;font-weight:700}
+.tcc{font-size:11px;color:var(--t3);background:var(--bg);padding:3px 10px;border-radius:12px;font-weight:500}
 .tcs{overflow-x:auto}
-table{width:100%;border-collapse:collapse;min-width:780px}
-thead th{text-align:left;padding:12px 16px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.7px;color:var(--t3);border-bottom:1px solid var(--bdl);background:var(--bg);white-space:nowrap}
-tbody td{padding:10px 16px;font-size:13px;color:var(--t2);border-bottom:1px solid var(--bdl);transition:background .1s;vertical-align:middle}
-tbody tr:last-child td{border-bottom:none}tbody tr:hover td{background:var(--sfh)}
+table{width:100%;border-collapse:collapse;min-width:700px}
+thead th{text-align:left;padding:10px 14px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--t3);border-bottom:1px solid var(--bdl);background:var(--bg);white-space:nowrap}
+tbody td{padding:9px 14px;font-size:12px;color:var(--t2);border-bottom:1px solid var(--bdl);transition:background .1s;vertical-align:middle}
+tbody tr:last-child td{border-bottom:none}
+tbody tr{cursor:pointer}
+tbody tr:hover td{background:var(--sfh)}
 tbody tr.hide{display:none}
-.cc{display:flex;align-items:center;gap:12px}
-.ci{width:64px;height:44px;border-radius:6px;object-fit:cover;background:var(--bg2);flex-shrink:0;border:1px solid var(--bdl)}
-.cp{width:64px;height:44px;border-radius:6px;background:var(--bg2);border:1px solid var(--bdl);display:flex;align-items:center;justify-content:center;color:var(--t3);font-size:18px;flex-shrink:0}
-.cn{font-weight:500;color:var(--t1);font-size:13px}.cv{font-size:10px;color:var(--t3);font-weight:300;margin-top:2px}
-.hi{color:var(--cr);font-weight:600;font-size:11px;text-transform:uppercase}.hs{color:var(--t3);font-size:11px}
-.pc{display:flex;flex-direction:column;gap:5px;min-width:110px}
-.pr{display:flex;align-items:center;gap:8px}
-.sb-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:500;white-space:nowrap}
-.sb-badge::before{content:'';width:6px;height:6px;border-radius:50%;flex-shrink:0}
-.sb-badge.ar{color:var(--cr);background:var(--crp)}.sb-badge.ar::before{background:var(--cr)}
-.sb-badge.p1{color:var(--ac);background:var(--acp)}.sb-badge.p1::before{background:var(--ac)}
-.sb-badge.p2{color:var(--am);background:var(--amp)}.sb-badge.p2::before{background:var(--am)}
-.sb-badge.p3{color:var(--t3);background:var(--bg2)}.sb-badge.p3::before{background:var(--t3)}
-.sb-badge.no{color:#bbb5aa;background:var(--bg2)}.sb-badge.no::before{background:#ccc}
-.pp{font-weight:500;color:var(--t1);font-size:12px;white-space:nowrap}
-a.plk{display:inline-flex;align-items:center;gap:4px;text-decoration:none;border-radius:20px;padding:2px;transition:transform .15s,box-shadow .15s}
-a.plk:hover{transform:translateY(-1px);box-shadow:0 2px 8px rgba(0,0,0,.08)}
-a.plk::after{content:'↗';font-size:11px;opacity:0;transition:opacity .15s;color:var(--ac);font-weight:600}
+
+.cc{display:flex;align-items:center;gap:10px}
+.ci{width:56px;height:40px;border-radius:5px;object-fit:cover;background:var(--bg);flex-shrink:0;border:1px solid var(--bdl)}
+.cp{width:56px;height:40px;border-radius:5px;background:var(--bg);border:1px solid var(--bdl);display:flex;align-items:center;justify-content:center;color:var(--t3);font-size:16px;flex-shrink:0}
+.cn{font-weight:600;color:var(--t1);font-size:12px}.cv{font-size:10px;color:var(--t3);font-weight:400;font-family:'DM Mono',monospace;margin-top:1px}
+
+.hi{color:var(--rd);font-weight:700;font-size:10px;text-transform:uppercase;letter-spacing:.5px}.hs{color:var(--t3);font-size:11px}
+
+.badge{display:inline-flex;align-items:center;gap:5px;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700;white-space:nowrap;letter-spacing:.3px}
+.badge::before{content:'';width:5px;height:5px;border-radius:50%;flex-shrink:0}
+.badge.p1{background:var(--gnp);color:var(--gn)}.badge.p1::before{background:var(--gn)}
+.badge.p2{background:var(--amp);color:var(--am)}.badge.p2::before{background:var(--am)}
+.badge.p3{background:var(--gyp);color:var(--gy)}.badge.p3::before{background:var(--gy)}
+.badge.ar{background:var(--rdp);color:var(--rd)}.badge.ar::before{background:var(--rd)}
+.badge.no{background:var(--bg);color:#c0b8a8}.badge.no::before{background:#ccc}
+
+.pc{display:flex;flex-direction:column;gap:3px;min-width:100px}
+.pp{font-family:'DM Mono',monospace;font-weight:500;color:var(--t1);font-size:11px;white-space:nowrap}
+.pd{font-size:10px;font-weight:600;letter-spacing:.3px}
+.pd.down{color:var(--rd)}.pd.up{color:var(--gn)}.pd.same{color:var(--t3)}
+.days-badge{font-family:'DM Mono',monospace;font-size:11px;color:var(--t3);white-space:nowrap}
+a.plk{display:inline-flex;align-items:center;gap:3px;text-decoration:none;border-radius:var(--rs);padding:1px;transition:transform .15s}
+a.plk:hover{transform:translateY(-1px)}
+a.plk::after{content:'\2197';font-size:10px;opacity:0;transition:opacity .15s;color:var(--ac);font-weight:700}
 a.plk:hover::after{opacity:1}
-.nlk{cursor:default}
 
-/* Competitors */
-.cg{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.co{background:var(--sf);border:1px solid var(--bdl);border-radius:var(--r);overflow:hidden;opacity:0;animation:fu .5s ease forwards}
-.co:nth-child(1){animation-delay:.32s}.co:nth-child(2){animation-delay:.36s}
-.coh{padding:18px 22px;border-bottom:1px solid var(--bdl);display:flex;justify-content:space-between;align-items:center}
-.coh h3{font-size:15px;font-weight:600}
-.cob{font-size:11px;padding:3px 10px;border-radius:20px;font-weight:500}
-.cob.a{color:var(--ac);background:var(--acp)}.cob.v{color:var(--pr);background:var(--prp)}
-.coe{padding:32px 22px;text-align:center;color:var(--t3);font-size:13px}
-.col{max-height:380px;overflow-y:auto}.col::-webkit-scrollbar{width:4px}.col::-webkit-scrollbar-thumb{background:var(--bd);border-radius:4px}
-.coc{padding:10px 22px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;color:var(--t3);background:var(--bg);border-bottom:1px solid var(--bdl)}
-.coi{display:flex;align-items:center;gap:12px;padding:12px 22px;border-bottom:1px solid var(--bdl);transition:background .1s}
-.coi:last-child{border-bottom:none}.coi:hover{background:var(--sfh)}
-.con{font-size:13px;font-weight:500;color:var(--t1)}.cos{font-size:11px;color:var(--t3);margin-top:2px}
-.cop{font-weight:600;font-size:13px;color:var(--t1);white-space:nowrap;margin-left:auto}
+/* ─── DETAIL PANEL ─── */
+.dp-overlay{display:none;position:fixed;inset:0;background:rgba(26,26,26,.3);z-index:300;backdrop-filter:blur(2px);transition:opacity .3s}
+.dp-overlay.open{display:block;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.dp{position:fixed;top:0;right:0;bottom:0;width:540px;max-width:100vw;background:var(--sf);z-index:301;overflow-y:auto;box-shadow:-4px 0 32px rgba(0,0,0,.15);transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1)}
+.dp.open{transform:translateX(0)}
+.dp::-webkit-scrollbar{width:3px}.dp::-webkit-scrollbar-thumb{background:var(--bd);border-radius:4px}
+.dp-close{position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:50%;border:1px solid var(--bd);background:var(--sf);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;color:var(--t3);transition:.2s;z-index:10}
+.dp-close:hover{background:var(--rdp);color:var(--rd);border-color:var(--rd)}
+.dp-img{width:100%;height:240px;object-fit:cover;background:var(--bg)}
+.dp-body{padding:24px}
+.dp-title{font-size:20px;font-weight:700;letter-spacing:-.3px;line-height:1.3}
+.dp-vin{font-family:'DM Mono',monospace;font-size:12px;color:var(--t3);margin-top:4px}
+.dp-pri{display:inline-block;margin-top:8px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;padding:3px 10px;border-radius:10px}
+.dp-pri.hi{background:var(--rdp);color:var(--rd)}.dp-pri.st{background:var(--bg);color:var(--t3)}
 
-/* Charts */
-.cs{padding-top:8px}
-.cr2{display:flex;align-items:baseline;gap:12px;margin-bottom:20px;opacity:0;animation:fu .5s ease forwards;animation-delay:.38s}
-.cr2 h2{font-size:22px;font-weight:600}.cr2 span{font-size:13px;color:var(--t3);font-weight:300}
-.cf{background:var(--sf);border:1px solid var(--bdl);border-radius:var(--r);padding:24px;opacity:0;animation:fu .5s ease forwards;animation-delay:.4s}
-.cfh{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;flex-wrap:wrap;gap:10px}
-.cfh h3{font-size:16px;font-weight:600}
-.ctg{display:flex;gap:4px}
-.ctg button{font-family:'Geologica',sans-serif;font-size:11px;font-weight:500;padding:5px 14px;border-radius:20px;border:1.5px solid var(--bd);background:transparent;color:var(--t3);cursor:pointer;transition:.2s}
+.dp-sts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+.dp-st{background:var(--bg);border-radius:var(--rs);padding:14px;text-align:center}
+.dp-st-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--t3);margin-bottom:8px}
+.dp-st-price{font-family:'DM Mono',monospace;font-size:16px;font-weight:500;margin-top:6px}
+
+.dp-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px}
+.dp-metric{background:var(--bg);border-radius:var(--rs);padding:12px;text-align:center}
+.dp-metric-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--t3)}
+.dp-metric-val{font-family:'DM Mono',monospace;font-size:16px;font-weight:500;margin-top:4px;color:var(--t1)}
+
+.dp-chart{margin-top:24px}
+.dp-chart h3{font-size:13px;font-weight:700;margin-bottom:4px}
+.dp-chart-sub{font-size:11px;color:var(--t3);font-weight:400;margin-bottom:12px}
+.dp-cfb{position:relative;height:260px}
+
+/* ─── Status chart legend ─── */
+.st-legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;margin-bottom:4px}
+.st-legend-item{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--t3);font-weight:500}
+.st-legend-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+
+.dp-tl{margin-top:24px}
+.dp-tl h3{font-size:13px;font-weight:700;margin-bottom:12px}
+.timeline{position:relative;padding-left:22px}
+.timeline::before{content:'';position:absolute;left:5px;top:8px;bottom:8px;width:2px;background:var(--bd);border-radius:2px}
+.tl-item{position:relative;padding-bottom:14px}
+.tl-item:last-child{padding-bottom:0}
+.tl-dot{position:absolute;left:-19px;top:4px;width:10px;height:10px;border-radius:50%;border:2px solid var(--sf);box-shadow:0 0 0 2px var(--bd)}
+.tl-item:first-child .tl-dot{box-shadow:0 0 0 2px var(--ac);background:var(--ac)}
+.tl-date{font-size:10px;color:var(--t3);font-weight:600;font-family:'DM Mono',monospace}
+.tl-row{display:flex;align-items:center;gap:8px;margin-top:3px;flex-wrap:wrap}
+.tl-price{font-family:'DM Mono',monospace;font-size:12px;font-weight:500;color:var(--t1)}
+
+.cs{padding-top:4px}
+.cr2{display:flex;align-items:baseline;gap:10px;margin-bottom:16px;opacity:0;animation:fu .5s ease forwards;animation-delay:.35s}
+.cr2 h2{font-size:20px;font-weight:700}.cr2 span{font-size:12px;color:var(--t3);font-weight:400}
+.cf{background:var(--sf);border:1px solid var(--bdl);border-radius:var(--r);padding:20px;opacity:0;animation:fu .5s ease forwards;animation-delay:.4s}
+.cfh{display:flex;justify-content:space-between;align-items:center;margin-bottom:2px;flex-wrap:wrap;gap:8px}
+.cfh h3{font-size:14px;font-weight:700}
+.ctg{display:flex;gap:3px}
+.ctg button{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:600;padding:4px 12px;border-radius:14px;border:1.5px solid var(--bd);background:transparent;color:var(--t3);cursor:pointer;transition:.2s;letter-spacing:.3px}
 .ctg button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
 .ctg button:hover:not(.on){border-color:var(--ac);color:var(--ac)}
-.cf .csu{font-size:12px;color:var(--t3);font-weight:300;margin-bottom:16px}
-.cfb{position:relative;height:360px}
-.cin{margin-top:12px;padding:10px 16px;background:var(--bg2);border-radius:var(--rs);font-size:11px;color:var(--t3);display:flex;gap:20px;flex-wrap:wrap}
+.cf .csu{font-size:11px;color:var(--t3);font-weight:400;margin-bottom:12px}
+.cfb{position:relative;height:320px}
+.cin{margin-top:10px;padding:8px 14px;background:var(--bg);border-radius:var(--rs);font-size:11px;color:var(--t3);display:flex;gap:16px;flex-wrap:wrap}
 .cin b{color:var(--t2);font-weight:500}
-.c3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-top:20px}
-.c3c{background:var(--sf);border:1px solid var(--bdl);border-radius:var(--r);padding:24px;opacity:0;animation:fu .5s ease forwards}
-.c3c:nth-child(1){animation-delay:.44s}.c3c:nth-child(2){animation-delay:.48s}.c3c:nth-child(3){animation-delay:.52s}
-.c3c h3{font-size:14px;font-weight:600;margin-bottom:4px}.c3c .csu{font-size:12px;color:var(--t3);font-weight:300;margin-bottom:20px}
-.cb{position:relative;height:280px}
+.c2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.c2c{background:var(--sf);border:1px solid var(--bdl);border-radius:var(--r);padding:20px;opacity:0;animation:fu .5s ease forwards}
+.c2c:nth-child(1){animation-delay:.44s}.c2c:nth-child(2){animation-delay:.48s}
+.c2c h3{font-size:13px;font-weight:700;margin-bottom:2px}.c2c .csu{font-size:11px;color:var(--t3);font-weight:400;margin-bottom:14px}
+.cb{position:relative;height:260px}
 
-/* Loader */
-.lo{position:fixed;inset:0;background:rgba(244,240,232,.95);z-index:1000;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;transition:opacity .4s}
+.lo{position:fixed;inset:0;background:rgba(240,236,227,.97);z-index:1000;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;transition:opacity .4s}
 .lo.done{opacity:0;pointer-events:none}
-.lo-s{width:40px;height:40px;border:3px solid var(--bd);border-top-color:var(--ac);border-radius:50%;animation:sp .8s linear infinite}
-.lo-t{font-size:14px;color:var(--t3)}
-
+.lo-s{width:36px;height:36px;border:3px solid var(--bd);border-top-color:var(--ac);border-radius:50%;animation:sp .8s linear infinite}
+.lo-t{font-size:13px;color:var(--t3)}
 .sh{display:none !important}
 
-@media(max-width:1200px){.c3{grid-template-columns:1fr 1fr}}
-@media(max-width:1100px){.sg{grid-template-columns:repeat(2,1fr)}.c3,.cg{grid-template-columns:1fr}}
-@media(max-width:860px){.ly{grid-template-columns:1fr;padding:16px}.sb{position:static;max-height:none;flex-direction:row;flex-wrap:wrap}.fs{flex:1;min-width:200px}.nav{display:none}}
-@media(max-width:600px){.sg{grid-template-columns:1fr}}
+@media(max-width:1100px){.kg{grid-template-columns:repeat(2,1fr)}.c2{grid-template-columns:1fr}}
+@media(max-width:860px){.ly{grid-template-columns:1fr;padding:14px}.sb{position:static;max-height:none;flex-direction:row;flex-wrap:wrap}.fs{flex:1;min-width:180px}.nav{display:none}.dp{width:100%}}
+@media(max-width:600px){.kg{grid-template-columns:1fr}.dp-metrics{grid-template-columns:1fr 1fr}.dp-sts{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
-<div class="lo" id="loader"><div class="lo-s"></div><div class="lo-t">Загрузка данных из GitHub...</div></div>
+<div class="lo" id="loader"><div class="lo-s"></div><div class="lo-t">Загрузка данных...</div></div>
 
 <header class="hd"><div class="hd-in">
-  <a href="#" class="logo" onclick="return false"><div class="logo-i">Mo</div><div class="logo-t">Monitor<span>Hub</span></div></a>
+  <a href="#" class="logo" onclick="return false"><div class="logo-i">AM</div><div class="logo-t">Auto<span>Monitor</span></div></a>
   <nav class="nav" id="mainNav">
     <a href="#" class="on" data-sec="overview">Обзор</a>
-    <a href="#" data-sec="cars">Мои авто</a>
-    <a href="#" data-sec="competitors">Конкуренты</a>
+    <a href="#" data-sec="cars">Автомобили</a>
     <a href="#" data-sec="charts">Статистика</a>
   </nav>
   <div class="hdr">
     <div class="gw">
-      <span class="gb" id="ghBtn">GitHub ▾</span>
+      <span class="gb" id="ghBtn">GitHub &#9662;</span>
       <div class="gd" id="ghDD">
-        <div class="gd-h"><span class="gdot" id="gDot"></span><b id="gTitle">—</b></div>
-        <div class="gr"><span>data.json</span><b id="gDS">—</b></div>
-        <div class="gr"><span>history.json</span><b id="gHS">—</b></div>
-        <div class="gr"><span>Последнее обновление</span><b id="gTime">—</b></div>
-        <div class="gr"><span>Снапшотов в истории</span><b id="gHC">—</b></div>
-        <div class="gr"><span>Дней истории</span><b id="gHD">—</b></div>
+        <div class="gd-h"><span class="gdot" id="gDot"></span><b id="gTitle">&mdash;</b></div>
+        <div class="gr"><span>data.json</span><b id="gDS">&mdash;</b></div>
+        <div class="gr"><span>history.json</span><b id="gHS">&mdash;</b></div>
+        <div class="gr"><span>Обновлено</span><b id="gTime">&mdash;</b></div>
+        <div class="gr"><span>Снапшотов</span><b id="gHC">&mdash;</b></div>
+        <div class="gr"><span>Авто в истории</span><b id="gHV">&mdash;</b></div>
         <div class="ge" id="gErr"></div>
         <div class="go" id="gOk"></div>
-        <a href="https://github.com/silvercatsc/Monitoring-a1/blob/main/data.json" target="_blank" rel="noopener" class="gl">data.json ↗</a>
-        <a href="https://github.com/silvercatsc/Monitoring-a1/blob/main/history.json" target="_blank" rel="noopener" class="gl" style="margin-top:6px">history.json ↗</a>
-        <a href="https://github.com/silvercatsc/Monitoring-a1" target="_blank" rel="noopener" class="gl" style="margin-top:6px;background:var(--bg2);color:var(--t2)">Репозиторий ↗</a>
+        <a href="https://github.com/silvercatsc/Monitoring-a1/blob/main/data.json" target="_blank" rel="noopener" class="gl">data.json &#8599;</a>
+        <a href="https://github.com/silvercatsc/Monitoring-a1/blob/main/history.json" target="_blank" rel="noopener" class="gl" style="margin-top:4px">history.json &#8599;</a>
+        <a href="https://github.com/silvercatsc/Monitoring-a1" target="_blank" rel="noopener" class="gl" style="margin-top:4px;background:var(--bg);color:var(--t2)">Репозиторий &#8599;</a>
         <button class="gs" id="gSync">Обновить данные</button>
       </div>
     </div>
-    <span class="hdr-date" id="hDate">—</span>
-    <div class="av">АК</div>
+    <span class="hdr-date" id="hDate">&mdash;</span>
+    <div class="av" id="avatar">AM</div>
   </div>
 </div></header>
 
@@ -213,306 +261,579 @@ a.plk:hover::after{opacity:1}
       <label class="fl"><input type="checkbox" value="p3" checked> Стр. 3+</label>
       <label class="fl"><input type="checkbox" value="no" checked> Нет</label>
     </div></div>
-    <div class="fs"><div class="ft">Приоритет</div><select class="sel" id="fPri"><option value="all">Все</option><option value="Высокий">Высокий</option><option value="Стандартный">Стандартный</option></select></div>
+    <div class="fs"><div class="ft">Приоритет</div><select class="sel" id="fPri"><option value="all">Все</option><option value="high">Высокий</option><option value="std">Стандартный</option></select></div>
     <div class="fs"><button class="ba" id="bApply">Применить</button><button class="br" id="bReset">Сбросить</button></div>
     <div class="fs"><div class="ft">Сводка</div><div class="ss" id="sideStats"></div></div>
   </aside>
 
   <main class="mn">
     <div id="sec-overview">
-      <div class="pt"><h1>Мониторинг объявлений</h1><p id="ovDesc">Загрузка...</p></div>
-      <div class="sg" id="cards"></div>
+      <div class="pt"><h1>Кабинет дилера</h1><p id="ovDesc">Загрузка...</p></div>
+      <div class="kg" id="cards"></div>
+      <div class="c2" style="margin-top:16px">
+        <div class="c2c"><h3>Статусы Auto.ru</h3><p class="csu" id="chAS">&mdash;</p><div class="cb"><canvas id="chAuto"></canvas></div></div>
+        <div class="c2c"><h3>Статусы Avito</h3><p class="csu" id="chVS">&mdash;</p><div class="cb"><canvas id="chAv"></canvas></div></div>
+      </div>
     </div>
 
     <div id="sec-cars" class="tc">
-      <div class="tch"><h2>Мои автомобили</h2><span class="tcc" id="tcCnt">—</span></div>
-      <div class="tcs"><table><thead><tr><th>Автомобиль</th><th>Приоритет</th><th>Auto.ru</th><th>Avito</th></tr></thead><tbody id="tBody"></tbody></table></div>
-    </div>
-
-    <div id="sec-competitors" class="cg">
-      <div class="co"><div class="coh"><h3>Конкуренты — Auto.ru</h3><span class="cob a">Auto.ru</span></div><div class="coe" id="cAuto">—</div></div>
-      <div class="co"><div class="coh"><h3>Конкуренты — Avito</h3><span class="cob v" id="cAvBadge">Avito</span></div><div class="col" id="cAvito"></div></div>
+      <div class="tch"><h2>Автомобили</h2><span class="tcc" id="tcCnt">&mdash;</span></div>
+      <div class="tcs"><table><thead><tr><th>Автомобиль</th><th>Приоритет</th><th>Дней</th><th>Auto.ru</th><th>Avito</th></tr></thead><tbody id="tBody"></tbody></table></div>
     </div>
 
     <section id="sec-charts" class="cs">
-      <div class="cr2"><h2>Статистика и динамика</h2><span id="chDesc">Данные из history.json</span></div>
-
+      <div class="cr2"><h2>Статистика</h2><span id="chDesc">&mdash;</span></div>
       <div class="cf">
         <div class="cfh">
-          <h3>Динамика размещения объявлений</h3>
+          <h3>Динамика размещения (все авто)</h3>
           <div class="ctg" id="dynTog"><button class="on" data-p="auto">Auto.ru</button><button data-p="avito">Avito</button></div>
         </div>
-        <p class="csu">Количество объявлений по позициям за каждый день · последний снапшот за день</p>
+        <p class="csu">Количество объявлений по позициям за каждый день</p>
         <div class="cfb"><canvas id="chDyn"></canvas></div>
         <div class="cin" id="dynInfo"></div>
       </div>
-
-      <div class="c3">
-        <div class="c3c"><h3>Статусы на Auto.ru</h3><p class="csu" id="chAS">—</p><div class="cb"><canvas id="chAuto"></canvas></div></div>
-        <div class="c3c"><h3>Статусы на Avito</h3><p class="csu" id="chVS">—</p><div class="cb"><canvas id="chAv"></canvas></div></div>
-        <div class="c3c"><h3>Тренд: Auto vs Avito</h3><p class="csu" id="chTrS">—</p><div class="cb"><canvas id="chTr"></canvas></div></div>
+      <div class="c2" style="margin-top:16px">
+        <div class="cf" style="opacity:0;animation:fu .5s ease forwards;animation-delay:.5s">
+          <div class="cfh"><h3>Auto.ru vs Avito</h3></div>
+          <p class="csu" id="chTrS">&mdash;</p>
+          <div class="cfb"><canvas id="chTr"></canvas></div>
+        </div>
+        <div class="cf" style="opacity:0;animation:fu .5s ease forwards;animation-delay:.55s">
+          <div class="cfh"><h3>Распределение по ценам</h3></div>
+          <p class="csu">Текущие цены автомобилей в наличии</p>
+          <div class="cfb"><canvas id="chPrice"></canvas></div>
+        </div>
       </div>
     </section>
   </main>
 </div>
 
+<!-- DETAIL PANEL -->
+<div class="dp-overlay" id="dpOverlay"></div>
+<div class="dp" id="dpPanel">
+  <div class="dp-close" id="dpClose">&times;</div>
+  <img class="dp-img" id="dpImg" src="" alt="">
+  <div class="dp-body">
+    <div class="dp-title" id="dpTitle"></div>
+    <div class="dp-vin" id="dpVin"></div>
+    <div class="dp-pri" id="dpPri"></div>
+
+    <div class="dp-sts">
+      <div class="dp-st">
+        <div class="dp-st-label">Auto.ru</div>
+        <div id="dpAutoBadge"></div>
+        <div class="dp-st-price mono" id="dpAutoPrice"></div>
+      </div>
+      <div class="dp-st">
+        <div class="dp-st-label">Avito</div>
+        <div id="dpAvitoBadge"></div>
+        <div class="dp-st-price mono" id="dpAvitoPrice"></div>
+      </div>
+    </div>
+
+    <div class="dp-metrics">
+      <div class="dp-metric"><div class="dp-metric-label">Добавлен</div><div class="dp-metric-val" id="dpFirst">&mdash;</div></div>
+      <div class="dp-metric"><div class="dp-metric-label">Дней на сайте</div><div class="dp-metric-val" id="dpDays">&mdash;</div></div>
+      <div class="dp-metric"><div class="dp-metric-label">Точек данных</div><div class="dp-metric-val" id="dpChCount">&mdash;</div></div>
+    </div>
+    <div class="dp-metrics" style="margin-top:8px">
+      <div class="dp-metric"><div class="dp-metric-label">Первая цена</div><div class="dp-metric-val" id="dpFirstP">&mdash;</div></div>
+      <div class="dp-metric"><div class="dp-metric-label">Текущая цена</div><div class="dp-metric-val" id="dpCurP">&mdash;</div></div>
+      <div class="dp-metric"><div class="dp-metric-label">Изменение</div><div class="dp-metric-val" id="dpChg">&mdash;</div></div>
+    </div>
+
+    <!-- ★ ДИНАМИКА РАЗМЕЩЕНИЯ ПО АВТО -->
+    <div class="dp-chart" style="margin-top:28px">
+      <h3>Динамика размещения</h3>
+      <div class="dp-chart-sub" id="dpPlacSub">&mdash;</div>
+      <div class="st-legend">
+        <div class="st-legend-item"><div class="st-legend-dot" style="background:var(--gn)"></div>Стр. 1</div>
+        <div class="st-legend-item"><div class="st-legend-dot" style="background:var(--am)"></div>Стр. 2</div>
+        <div class="st-legend-item"><div class="st-legend-dot" style="background:var(--gy)"></div>Стр. 3+</div>
+        <div class="st-legend-item"><div class="st-legend-dot" style="background:var(--rd)"></div>Архив / Нет</div>
+      </div>
+      <div class="dp-cfb"><canvas id="dpPlaceChart"></canvas></div>
+    </div>
+
+    <!-- ИСТОРИЯ ЦЕН -->
+    <div class="dp-chart">
+      <h3>История цен</h3>
+      <div class="dp-chart-sub" id="dpChartSub">&mdash;</div>
+      <div class="dp-cfb"><canvas id="dpPriceChart"></canvas></div>
+    </div>
+
+    <!-- ТАЙМЛАЙН ИЗМЕНЕНИЙ -->
+    <div class="dp-tl">
+      <h3>Лог изменений</h3>
+      <div class="timeline" id="dpTimeline"></div>
+    </div>
+  </div>
+</div>
+
 <script>
 /* ════════════════════════════════════════════
-   КОНФИГУРАЦИЯ
+   CONFIG
    ════════════════════════════════════════════ */
 const GH='silvercatsc/Monitoring-a1';
 const RAW='https://raw.githubusercontent.com/'+GH+'/main';
 const API='https://api.github.com/repos/'+GH+'/contents';
 
 let DATA=null,HIST=null;
-let cDyn=null,cAuto=null,cAv=null,cTr=null;
+let cDyn=null,cAuto=null,cAv=null,cTr=null,cPrice=null,cDetail=null,cPlace=null;
 
 /* ════════════════════════════════════════════
-   ЗАГРУЗКА ДАННЫХ
+   DATA LOADING
    ════════════════════════════════════════════ */
-async function fetchRaw(file){
-  try{const r=await fetch(RAW+'/'+file+'?t='+Date.now());if(r.ok)return await r.json()}catch(e){}
-  return null;
-}
-async function fetchAPI(file){
-  try{
-    const r=await fetch(API+'/'+file+'?ref=main',{headers:{'Accept':'application/vnd.github.v3+json'}});
-    if(!r.ok)return null;
-    return JSON.parse(atob((await r.json()).content));
-  }catch(e){return null}
-}
-async function fetchLocal(file){
-  try{const r=await fetch(file+'?t='+Date.now());if(r.ok)return await r.json()}catch(e){}
-  return null;
-}
-async function loadFile(file){
-  let d=await fetchRaw(file);
-  if(!d)d=await fetchAPI(file);
-  if(!d)d=await fetchLocal(file);
-  return d;
-}
+async function fetchRaw(f){try{const r=await fetch(RAW+'/'+f+'?t='+Date.now());if(r.ok)return await r.json()}catch(e){}return null}
+async function fetchAPI(f){try{const r=await fetch(API+'/'+f+'?ref=main',{headers:{'Accept':'application/vnd.github.v3+json'}});if(!r.ok)return null;return JSON.parse(atob((await r.json()).content))}catch(e){return null}}
+async function fetchLocal(f){try{const r=await fetch(f+'?t='+Date.now());if(r.ok)return await r.json()}catch(e){}return null}
+async function loadFile(f){let d=await fetchRaw(f);if(!d)d=await fetchAPI(f);if(!d)d=await fetchLocal(f);return d}
 
 /* ════════════════════════════════════════════
-   ИНИЦИАЛИЗАЦИЯ
+   UTILITIES
+   ════════════════════════════════════════════ */
+function nst(s){if(!s)return'no';s=String(s).toLowerCase();if(s.includes('архив'))return'ar';if(s.includes('стр. 1'))return'p1';if(s==='стр. 2')return'p2';if(s.includes('стр. 3'))return'p3';if(s==='нет'||s==='')return'no';return'p3'}
+function stL(s){return{ar:'Архив',p1:'Стр. 1',p2:'Стр. 2',p3:'Стр. 3+',no:'Нет'}[s]||s}
+function fp(v){if(!v||v==='-'||v==='0'||v===0)return'\u2014';return String(Number(v)).replace(/(\d)(?=(\d{3})+(\D|$))/g,'$1 ')+' \u20BD'}
+function fpShort(v){if(!v||v===0)return'\u2014';const n=Number(v);if(n>=1e6)return(n/1e6).toFixed(1)+'M';return fp(v)}
+function brand(t){if(!t)return'Другое';t=t.toLowerCase();if(t.includes('sprinter'))return'Sprinter';if(t.includes('mercedes'))return'Mercedes-Benz';if(t.includes('zeekr'))return'Zeekr';if(t.includes('maextro'))return'Maextro';if(t.includes('land rover')||t.includes('range rover'))return'Land Rover';return'Другое'}
+function isNew(c){return c.auto_status!==undefined}
+function parsePrice(s){if(!s)return 0;if(typeof s==='number')return s;try{return parseInt(String(s).replace(/\D/g,''))||0}catch(e){return 0}}
+
+function getCar(vin,car){
+  if(isNew(car))return{...car,vin};
+  const h=car.history||[],last=h.length?h[h.length-1]:{};
+  return{title:car.title,priority:car.priority,vin,
+    first_seen:h.length?h[0].date:'',days_on_sale:0,
+    auto_status:last.auto_status||'Нет',auto_price:parsePrice(last.auto_price),auto_price_fmt:last.auto_price||'\u2014',
+    auto_img:last.auto_img||'',auto_ai_warn:last.auto_ai_warn||'',
+    avito_status:last.avito_status||'Нет',avito_price:parsePrice(last.avito_price),avito_price_fmt:last.avito_price||'\u2014',
+    avito_img:last.avito_img||'',auto_url:'',avito_url:'',active:true,
+    _old_history:h}
+}
+
+/* ★ Placement status → numeric (higher = better visibility) */
+function stNum(s){return{'p1':5,'p2':4,'p3':3,'ar':1,'no':0}[s]||0}
+function stNumColor(s){return{5:'#22804a',4:'#b8860b',3:'#8a7e6e',1:'#c44b3f',0:'#ccc'}[stNum(s)]||'#ccc'}
+
+function dd(a,b){try{const da=a.split('.').reverse().join(''),db=b.split('.').reverse().join('');return da.localeCompare(db)}catch(e){return 0}}
+
+/* ════════════════════════════════════════════
+   INIT
    ════════════════════════════════════════════ */
 async function init(){
   const[dat,hist]=await Promise.all([loadFile('data.json'),loadFile('history.json')]);
   DATA=dat;HIST=hist;
 
-  // GitHub panel
-  document.getElementById('gDS').textContent=DATA?'✓ загружен':'✕ ошибка';
-  document.getElementById('gDS').style.color=DATA?'var(--ac)':'var(--cr)';
-  document.getElementById('gHS').textContent=HIST&&HIST.snapshots?'✓ '+HIST.snapshots.length+' снапшотов':'нет файла';
-  document.getElementById('gHS').style.color=HIST&&HIST.snapshots?'var(--ac)':'var(--am)';
+  document.getElementById('gDS').textContent=DATA?'\u2713 загружен':'\u2717 ошибка';
+  document.getElementById('gDS').style.color=DATA?'var(--gn)':'var(--rd)';
+  document.getElementById('gHS').textContent=HIST&&HIST.snapshots?'\u2713 '+HIST.snapshots.length:'нет файла';
+  document.getElementById('gHS').style.color=HIST&&HIST.snapshots?'var(--gn)':'var(--am)';
 
   if(DATA){
     document.getElementById('gDot').className='gdot ok';
     document.getElementById('gTitle').textContent='Данные загружены';
-    document.getElementById('gTime').textContent=DATA.last_updated||'—';
+    document.getElementById('gTime').textContent=DATA.last_updated||'\u2014';
     renderData();
   }else{
     document.getElementById('gDot').className='gdot err';
-    document.getElementById('gTitle').textContent='Ошибка загрузки data.json';
+    document.getElementById('gTitle').textContent='Ошибка загрузки';
   }
 
-  if(HIST&&HIST.snapshots&&HIST.snapshots.length){
-    const ud=new Set(HIST.snapshots.map(s=>s.date));
-    document.getElementById('gHC').textContent=HIST.snapshots.length;
-    document.getElementById('gHD').textContent=ud.size+' дней';
-    renderHistory();
-  }else{
-    document.getElementById('dynInfo').innerHTML='<span>history.json не найден. Запустите мониторинг — история начнёт накапливаться.</span>';
+  if(HIST){
+    const snaps=HIST.snapshots||[];
+    const ch=HIST.cars_history||{};
+    document.getElementById('gHC').textContent=snaps.length;
+    document.getElementById('gHV').textContent=Object.keys(ch).length;
+    if(snaps.length)renderHistory();
+    else document.getElementById('dynInfo').innerHTML='<span style="font-size:12px;color:var(--t3)">history.json пуст. Запустите мониторинг.</span>';
   }
 
   document.getElementById('loader').classList.add('done');
 }
 
 /* ════════════════════════════════════════════
-   УТИЛИТЫ
-   ════════════════════════════════════════════ */
-function nst(s){
-  if(!s)return'no';s=String(s).toLowerCase();
-  if(s.includes('архив'))return'ar';if(s.includes('стр. 1'))return'p1';if(s==='стр. 2')return'p2';
-  if(s.includes('стр. 3'))return'p3';if(s==='нет'||s==='')return'no';return'p3';
-}
-function stL(s){return{ar:'Архив',p1:'Стр. 1',p2:'Стр. 2',p3:'Стр. 3+',no:'Нет'}[s]||s}
-function stC(s){return{ar:'ar',p1:'p1',p2:'p2',p3:'p3',no:'no'}[s]||'no'}
-function fp(v){if(!v||v==='-'||v==='0')return'—';return String(v).replace(/(\d)(?=(\d{3})+(\D|$))/g,'$1 ')}
-function brand(t){if(!t)return'Другое';t=t.toLowerCase();if(t.includes('sprinter'))return'Sprinter';if(t.includes('mercedes'))return'Mercedes-Benz';if(t.includes('zeekr'))return'Zeekr';if(t.includes('maextro'))return'Maextro';if(t.includes('land rover')||t.includes('range rover'))return'Land Rover';return'Другое'}
-
-/* ════════════════════════════════════════════
-   РЕНДЕР ИЗ data.json
+   RENDER DATA
    ════════════════════════════════════════════ */
 function renderData(){
-  const cars=DATA.cars||{},comp=DATA.competitors||{};
-  const E=Object.entries(cars),N=E.length,ts=DATA.last_updated||'—';
-
+  const cars=DATA.cars||{};
+  const E=Object.entries(cars),N=E.length;
+  const ts=DATA.last_updated||'\u2014';
   document.getElementById('hDate').textContent=ts;
-  document.getElementById('ovDesc').textContent='Данные на '+ts+' · '+N+' автомобилей';
+  document.getElementById('ovDesc').textContent='Данные на '+ts+' \u00B7 '+N+' автомобилей';
 
-  // Brands
-  const B=new Set();E.forEach(([,c])=>B.add(brand(c.title)));
+  const B=new Map();
+  E.forEach(([vin,c])=>{const b=brand(c.title);B.set(b,(B.get(b)||0)+1)});
   const fb=document.getElementById('fBrand');fb.innerHTML='';
-  B.forEach(b=>{fb.innerHTML+='<label class="fl"><input type="checkbox" value="'+b+'" checked> '+b+'</label>'});
+  B.forEach((cnt,b)=>{fb.innerHTML+='<label class="fl"><input type="checkbox" value="'+b+'" checked> '+b+' ('+cnt+')</label>'});
 
-  // Stats
-  let hi=0,ar=0,p1a=0,p1v=0;
+  let hi=0,ar=0,p1a=0,p1v=0,totalVal=0;
   const aS={},vS={};
-  E.forEach(([,c])=>{
-    if(c.priority==='Высокий')hi++;
-    const h=c.history||[],last=h.length?h[h.length-1]:{};
-    const as=nst(last.auto_status),avs=nst(last.avito_status);
+  E.forEach(([vin,c])=>{
+    const car=getCar(vin,c);
+    if(car.priority==='Высокий')hi++;
+    const as=nst(car.auto_status),avs=nst(car.avito_status);
     aS[as]=(aS[as]||0)+1;vS[avs]=(vS[avs]||0)+1;
     if(as==='ar')ar++;if(as==='p1')p1a++;if(avs==='p1')p1v++;
+    if(as!=='ar'&&as!=='no')totalVal+=car.auto_price||0;
+    else if(avs!=='ar'&&avs!=='no')totalVal+=car.avito_price||0;
   });
 
   document.getElementById('cards').innerHTML=
-    '<div class="sc"><div class="sl">На мониторинге</div><div class="sv">'+N+'</div></div>'+
-    '<div class="sc"><div class="sl">В архиве (Auto.ru)</div><div class="sv">'+ar+'</div></div>'+
-    '<div class="sc"><div class="sl">Стр. 1 (Auto/Avito)</div><div class="sv">'+p1a+' / '+p1v+'</div></div>'+
-    '<div class="sc"><div class="sl">Высокий приоритет</div><div class="sv">'+hi+'</div></div>';
+    '<div class="kc"><div class="kl">На мониторинге</div><div class="kv">'+N+'</div><div class="ks">автомобилей</div></div>'+
+    '<div class="kc"><div class="kl">Стр. 1 (Auto / Avito)</div><div class="kv">'+p1a+' / '+p1v+'</div><div class="ks">на первой странице</div></div>'+
+    '<div class="kc"><div class="kl">В архиве</div><div class="kv">'+ar+'</div><div class="ks">закрытых объявлений</div></div>'+
+    '<div class="kc"><div class="kl">Стоимость склада</div><div class="kv" style="font-size:20px">'+fp(totalVal)+'</div><div class="ks">по активным</div></div>';
 
   document.getElementById('sideStats').innerHTML=
     '<div class="sr"><span>Всего</span><b>'+N+'</b></div>'+
     '<div class="sr"><span>Высокий приоритет</span><b>'+hi+'</b></div>'+
-    '<div class="sr"><span>Архив Auto.ru</span><b>'+ar+'</b></div>'+
-    '<div class="sr"><span>Стр. 1 Auto.ru</span><b>'+p1a+'</b></div>'+
+    '<div class="sr"><span>Архив</span><b>'+ar+'</b></div>'+
+    '<div class="sr"><span>Стр. 1 Auto</span><b>'+p1a+'</b></div>'+
     '<div class="sr"><span>Стр. 1 Avito</span><b>'+p1v+'</b></div>'+
     '<div class="sr"><span>Видимых</span><b id="sV">'+N+'</b></div>';
 
-  // Table
   const tb=document.getElementById('tBody');tb.innerHTML='';
   E.forEach(([vin,c])=>{
-    const title=c.title||'Авто',pri=c.priority||'Стандартный',br=brand(title);
-    const h=c.history||[],last=h.length?h[h.length-1]:{};
-    const as=nst(last.auto_status),avs=nst(last.avito_status);
-    const img=(last.auto_img&&!String(last.auto_img).includes('placeholder'))?last.auto_img:(last.avito_img&&!String(last.avito_img).includes('placeholder'))?last.avito_img:'';
-    const hasA=as!=='no',hasV=avs!=='no';
-    const imgH=img?'<img src="'+img+'" class="ci" loading="lazy">':'<div class="cp">🚗</div>';
+    const car=getCar(vin,c);
+    const br=brand(car.title),pri=car.priority||'Стандартный';
+    const as=nst(car.auto_status),avs=nst(car.avito_status);
+    const img=(car.auto_img&&!String(car.auto_img).includes('placeholder'))?car.auto_img:
+              (car.avito_img&&!String(car.avito_img).includes('placeholder'))?car.avito_img:'';
+    const imgH=img?'<img src="'+img+'" class="ci" loading="lazy">':'<div class="cp">\uD83D\uDE97</div>';
     const priH=pri==='Высокий'?'<span class="hi">'+pri+'</span>':'<span class="hs">'+pri+'</span>';
 
-    let aH;
-    if(hasA)aH='<div class="pc"><div class="pr"><a href="https://auto.ru/cars/used/sale/?vin='+encodeURIComponent(vin)+'&geo_radius=0&rid=213" target="_blank" rel="noopener" class="plk"><span class="sb-badge '+stC(as)+'">'+stL(as)+'</span></a></div><div class="pp">'+fp(last.auto_price)+'</div></div>';
-    else aH='<div class="pc"><div class="pr nlk"><span class="sb-badge no">Нет</span></div><div class="pp">'+fp(last.auto_price)+'</div></div>';
-
-    let vH;
-    if(hasV)vH='<div class="pc"><div class="pr"><a href="https://www.avito.ru/moskva/avtomobili?q='+encodeURIComponent(vin)+'" target="_blank" rel="noopener" class="plk"><span class="sb-badge '+stC(avs)+'">'+stL(avs)+'</span></a></div><div class="pp">'+fp(last.avito_price)+'</div></div>';
-    else vH='<div class="pc"><div class="pr nlk"><span class="sb-badge no">Нет</span></div><div class="pp">'+fp(last.avito_price)+'</div></div>';
+    const autoH=buildStatusCell(as,car.auto_price,'auto',vin);
+    const avH=buildStatusCell(avs,car.avito_price,'avito',vin);
 
     const tr=document.createElement('tr');
-    tr.dataset.brand=br;tr.dataset.pri=pri;tr.dataset.as=as;tr.dataset.avs=avs;
-    tr.innerHTML='<td><div class="cc">'+imgH+'<div><div class="cn">'+title+'</div><div class="cv">'+vin+'</div></div></div></td><td>'+priH+'</td><td>'+aH+'</td><td>'+vH+'</td>';
+    tr.dataset.brand=br;tr.dataset.pri=pri;tr.dataset.as=as;tr.dataset.avs=avs;tr.dataset.vin=vin;
+    tr.onclick=function(){openDetail(vin)};
+    tr.innerHTML='<td><div class="cc">'+imgH+'<div><div class="cn">'+esc(car.title)+'</div><div class="cv">'+esc(vin)+'</div></div></div></td>'+
+      '<td>'+priH+'</td>'+
+      '<td><span class="days-badge mono">'+(car.days_on_sale||'\u2014')+'</span></td>'+
+      '<td>'+autoH+'</td><td>'+avH+'</td>';
     tb.appendChild(tr);
   });
   document.getElementById('tcCnt').textContent=N+' записей';
 
-  // Competitors Auto
-  const ac2=comp['Auto.ru']||{};let atA=0;
-  Object.values(ac2).forEach(l=>{if(l&&l.length)atA+=l.length});
-  document.getElementById('cAuto').innerHTML=atA?'':'Данные конкурентов по Auto.ru отсутствуют';
-
-  // Competitors Avito
-  const av2=comp['Avito']||{};let atV=0,avH='';
-  Object.entries(av2).forEach(([cat,list])=>{
-    if(!list||!list.length)return;atV+=list.length;
-    avH+='<div class="coc">'+cat+'</div>';
-    list.forEach(i=>{avH+='<div class="coi"><div><div class="con">'+(i.title||'')+'</div><div class="cos">'+(i.seller||'')+'</div></div><div class="cop">'+fp(i.price)+'</div></div>'});
-  });
-  document.getElementById('cAvito').innerHTML=avH||'<div class="coe">Нет данных</div>';
-  document.getElementById('cAvBadge').textContent='Avito · '+atV+' объявлений';
-
-  // Doughnuts
   renderDoughnuts(aS,vS);
+  renderPriceChart();
   wireFilters();
 }
 
-function renderDoughnuts(aS,vS){
-  const al=['ar','p1','p2','p3','no'],an=['Архив','Стр. 1','Стр. 2','Стр. 3+','Нет'],ac=['#c45d4a','#2a6f5a','#b8860b','#3a8f74','#ccc'];
-  const ad=al.map(l=>aS[l]||0);
-  const vl=['p1','p2','p3','no'],vn=['Стр. 1','Стр. 2','Стр. 3+','Нет'],vc=['#2a6f5a','#b8860b','#3a8f74','#ccc'];
-  const vd=vl.map(l=>vS[l]||0);
-  const dL=al.map((l,i)=>an[i]+' ('+ad[i]+')');
-  const vL=vl.map((l,i)=>vn[i]+' ('+vd[i]+')');
+function buildStatusCell(st,price,plat,vin){
+  const has=st!=='no';
+  if(has){
+    const url=plat==='auto'?
+      'https://auto.ru/cars/used/sale/?vin='+encodeURIComponent(vin)+'&geo_radius=0&rid=213':
+      'https://www.avito.ru/moskva/avtomobili?q='+encodeURIComponent(vin);
+    return'<div class="pc"><div><a href="'+url+'" target="_blank" rel="noopener" class="plk" onclick="event.stopPropagation()"><span class="badge '+st+'">'+stL(st)+'</span></a></div><div class="pp mono">'+fp(price)+'</div></div>';
+  }
+  return'<div class="pc"><div><span class="badge no">Нет</span></div><div class="pp mono" style="color:var(--t3)">'+fp(price)+'</div></div>';
+}
 
-  let lastD='—';
-  for(const[,c]of Object.entries(DATA.cars||{})){const h=c.history||[];if(h.length){lastD=h[h.length-1].date||'—';break}}
+function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
+
+/* ════════════════════════════════════════════
+   DOUGHNUTS
+   ════════════════════════════════════════════ */
+function renderDoughnuts(aS,vS){
+  const al=['ar','p1','p2','p3','no'],an=['Архив','Стр. 1','Стр. 2','Стр. 3+','Нет'],ac=['#c44b3f','#22804a','#b8860b','#8a7e6e','#ccc'];
+  const ad=al.map(l=>aS[l]||0),dL=al.map((l,i)=>an[i]+' ('+ad[i]+')');
+  const vl=['p1','p2','p3','no'],vn=['Стр. 1','Стр. 2','Стр. 3+','Нет'],vc=['#22804a','#b8860b','#8a7e6e','#ccc'];
+  const vd=vl.map(l=>vS[l]||0),vL=vl.map((l,i)=>vn[i]+' ('+vd[i]+')');
+  let lastD='\u2014';
+  for(const[,c]of Object.entries(DATA.cars||{})){if(isNew(c)){lastD=DATA.last_updated;break}const h=c.history;if(h&&h.length){lastD=h[h.length-1].date;break}}
   document.getElementById('chAS').textContent=lastD;
   document.getElementById('chVS').textContent=lastD;
-
   if(cAuto)cAuto.destroy();
-  cAuto=new Chart(document.getElementById('chAuto'),{type:'doughnut',data:{labels:dL,datasets:[{data:ad,backgroundColor:ac,borderWidth:0,hoverOffset:8}]},options:{responsive:true,maintainAspectRatio:false,cutout:'58%',plugins:{legend:{position:'bottom',labels:{padding:10,font:{size:11}}}}}});
+  cAuto=new Chart(document.getElementById('chAuto'),{type:'doughnut',data:{labels:dL,datasets:[{data:ad,backgroundColor:ac,borderWidth:0,hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:false,cutout:'55%',plugins:{legend:{position:'bottom',labels:{padding:8,font:{size:10,family:'Montserrat'}}}}}});
   if(cAv)cAv.destroy();
-  cAv=new Chart(document.getElementById('chAv'),{type:'doughnut',data:{labels:vL,datasets:[{data:vd,backgroundColor:vc,borderWidth:0,hoverOffset:8}]},options:{responsive:true,maintainAspectRatio:false,cutout:'58%',plugins:{legend:{position:'bottom',labels:{padding:10,font:{size:11}}}}}});
+  cAv=new Chart(document.getElementById('chAv'),{type:'doughnut',data:{labels:vL,datasets:[{data:vd,backgroundColor:vc,borderWidth:0,hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:false,cutout:'55%',plugins:{legend:{position:'bottom',labels:{padding:8,font:{size:10,family:'Montserrat'}}}}}});
+}
+
+function renderPriceChart(){
+  if(!DATA)return;
+  const items=[];
+  Object.entries(DATA.cars||{}).forEach(([vin,c])=>{
+    const car=getCar(vin,c);
+    const as=nst(car.auto_status);
+    if(as!=='ar'&&as!=='no'&&car.auto_price>0)items.push({label:car.title,price:car.auto_price});
+  });
+  items.sort((a,b)=>b.price-a.price);
+  const labels=items.map(i=>i.label.length>18?i.label.slice(0,18)+'...':i.label);
+  const prices=items.map(i=>i.price);
+  const colors=items.map(i=>i.price>30e6?'#c49a3c':i.price>10e6?'#22804a':'#8a7e6e');
+  if(cPrice)cPrice.destroy();
+  cPrice=new Chart(document.getElementById('chPrice'),{type:'bar',data:{labels,datasets:[{data:prices,backgroundColor:colors,borderRadius:4,barThickness:16}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>fp(c.raw)}}},scales:{x:{grid:{color:'rgba(221,214,200,.5)',drawBorder:false},ticks:{callback:v=>fpShort(v),font:{size:10,family:'DM Mono'}}},y:{grid:{display:false},ticks:{font:{size:10,family:'Montserrat'}}}}}});
 }
 
 /* ════════════════════════════════════════════
-   РЕНДЕР ИЗ history.json
+   RENDER HISTORY
    ════════════════════════════════════════════ */
 function renderHistory(){
   if(!HIST||!HIST.snapshots||!HIST.snapshots.length)return;
   const snaps=HIST.snapshots;
   const ud=new Set(snaps.map(s=>s.date));
-
-  document.getElementById('chDesc').textContent='history.json · '+snaps.length+' снапшотов · '+ud.size+' дней';
-
-  // Daily snapshots (last per day)
+  document.getElementById('chDesc').textContent=snaps.length+' снапшотов \u00B7 '+ud.size+' дней';
   const byD={};snaps.forEach(s=>{byD[s.date]=s});
-  const daily=Object.values(byD).sort((a,b)=>{
-    const da=a.date.split('.').reverse().join(''),db=b.date.split('.').reverse().join('');
-    return da.localeCompare(db);
-  });
-
-  // Trend: Auto active vs Avito active
+  const daily=Object.values(byD).sort((a,b)=>dd(a.date,b.date));
   const labels=daily.map(s=>s.date);
   const aAct=daily.map(s=>{const st=s.auto_statuses||{};return(st['Стр. 1']||0)+(st['Стр. 2']||0)+(st['Стр. 3+']||0)});
   const vAct=daily.map(s=>{const st=s.avito_statuses||{};return(st['Стр. 1']||0)+(st['Стр. 2']||0)+(st['Стр. 3+']||0)});
-
-  document.getElementById('chTrS').textContent=daily[0].date+' → '+daily[daily.length-1].date;
+  document.getElementById('chTrS').textContent=daily[0].date+' \u2192 '+daily[daily.length-1].date;
   if(cTr)cTr.destroy();
   cTr=new Chart(document.getElementById('chTr'),{type:'line',data:{labels,datasets:[
-    {label:'Auto.ru (активные)',data:aAct,borderColor:'#2a6f5a',backgroundColor:'rgba(42,111,90,.12)',fill:true,tension:.3,pointRadius:3,borderWidth:2},
-    {label:'Avito (активные)',data:vAct,borderColor:'#6b5ce7',backgroundColor:'rgba(107,92,231,.12)',fill:true,tension:.3,pointRadius:3,borderWidth:2}
-  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{padding:14,usePointStyle:true}}},scales:{y:{beginAtZero:true,grid:{color:'rgba(224,216,200,.5)',drawBorder:false},title:{display:true,text:'Авто',font:{size:11}}},x:{grid:{display:false},ticks:{maxRotation:45,font:{size:10}}}},interaction:{mode:'index',intersect:false}}});
-
-  // Stacked area chart
+    {label:'Auto.ru',data:aAct,borderColor:'#1a5632',backgroundColor:'rgba(26,86,50,.1)',fill:true,tension:.3,pointRadius:2,borderWidth:2},
+    {label:'Avito',data:vAct,borderColor:'#c49a3c',backgroundColor:'rgba(196,154,60,.1)',fill:true,tension:.3,pointRadius:2,borderWidth:2}
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{padding:10,usePointStyle:true,font:{size:10,family:'Montserrat'}}}},scales:{y:{beginAtZero:true,grid:{color:'rgba(221,214,200,.4)',drawBorder:false},ticks:{font:{size:10,family:'DM Mono'}}},x:{grid:{display:false},ticks:{maxRotation:45,font:{size:9,family:'DM Mono'}}}},interaction:{mode:'index',intersect:false}}});
   buildDyn('auto',daily);
-
-  // Info
   document.getElementById('dynInfo').innerHTML=
     '<span>Снапшотов: <b>'+snaps.length+'</b></span>'+
-    '<span>Уникальных дней: <b>'+ud.size+'</b></span>'+
-    '<span>Диапазон: <b>'+daily[0].date+'</b> — <b>'+daily[daily.length-1].date+'</b></span>'+
-    (snaps.length>ud.size?'<span>Дублей в день: <b>'+(snaps.length-ud.size)+'</b></span>':'');
+    '<span>Дней: <b>'+ud.size+'</b></span>'+
+    '<span>Диапазон: <b>'+daily[0].date+'</b> \u2014 <b>'+daily[daily.length-1].date+'</b></span>';
 }
 
 function buildDyn(mode,daily){
   if(!daily){
     if(!HIST||!HIST.snapshots)return;
     const byD={};HIST.snapshots.forEach(s=>{byD[s.date]=s});
-    daily=Object.values(byD).sort((a,b)=>a.date.split('.').reverse().join('').localeCompare(b.date.split('.').reverse().join('')));
+    daily=Object.values(byD).sort((a,b)=>dd(a.date,b.date));
   }
   const labels=daily.map(s=>s.date);
   const plat=mode==='auto'?'auto_statuses':'avito_statuses';
   const keys=['Стр. 1','Стр. 2','Стр. 3+','Архив','Нет'];
-  const cols=['#2a6f5a','#b8860b','#3a8f74','#c45d4a','#ccc'];
-
-  const ds=keys.map((k,i)=>({
-    label:k,data:daily.map(s=>(s[plat]||{})[k]||0),
-    backgroundColor:cols[i]+'44',borderColor:cols[i],
-    borderWidth:2,fill:true,tension:.3,pointRadius:3,pointBackgroundColor:cols[i]
-  }));
-
+  const cols=['#22804a','#b8860b','#8a7e6e','#c44b3f','#ccc'];
+  const ds=keys.map((k,i)=>({label:k,data:daily.map(s=>(s[plat]||{})[k]||0),backgroundColor:cols[i]+'33',borderColor:cols[i],borderWidth:2,fill:true,tension:.3,pointRadius:2,pointBackgroundColor:cols[i]}));
   if(cDyn)cDyn.destroy();
-  cDyn=new Chart(document.getElementById('chDyn'),{type:'line',data:{labels,datasets:ds},options:{
-    responsive:true,maintainAspectRatio:false,
-    plugins:{legend:{position:'bottom',labels:{padding:14,usePointStyle:true}}},
-    scales:{y:{beginAtZero:true,stacked:true,grid:{color:'rgba(224,216,200,.5)',drawBorder:false},title:{display:true,text:'Количество авто',font:{size:11}}},x:{grid:{display:false},ticks:{maxRotation:45,font:{size:10}}}},
-    interaction:{mode:'index',intersect:false}
-  }});
+  cDyn=new Chart(document.getElementById('chDyn'),{type:'line',data:{labels,datasets:ds},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{padding:10,usePointStyle:true,font:{size:10,family:'Montserrat'}}}},scales:{y:{beginAtZero:true,stacked:true,grid:{color:'rgba(221,214,200,.4)',drawBorder:false},ticks:{font:{size:10,family:'DM Mono'}},title:{display:true,text:'Авто',font:{size:10}}},x:{grid:{display:false},ticks:{maxRotation:45,font:{size:9,family:'DM Mono'}}}},interaction:{mode:'index',intersect:false}}});
 }
 
 /* ════════════════════════════════════════════
-   ФИЛЬТРЫ
+   DETAIL PANEL
+   ════════════════════════════════════════════ */
+function openDetail(vin){
+  const carData=DATA.cars[vin];
+  if(!carData)return;
+  const car=getCar(vin,carData);
+  const as=nst(car.auto_status),avs=nst(car.avito_status);
+
+  const img=(car.auto_img&&!String(car.auto_img).includes('placeholder'))?car.auto_img:
+            (car.avito_img&&!String(car.avito_img).includes('placeholder'))?car.avito_img:'';
+  document.getElementById('dpImg').src=img||'';
+  document.getElementById('dpImg').style.display=img?'block':'none';
+
+  document.getElementById('dpTitle').textContent=car.title||'Авто';
+  document.getElementById('dpVin').textContent='VIN: '+vin;
+  const priEl=document.getElementById('dpPri');
+  priEl.textContent=car.priority||'Стандартный';
+  priEl.className='dp-pri '+(car.priority==='Высокий'?'hi':'st');
+
+  document.getElementById('dpAutoBadge').innerHTML='<span class="badge '+as+'">'+stL(as)+'</span>';
+  document.getElementById('dpAvitoBadge').innerHTML='<span class="badge '+avs+'">'+stL(avs)+'</span>';
+  document.getElementById('dpAutoPrice').textContent=fp(car.auto_price);
+  document.getElementById('dpAvitoPrice').textContent=fp(car.avito_price);
+
+  /* ★ Получаем массив изменений */
+  let changes=[];
+  const ch=HIST&&HIST.cars_history&&HIST.cars_history[vin];
+  if(ch&&ch.changes&&ch.changes.length){
+    changes=ch.changes;
+  }else if(car._old_history&&car._old_history.length){
+    changes=car._old_history.map(h=>({date:h.date,auto_status:h.auto_status,auto_price:parsePrice(h.auto_price),avito_status:h.avito_status,avito_price:parsePrice(h.avito_price)}));
+  }
+
+  /* Из snapshot history fallback — если cars_history нет, но есть snapshots */
+  if(!changes.length&&HIST&&HIST.snapshots&&HIST.snapshots.length){
+    const tmp=[];
+    HIST.snapshots.forEach(s=>{
+      const sc=s.cars&&s.cars[vin];
+      if(sc)tmp.push({date:s.date,auto_status:sc.auto_status,auto_price:parsePrice(sc.auto_price),avito_status:sc.avito_status,avito_price:parsePrice(sc.avito_price)});
+    });
+    if(tmp.length)changes=tmp;
+  }
+
+  document.getElementById('dpFirst').textContent=car.first_seen||'\u2014';
+  document.getElementById('dpDays').textContent=car.days_on_sale||'\u2014';
+  document.getElementById('dpChCount').textContent=changes.length;
+
+  if(changes.length){
+    const first=changes[0],last=changes[changes.length-1];
+    const fp0=first.auto_price||first.avito_price||0;
+    const lp=last.auto_price||last.avito_price||0;
+    document.getElementById('dpFirstP').textContent=fp(fp0);
+    document.getElementById('dpCurP').textContent=fp(lp);
+    if(fp0>0&&lp>0&&fp0!==lp){
+      const pct=((lp-fp0)/fp0*100).toFixed(1);
+      const chgEl=document.getElementById('dpChg');
+      chgEl.textContent=(lp<fp0?'\u2193':'\u2191')+Math.abs(pct)+'%';
+      chgEl.style.color=lp<fp0?'var(--rd)':'var(--gn)';
+    }else{document.getElementById('dpChg').textContent='\u2014';document.getElementById('dpChg').style.color=''}
+  }else{
+    document.getElementById('dpFirstP').textContent=fp(car.auto_price||car.avito_price);
+    document.getElementById('dpCurP').textContent=fp(car.auto_price||car.avito_price);
+    document.getElementById('dpChg').textContent='\u2014';document.getElementById('dpChg').style.color='';
+  }
+
+  /* ★★★ ДИНАМИКА РАЗМЕЩЕНИЯ — ГРАФИК ★★★ */
+  renderPlacementChart(changes,vin);
+
+  /* График цен */
+  document.getElementById('dpChartSub').textContent=changes.length+' точек данных';
+  if(cDetail)cDetail.destroy();
+  if(changes.length){
+    const dates=changes.map(c=>c.date);
+    const ap=changes.map(c=>c.auto_price||null);
+    const vp=changes.map(c=>c.avito_price||null);
+    cDetail=new Chart(document.getElementById('dpPriceChart'),{type:'line',data:{labels:dates,datasets:[
+      {label:'Auto.ru',data:ap,borderColor:'#1a5632',backgroundColor:'rgba(26,86,50,.08)',fill:true,tension:.2,pointRadius:4,pointBackgroundColor:'#1a5632',borderWidth:2,spanGaps:true},
+      {label:'Avito',data:vp,borderColor:'#c49a3c',backgroundColor:'rgba(196,154,60,.08)',fill:true,tension:.2,pointRadius:4,pointBackgroundColor:'#c49a3c',borderWidth:2,spanGaps:true}
+    ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{padding:10,usePointStyle:true,font:{size:10,family:'Montserrat'}}},tooltip:{callbacks:{label:c=>c.dataset.label+': '+fp(c.raw)}}},scales:{y:{grid:{color:'rgba(221,214,200,.4)',drawBorder:false},ticks:{callback:v=>fpShort(v),font:{size:10,family:'DM Mono'}}},x:{grid:{display:false},ticks:{font:{size:9,family:'DM Mono'}}}},interaction:{mode:'index',intersect:false}}});
+  }
+
+  /* Таймлайн */
+  const tl=document.getElementById('dpTimeline');tl.innerHTML='';
+  if(changes.length){
+    [...changes].reverse().forEach((ch,i)=>{
+      const cls=i===0?'style="color:var(--t1);font-weight:600"':'';
+      const dotBg=i===0?'var(--ac)':'var(--bd)';
+      tl.innerHTML+=
+        '<div class="tl-item"><div class="tl-dot" style="background:'+dotBg+'"></div>'+
+        '<div class="tl-date" '+cls+'>'+ch.date+'</div>'+
+        '<div class="tl-row">'+
+        '<span class="badge '+nst(ch.auto_status)+'" style="font-size:9px;padding:1px 6px">A: '+stL(nst(ch.auto_status))+'</span>'+
+        '<span class="tl-price">'+fp(ch.auto_price)+'</span>'+
+        '<span style="color:var(--t3);font-size:10px">\u2502</span>'+
+        '<span class="badge '+nst(ch.avito_status)+'" style="font-size:9px;padding:1px 6px">Av: '+stL(nst(ch.avito_status))+'</span>'+
+        '<span class="tl-price">'+fp(ch.avito_price)+'</span>'+
+        '</div></div>';
+    });
+  }
+
+  document.getElementById('dpOverlay').classList.add('open');
+  document.getElementById('dpPanel').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+/* ★★★ РЕНДЕР ГРАФИКА ДИНАМИКИ РАЗМЕЩЕНИЯ ★★★ */
+function renderPlacementChart(changes,vin){
+  if(cPlace)cPlace.destroy();
+
+  if(!changes.length){
+    document.getElementById('dpPlacSub').textContent='Нет данных';
+    return;
+  }
+
+  const dates=changes.map(c=>c.date);
+  const autoNums=changes.map(c=>stNum(nst(c.auto_status)));
+  const avitoNums=changes.map(c=>stNum(nst(c.avito_status)));
+
+  /* Цвет точек по статусу */
+  const autoColors=changes.map(c=>stNumColor(nst(c.auto_status)));
+  const avitoColors=changes.map(c=>stNumColor(nst(c.avito_status)));
+
+  document.getElementById('dpPlacSub').textContent=changes.length+' точек \u00B7 '+dates[0]+' \u2014 '+dates[dates.length-1];
+
+  const yLabels={0:'Нет',1:'Архив',3:'Стр. 3+',4:'Стр. 2',5:'Стр. 1'};
+
+  cPlace=new Chart(document.getElementById('dpPlaceChart'),{
+    type:'line',
+    data:{
+      labels:dates,
+      datasets:[
+        {
+          label:'Auto.ru',
+          data:autoNums,
+          borderColor:'#1a5632',
+          backgroundColor:'rgba(26,86,50,.06)',
+          fill:false,
+          stepped:'before',
+          pointRadius:5,
+          pointBackgroundColor:autoColors,
+          pointBorderColor:'#fff',
+          pointBorderWidth:2,
+          pointHoverRadius:7,
+          borderWidth:2.5
+        },
+        {
+          label:'Avito',
+          data:avitoNums,
+          borderColor:'#c49a3c',
+          backgroundColor:'rgba(196,154,60,.06)',
+          fill:false,
+          stepped:'before',
+          pointRadius:5,
+          pointBackgroundColor:avitoColors,
+          pointBorderColor:'#fff',
+          pointBorderWidth:2,
+          pointHoverRadius:7,
+          borderWidth:2.5,
+          borderDash:[6,3]
+        }
+      ]
+    },
+    options:{
+      responsive:true,
+      maintainAspectRatio:false,
+      plugins:{
+        legend:{
+          position:'bottom',
+          labels:{padding:12,usePointStyle:true,font:{size:11,family:'Montserrat'}}
+        },
+        tooltip:{
+          callbacks:{
+            title:function(items){return items[0].label},
+            label:function(c){
+              const val=c.raw;
+              const label=yLabels[val]||'???';
+              const plat=c.dataset.label;
+              /* Показать также цену на эту дату */
+              const idx=c.dataIndex;
+              const ch=changes[idx];
+              const price=c.dataset.label==='Auto.ru'?ch.auto_price:ch.avito_price;
+              return plat+': '+label+(price?' \u2014 '+fp(price):'');
+            }
+          }
+        }
+      },
+      scales:{
+        y:{
+          min:-0.5,
+          max:5.5,
+          ticks:{
+            stepSize:1,
+            callback:function(v){return yLabels[v]||''},
+            font:{size:11,family:'Montserrat'},
+            color:function(ctx){
+              const colors={0:'#ccc',1:'#c44b3f',3:'#8a7e6e',4:'#b8860b',5:'#22804a'};
+              return colors[ctx.tick.value]||'var(--t3)';
+            }
+          },
+          grid:{color:'rgba(221,214,200,.3)',drawBorder:false},
+          title:{display:true,text:'Позиция',font:{size:10,family:'Montserrat'},color:'var(--t3)'}
+        },
+        x:{
+          grid:{display:false},
+          ticks:{maxRotation:45,font:{size:9,family:'DM Mono'},color:'var(--t3)'}
+        }
+      },
+      interaction:{mode:'index',intersect:false}
+    }
+  });
+}
+
+function closeDetail(){
+  document.getElementById('dpOverlay').classList.remove('open');
+  document.getElementById('dpPanel').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.getElementById('dpClose').onclick=closeDetail;
+document.getElementById('dpOverlay').onclick=closeDetail;
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDetail()});
+
+/* ════════════════════════════════════════════
+   FILTERS
    ════════════════════════════════════════════ */
 function wireFilters(){
   document.getElementById('bApply').onclick=doFilter;
@@ -532,12 +853,13 @@ function doFilter(){
   let vis=0;
   document.querySelectorAll('#tBody tr').forEach(r=>{
     const t=(r.querySelector('.cn')?.textContent||'').toLowerCase();
-    const v=(r.querySelector('.cv')?.textContent||'').toLowerCase();
+    const v=(r.dataset.vin||'').toLowerCase();
     const rb=(r.dataset.brand||'').toLowerCase();
     let ok=true;
     if(q&&!t.includes(q)&&!v.includes(q))ok=false;
     if(B.length&&!B.some(b=>rb.includes(b)||b.includes(rb)))ok=false;
-    if(pri!=='all'&&r.dataset.pri!==pri)ok=false;
+    if(pri==='high'&&r.dataset.pri!=='Высокий')ok=false;
+    if(pri==='std'&&r.dataset.pri!=='Стандартный')ok=false;
     if(!S.some(s=>r.dataset.as===s||r.dataset.avs===s))ok=false;
     r.classList.toggle('hide',!ok);if(ok)vis++;
   });
@@ -546,19 +868,14 @@ function doFilter(){
 }
 
 /* ════════════════════════════════════════════
-   НАВИГАЦИЯ
+   NAV / GITHUB
    ════════════════════════════════════════════ */
 document.getElementById('mainNav').addEventListener('click',function(e){
   const a=e.target.closest('a[data-sec]');if(!a)return;e.preventDefault();
   this.querySelectorAll('a').forEach(x=>x.classList.remove('on'));a.classList.add('on');
-  ['overview','cars','competitors','charts'].forEach(s=>{
-    const el=document.getElementById('sec-'+s);if(el)el.classList.toggle('sh',s!==a.dataset.sec);
-  });
+  ['overview','cars','charts'].forEach(s=>{const el=document.getElementById('sec-'+s);if(el)el.classList.toggle('sh',s!==a.dataset.sec)});
 });
 
-/* ════════════════════════════════════════════
-   GITHUB DROPDOWN
-   ════════════════════════════════════════════ */
 document.getElementById('ghBtn').addEventListener('click',function(e){e.stopPropagation();document.getElementById('ghDD').classList.toggle('open')});
 document.addEventListener('click',function(e){if(!e.target.closest('.gw'))document.getElementById('ghDD').classList.remove('open')});
 
@@ -566,53 +883,26 @@ document.getElementById('gSync').addEventListener('click',async function(){
   const btn=this;btn.classList.add('sp');btn.disabled=true;
   document.getElementById('gDot').className='gdot ld';document.getElementById('gTitle').textContent='Обновление...';
   document.getElementById('gErr').classList.remove('show');document.getElementById('gOk').classList.remove('show');
-
   const[dat,hist]=await Promise.all([loadFile('data.json'),loadFile('history.json')]);
   let ok=false;
-
-  if(dat){DATA=dat;ok=true;
-    document.getElementById('gDS').textContent='✓ обновлён';document.getElementById('gDS').style.color='var(--ac)';
-    renderData();
-  }else{document.getElementById('gDS').textContent='✕ ошибка';document.getElementById('gDS').style.color='var(--cr)'}
-
-  if(hist&&hist.snapshots){HIST=hist;
-    document.getElementById('gHS').textContent='✓ '+hist.snapshots.length+' снапшотов';document.getElementById('gHS').style.color='var(--ac)';
-    const ud=new Set(hist.snapshots.map(s=>s.date));
-    document.getElementById('gHC').textContent=hist.snapshots.length;
-    document.getElementById('gHD').textContent=ud.size+' дней';
-    renderHistory();
-  }else{document.getElementById('gHS').textContent='нет файла';document.getElementById('gHS').style.color='var(--am)'}
-
-  if(ok){
-    document.getElementById('gDot').className='gdot ok';
-    document.getElementById('gTitle').textContent='Обновлено!';
-    document.getElementById('gTime').textContent=DATA.last_updated||'—';
-    document.getElementById('gOk').textContent='✓ '+new Date().toLocaleTimeString('ru-RU');
-    document.getElementById('gOk').classList.add('show');
-  }else{
-    document.getElementById('gDot').className='gdot err';
-    document.getElementById('gTitle').textContent='Ошибка';
-    document.getElementById('gErr').textContent='Не удалось загрузить данные';
-    document.getElementById('gErr').classList.add('show');
-  }
+  if(dat){DATA=dat;ok=true;document.getElementById('gDS').textContent='\u2713 обновлён';document.getElementById('gDS').style.color='var(--gn)';renderData()}
+  else{document.getElementById('gDS').textContent='\u2717 ошибка';document.getElementById('gDS').style.color='var(--rd)'}
+  if(hist&&hist.snapshots){HIST=hist;document.getElementById('gHS').textContent='\u2713 '+hist.snapshots.length;document.getElementById('gHS').style.color='var(--gn)';document.getElementById('gHC').textContent=hist.snapshots.length;document.getElementById('gHV').textContent=Object.keys(hist.cars_history||{}).length;renderHistory()}
+  else{document.getElementById('gHS').textContent='нет файла';document.getElementById('gHS').style.color='var(--am)'}
+  if(ok){document.getElementById('gDot').className='gdot ok';document.getElementById('gTitle').textContent='Обновлено!';document.getElementById('gTime').textContent=DATA.last_updated||'\u2014';document.getElementById('gOk').textContent='\u2713 '+new Date().toLocaleTimeString('ru-RU');document.getElementById('gOk').classList.add('show')}
+  else{document.getElementById('gDot').className='gdot err';document.getElementById('gTitle').textContent='Ошибка';document.getElementById('gErr').textContent='Не удалось загрузить';document.getElementById('gErr').classList.add('show')}
   btn.classList.remove('sp');btn.disabled=false;btn.textContent='Обновить ещё';
 });
 
-/* ════════════════════════════════════════════
-   DYN TOGGLE
-   ════════════════════════════════════════════ */
 document.getElementById('dynTog').addEventListener('click',function(e){
   const b=e.target.closest('button');if(!b)return;
   this.querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
   buildDyn(b.dataset.p);
 });
 
-/* ════════════════════════════════════════════
-   CHART DEFAULTS & GO
-   ════════════════════════════════════════════ */
-Chart.defaults.font.family="'Geologica',sans-serif";
-Chart.defaults.font.size=12;
-Chart.defaults.color='#9a9286';
+Chart.defaults.font.family="'Montserrat',sans-serif";
+Chart.defaults.font.size=11;
+Chart.defaults.color='#8a7e6e';
 init();
 </script>
 </body>
